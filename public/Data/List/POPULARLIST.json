@@ -1,0 +1,81 @@
+{
+  "data" : 
+  [
+    {
+      "id": 1,
+      "profileImgSrc":
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      "profileLink": "/",
+      "name": "작가1",
+      "desc": "작가소개 descrtion입니다.",
+      "follower": 1,
+      "like": 2,
+      "illust": 3,
+      "imgPreviewSrc": [
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+        "https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554188248-986adbb73be4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+      ],
+      "imgPreviewLink":[
+        "/","/","/"
+      ]
+    },
+    {
+      "id": 2,
+      "profileImgSrc":
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      "profileLink": "/",
+      "name": "작가2",
+      "desc": "작가소개 descrtion입니다.",
+      "follower": 1,
+      "like": 2,
+      "illust": 3,
+      "imgPreviewSrc": [
+        "https://images.unsplash.com/photo-1596815256385-a48b471c8428?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        "https://images.unsplash.com/photo-1596815752852-db00af4a7c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        "https://images.unsplash.com/photo-1600433262182-04739144ad87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+      ],
+      "imgPreviewLink":[
+        "/","/","/"
+      ]
+    },
+    {
+      "id": 3,
+      "profileImgSrc":
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      "profileLink": "/",
+      "name": "작가1",
+      "desc": "작가소개 descrtion입니다.",
+      "follower": 1,
+      "like": 2,
+      "illust": 3,
+      "imgPreviewSrc": [
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+        "https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554188248-986adbb73be4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+      ],
+      "imgPreviewLink":[
+        "/","/","/"
+      ]
+    },
+    {
+      "id": 4,
+      "profileImgSrc":
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      "profileLink": "/",
+      "name": "작가1",
+      "desc": "작가소개 descrtion입니다.",
+      "follower": 1,
+      "like": 2,
+      "illust": 3,
+      "imgPreviewSrc": [
+        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+        "https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1554188248-986adbb73be4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+      ],
+      "imgPreviewLink":[
+        "/","/","/"
+      ]
+    }
+  ]
+}
