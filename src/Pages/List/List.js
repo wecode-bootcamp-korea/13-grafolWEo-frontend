@@ -9,45 +9,47 @@ class List extends Component {
   constructor() {
     super();
     this.state = {
-      /* Top Banner */
-      listName: "사진", // 카테고리명
-      // 카테고리 배경 이미지 src
+      listName: "사진",
       bannerBgSrc:
         "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
       categoryToggle: false,
-      category: [
-        // 카테고리 nav
-        { id: 1, name: "일러스트", src: "/" },
-        { id: 2, name: "사진", src: "/" },
-        { id: 3, name: "회화", src: "/" },
-        { id: 4, name: "조소/공예", src: "/" },
-        { id: 5, name: "디자인", src: "/" },
-        { id: 6, name: "캘리그라피", src: "/" },
-        { id: 7, name: "사운드", src: "/" },
-      ],
-      listBannerTags: [
-        // tags
-        { id: 1, name: "태그1" },
-        { id: 2, name: "태그2" },
-        { id: 3, name: "태그3" },
-        { id: 4, name: "태그4" },
-        { id: 5, name: "태그5" },
-      ],
-      /* Top Banner -- end */
-      /* Popular Creator */
+      category: [],
+      listBannerTags: [],
       popularCreator: [],
-      /* Popular Creator -- end */
     };
   }
 
   componentDidMount() {
+    // 상단 배너 카테고리
+    fetch("http://localhost:3000/Data/List/CATEGORY.json", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          category: res.category,
+        });
+      });
+
+    // 상단 배너 태그
+    fetch("http://localhost:3000/Data/List/LISTBANNERTAGS.json", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          listBannerTags: res.listBannerTags,
+        });
+      });
+
+    // 인기 크리에이터
     fetch("http://localhost:3000/Data/List/POPULARLIST.json", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          popularCreator: res.data,
+          popularCreator: res.popularCreator,
         });
       });
   }
