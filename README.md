@@ -14,10 +14,10 @@
 - grafolio
 
 ## 기술스택
-### Frontend
+#### Frontend
 - React
 
-### Backend
+#### Backend
 - Django
 
 ## 주요구현기능
