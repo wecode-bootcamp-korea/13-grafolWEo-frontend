@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class ListTag extends Component {
   render() {
-    return <li>{this.props.name}</li>;
+    const { name } = this.props;
+    return <li>{name}</li>;
   }
 }
 

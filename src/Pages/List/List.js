@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { LISTBANNERBGSRC, API } from "../../config";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
@@ -10,8 +11,7 @@ class List extends Component {
     super();
     this.state = {
       listName: "사진",
-      bannerBgSrc:
-        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      bannerBgSrc: [],
       categoryToggle: false,
       category: [],
       listBannerTags: [],
@@ -20,10 +20,9 @@ class List extends Component {
   }
 
   componentDidMount() {
-    // 상단 배너 카테고리
-    fetch("http://localhost:3000/Data/List/CATEGORY.json", {
-      method: "GET",
-    })
+    this.setState({ bannerBgSrc: LISTBANNERBGSRC });
+
+    fetch(`${API}/Data/List/CATEGORY.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -31,10 +30,7 @@ class List extends Component {
         });
       });
 
-    // 상단 배너 태그
-    fetch("http://localhost:3000/Data/List/LISTBANNERTAGS.json", {
-      method: "GET",
-    })
+    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -42,10 +38,7 @@ class List extends Component {
         });
       });
 
-    // 인기 크리에이터
-    fetch("http://localhost:3000/Data/List/POPULARLIST.json", {
-      method: "GET",
-    })
+    fetch(`${API}/Data/List/POPULARLIST.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -105,6 +98,8 @@ class List extends Component {
         />
       )
     );
+
+    console.log(this.state.bannerBgSrc);
 
     return (
       <div className="List">
