@@ -23,6 +23,15 @@
   background-size: cover;
 }
 
+@mixin tagItems {
+  height: 32px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 19px;
+  border: solid 1px #ddd;
+  font-weight: 300;
+}
+
 .Wallpaper {
   article {
     margin-top: 50px;
@@ -228,13 +237,7 @@
                     height: 20px;
                     margin-right: 7px;
                     border-radius: 100%;
-                    background-position: center;
-                    background-repeat: no-repeat;
-
-                    img {
-                      pointer-events: none;
-                      opacity: 0;
-                    }
+                    @include bgDefault;
                   }
                 }
                 .dwnload {
@@ -258,6 +261,7 @@
 
     ul {
       display: flex;
+      justify-content: space-between;
 
       li {
         position: relative;
@@ -279,6 +283,8 @@
         h5 {
           margin: 7px 0 0;
           text-align: center;
+          font-size: 14px;
+          font-weight: 300;
         }
 
         button {
@@ -291,16 +297,16 @@
           justify-content: center;
           align-items: center;
           padding: 0;
-          border: 2px solid $theme-color;
-          background: #fff;
+          border: 1px solid $theme-color;
+          background: $theme-color;
           border-radius: 100%;
           font-size: 20px;
-          color: $theme-color;
+          color: #fff;
         }
 
         button.active {
-          background: $theme-color;
-          color: #fff;
+          background: #fff;
+          color: $theme-color;
         }
       }
 
@@ -313,6 +319,158 @@
   .discover {
     .mainTit {
       @include secTit;
+      display: flex;
+      align-items: center;
+
+      .categoryType li {
+        float: left;
+        margin-left: 35px;
+
+        button {
+          padding: 0 0 3px;
+          font-size: 17px;
+          font-weight: 300;
+          color: #555;
+        }
+      }
+
+      .categoryType li.active button {
+        border-bottom: 2px solid #222;
+        font-weight: 500;
+        color: #222;
+      }
+    }
+
+    .tagItems {
+      margin: 0 0 25px;
+
+      li {
+        float: left;
+
+        button {
+          @include tagItems;
+        }
+      }
+
+      li.active button {
+        background: #111;
+        color: #fff;
+      }
+
+      li + li {
+        margin-left: 10px;
+      }
+    }
+
+    .wallpaperCardView {
+      padding: 50px 0;
+      background: #f4f4f4;
+
+      ul {
+        li {
+          position: relative;
+          float: left;
+          width: calc(33.3333% - 10px);
+
+          a {
+            display: block;
+            height: 226px;
+            @include bgDefault;
+
+            &:hover .slideInfo {
+              opacity: 1;
+            }
+
+            .slideInfo {
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              padding: 0 15px 15px;
+              background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.3),
+                transparent
+              );
+              transition: 0.35s ease;
+              opacity: 0;
+
+              .dwnBtn {
+                position: absolute;
+                right: 15px;
+                bottom: 15px;
+                width: 36px;
+                height: 36px;
+                padding: 0;
+                border: none;
+                border-radius: 3px;
+                background-image: url(/Images/sp_collection.png);
+                background-repeat: no-repeat;
+                background-size: 239px 214px;
+                background-position: -183px -83px;
+                box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+                z-index: 10;
+              }
+
+              h6 {
+                margin-bottom: 7px;
+                letter-spacing: 0.05rem;
+                font-size: 17px;
+                color: #fff;
+              }
+
+              .box {
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                font-weight: 300;
+                color: #fff;
+              }
+
+              .userInfo,
+              .dwnload {
+                display: flex;
+                align-items: center;
+              }
+
+              .userInfo {
+                &:after {
+                  content: "";
+                  display: block;
+                  width: 1px;
+                  height: 10px;
+                  margin: 0 8px;
+                  background: #fff;
+                }
+
+                .imgWrap {
+                  display: inline-block;
+                  width: 20px;
+                  height: 20px;
+                  margin-right: 7px;
+                  border-radius: 100%;
+                  @include bgDefault;
+
+                  img {
+                    pointer-events: none;
+                    opacity: 0;
+                  }
+                }
+              }
+              .dwnload {
+                em {
+                  margin-left: 5px;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+
+        li + li {
+          margin-left: 15px;
+        }
+      }
     }
   }
 }

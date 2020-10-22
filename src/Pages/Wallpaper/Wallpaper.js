@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import EditorsPickTag from "./Components/EditorsPickTag";
+import { API } from "../../config";
+// import EditorsPickTag from "./Components/EditorsPickTag";
 import TopCreator from "./Components/TopCreator";
 import Slide from "./Components/Slide";
+import DiscoverTag from "./Components/DiscoverTag";
 import Slider from "react-slick";
-// import { Link } from "react-router-dom";
 import "./Wallpaper.scss";
 
 class Wallpaper extends Component {
@@ -13,12 +14,12 @@ class Wallpaper extends Component {
       editorsPickTags: [],
       editorsPickSlides: [],
       topCreators: [],
+      discoverTags: [],
     };
   }
 
   componentDidMount() {
-    // 에디터 pick Tags
-    fetch("http://localhost:3000/Data/Wallpaper/EDITORSPICKTAGS.json")
+    fetch(`${API}/Data/Wallpaper/EDITORSPICKTAGS.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -26,8 +27,7 @@ class Wallpaper extends Component {
         });
       });
 
-    // 에디터 pick slides
-    fetch("http://localhost:3000/Data/Wallpaper/EDITORSPICKSLIDES.json")
+    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -35,12 +35,19 @@ class Wallpaper extends Component {
         });
       });
 
-    // Top Creators
-    fetch("http://localhost:3000/Data/Wallpaper/TOPCREATORS.json")
+    fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           topCreators: res.topCreators,
+        });
+      });
+
+    fetch(`${API}/Data/Wallpaper/DISCOVERTAGS.json`)
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          discoverTags: res.discoverTags,
         });
       });
   }
@@ -61,11 +68,13 @@ class Wallpaper extends Component {
   };
 
   render() {
-    const { editorsPickTags, editorsPickSlides, topCreators } = this.state;
+    const { editorsPickSlides, topCreators, discoverTags } = this.state;
 
+    /*
     const editorsPickTagList = editorsPickTags.map(({ id, name }) => (
       <EditorsPickTag key={id} id={id} name={name} />
     ));
+    */
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
@@ -105,39 +114,161 @@ class Wallpaper extends Component {
       )
     );
 
+    const discoverTagList = discoverTags.map(({ id, name }) => (
+      <DiscoverTag key={id} name={name} />
+    ));
+
     const settings = {
-      dots: true,
+      dots: false,
       arrows: true,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      autoplay: false,
+      autoplay: true,
     };
 
     return (
       <div className="Wallpaper">
-        <main className="container">
+        <main>
           <article className="editorsPick">
-            <h2 className="mainTit">
-              Editor's Pick
-              <ul className="tagList clearFix">
-                <li className="active">
-                  <button>태그</button>
-                </li>
-                {editorsPickTagList}
-              </ul>
-            </h2>
-            <Slider {...settings} className="slideWrap">
-              {editorsPickSlideList}
-            </Slider>
+            <div className="container">
+              <h2 className="mainTit">
+                Editor's Pick
+                <ul className="tagList clearFix">
+                  <li className="active">
+                    <button>일상</button>
+                  </li>
+                  <li>
+                    <button>풍경</button>
+                  </li>
+                  {/* {editorsPickTagList} */}
+                </ul>
+              </h2>
+              <Slider {...settings} className="slideWrap">
+                {editorsPickSlideList}
+              </Slider>
+            </div>
           </article>
           <article className="topCreators">
-            <h2 className="mainTit">Top Creators</h2>
-            <ul>{topCreatorList}</ul>
+            <div className="container">
+              <h2 className="mainTit">Top Creators</h2>
+              <ul>{topCreatorList}</ul>
+            </div>
           </article>
           <article className="discover">
-            <h2 className="mainTit">Discover</h2>
+            <div className="container">
+              <h2 className="mainTit">
+                Discover
+                <ul className="categoryType clearFix">
+                  <li className="active">
+                    <button>태그별</button>
+                  </li>
+                  <li>
+                    <button>색상별</button>
+                  </li>
+                  <li>
+                    <button>유형별</button>
+                  </li>
+                </ul>
+              </h2>
+              <ul className="tagItems clearFix">
+                <li className="active">
+                  <button>전체</button>
+                </li>
+                {discoverTagList}
+              </ul>
+            </div>
+            <div className="wallpaperCardView">
+              <div className="container">
+                <ul className="clearFix">
+                  <li>
+                    <a
+                      href="/"
+                      style={{
+                        backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                      }}
+                    >
+                      <div className="slideInfo">
+                        <h6>subject</h6>
+                        <div className="box">
+                          <span className="userInfo">
+                            <span
+                              className="imgWrap"
+                              style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                              }}
+                            ></span>
+                            <em>작가이름</em>
+                          </span>
+                          <span className="dwnload">
+                            다운로드
+                            <em>123</em>
+                          </span>
+                        </div>
+                        <button type="button" className="dwnBtn"></button>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      style={{
+                        backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                      }}
+                    >
+                      <div className="slideInfo">
+                        <h6>subject</h6>
+                        <div className="box">
+                          <span className="userInfo">
+                            <span
+                              className="imgWrap"
+                              style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                              }}
+                            ></span>
+                            <em>작가이름</em>
+                          </span>
+                          <span className="dwnload">
+                            다운로드
+                            <em>123</em>
+                          </span>
+                        </div>
+                        <button type="button" className="dwnBtn"></button>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/"
+                      style={{
+                        backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                      }}
+                    >
+                      <div className="slideInfo">
+                        <h6>subject</h6>
+                        <div className="box">
+                          <span className="userInfo">
+                            <span
+                              className="imgWrap"
+                              style={{
+                                backgroundImage: `url(https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80)`,
+                              }}
+                            ></span>
+                            <em>작가이름</em>
+                          </span>
+                          <span className="dwnload">
+                            다운로드
+                            <em>123</em>
+                          </span>
+                        </div>
+                        <button type="button" className="dwnBtn"></button>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </article>
         </main>
       </div>
