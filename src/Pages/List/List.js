@@ -75,11 +75,9 @@ class List extends Component {
       ({
         id,
         profileImgSrc,
-        profileLink,
         name,
         desc,
         imgPreviewSrc,
-        imgPreviewLink,
         follower,
         like,
         illust,
@@ -87,11 +85,9 @@ class List extends Component {
         <PopularCreator
           key={id}
           profileImgSrc={profileImgSrc}
-          profileLink={profileLink}
           name={name}
           desc={desc}
           imgPreviewSrc={imgPreviewSrc}
-          imgPreviewLink={imgPreviewLink}
           follower={follower}
           like={like}
           illust={illust}
