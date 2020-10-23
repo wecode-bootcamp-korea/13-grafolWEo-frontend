@@ -6,11 +6,35 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      mostViewdImg:
+      email: "",
+      password: "",
+      emailVal: true,
+      passwordVal: true,
+      mostViewdArt:
         "https://usercontents-c.styleshare.io/images/21484842/700x432",
     };
   }
 
+  checkVal = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+    if (name === "email") {
+      this.validateEmail(value);
+    } else {
+      this.validatePw(value);
+    }
+  };
+
+  validateEmail = (email) => {
+    const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    this.setState({ emailVal: emailRule.test(email) });
+  };
+
+  validatePw = (pw) => {
+    pw.length > 7
+      ? this.setState({ passwordVal: true })
+      : this.setState({ passwordVal: false });
+  };
   render() {
     return (
       <div className="Login">
@@ -24,11 +48,21 @@ class Login extends Component {
             <form>
               <div className="idBox">
                 <label>이메일</label>
-                <input type="text" placeholder="example@naver.com" />
+                <input
+                  onChange={this.checkVal}
+                  name="email"
+                  type="text"
+                  placeholder="example@naver.com"
+                />
               </div>
               <div className="pwBox">
                 <label>비밀번호</label>
-                <input type="password" placeholder="password" />
+                <input
+                  onChange={this.checkVal}
+                  name="pw"
+                  type="password"
+                  placeholder="password"
+                />
               </div>
               <div className="optionBox">
                 <span>비밀번호를 잊으셨나요?</span>
@@ -48,7 +82,7 @@ class Login extends Component {
           </div>
         </section>
         <aside
-          style={{ backgroundImage: `url(${this.state.mostViewdImg})` }}
+          style={{ backgroundImage: `url(${this.state.mostViewdArt})` }}
         ></aside>
       </div>
     );
