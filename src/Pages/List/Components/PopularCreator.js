@@ -9,9 +9,7 @@ class PopularCreator extends Component {
       name,
       desc,
       profileImgSrc,
-      profileLink,
       imgPreviewSrc,
-      imgPreviewLink,
       follower,
       like,
       illust,
@@ -21,7 +19,7 @@ class PopularCreator extends Component {
         <div className="inner">
           <div className="profileInfo">
             <Link
-              to={profileLink}
+              to="/"
               className="artistProfileImg"
               style={{ backgroundImage: `url(${profileImgSrc})` }}
             ></Link>
@@ -49,30 +47,18 @@ class PopularCreator extends Component {
             </ul>
           </div>
           <ul className="clearFix imgThumWrap">
-            <li>
-              <Link
-                to={imgPreviewLink[0]}
-                style={{ backgroundImage: `url(${imgPreviewSrc[0]})` }}
-              >
-                <img src={imgPreviewSrc[0]} alt="대표 이미지" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={imgPreviewLink[1]}
-                style={{ backgroundImage: `url(${imgPreviewSrc[1]})` }}
-              >
-                <img src={imgPreviewSrc[1]} alt="대표 이미지" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={imgPreviewLink[2]}
-                style={{ backgroundImage: `url(${imgPreviewSrc[2]})` }}
-              >
-                <img src={imgPreviewSrc[2]} alt="대표 이미지" />
-              </Link>
-            </li>
+            {imgPreviewSrc.map((tag, idx) => {
+              return (
+                <li key={idx}>
+                  <Link
+                    to="/"
+                    style={{ backgroundImage: `url(${imgPreviewSrc[idx]})` }}
+                  >
+                    <img src={imgPreviewSrc[idx]} alt="대표 이미지" />
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </li>
