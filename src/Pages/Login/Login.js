@@ -20,13 +20,12 @@ class Login extends Component {
               <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
               <span className="loginText">로그인</span>
             </header>
-
             <form>
-              <div className="idBox">
+              <div className="loginBox">
                 <label>이메일</label>
-                <input type="text" placeholder="example@naver.com" />
+                <input type="email" placeholder="example@naver.com" />
               </div>
-              <div className="pwBox">
+              <div className="loginBox">
                 <label>비밀번호</label>
                 <input type="password" placeholder="password" />
               </div>
@@ -36,7 +35,7 @@ class Login extends Component {
                   <span>회원가입하기</span>
                 </Link>
               </div>
-              <button classNam="btnStyle" type="button">
+              <button className="btnStyle" type="button">
                 로그인
               </button>
             </form>

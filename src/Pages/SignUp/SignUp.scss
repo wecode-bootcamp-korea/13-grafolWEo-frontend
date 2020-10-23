@@ -1,0 +1,166 @@
+@import "../../Styles/common.scss";
+
+.SignUp {
+  width: 100vw;
+  nav {
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+    height: 6%;
+    border-bottom: #f8f8f9 solid 1px;
+
+    img {
+      width: 100px;
+      height: 40px;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+    }
+  }
+
+  .signupContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 30%;
+
+    .text_box {
+      display: flex;
+      align-items: center;
+      height: 15vh;
+    }
+
+    p {
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    form {
+      div {
+        display: flex;
+        flex-direction: column;
+
+        img {
+          width: 90px;
+          height: 85px;
+          margin-bottom: 10px;
+          border-radius: 50%;
+        }
+
+        textarea {
+          height: 80px;
+          margin-bottom: 30px;
+          resize: none;
+        }
+      }
+
+      .alertMessage {
+        color: red;
+        font-size: 11px;
+      }
+
+      .idBox {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        label {
+          margin: 10px 0;
+          font-size: 14px;
+          color: #737373;
+        }
+
+        input {
+          height: 35px;
+          border-radius: 3px;
+          font-weight: normal;
+          border: 1px solid gray;
+          padding: 5px 15px;
+
+          &:focus::placeholder {
+            visibility: hidden;
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 30px;
+        background-color: $theme-color;
+        border-style: none;
+        border-radius: 3px;
+        color: white;
+        font-weight: bold;
+        background-color: $theme-color;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #00bd78;
+        }
+      }
+    }
+    .privacy {
+      margin: 30px 0 30px 0;
+      font-size: 11px;
+      font-weight: normal;
+      color: #a8aeb3;
+      text-align: center;
+
+      span {
+        color: #57a5c2;
+      }
+    }
+  }
+  footer {
+    border-top: #f8f8f9 solid 1px;
+    display: flex;
+    flex-direction: column;
+
+    .INCName {
+      margin: 10px 0 0 10px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .companyInfo {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+
+      ul {
+        display: flex;
+        font-size: 11px;
+        font-weight: normal;
+        color: rgb(27, 28, 29);
+        line-height: 16px;
+        letter-spacing: normal;
+        margin: 0px;
+        width: 340px;
+        flex-wrap: wrap;
+
+        li {
+          padding: 10px 0 0 10px;
+          cursor: pointer;
+          &:not(:last-child):not(:nth-child(4))::after {
+            content: "⎮";
+            padding-left: 10px;
+          }
+        }
+      }
+
+      div {
+        font-size: 11px;
+        font-weight: normal;
+        color: rgb(27, 28, 29);
+        line-height: 16px;
+        letter-spacing: normal;
+        margin: 0px;
+      }
+    }
+  }
+}
