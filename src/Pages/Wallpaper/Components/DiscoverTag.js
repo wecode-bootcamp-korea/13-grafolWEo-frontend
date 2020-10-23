@@ -2,10 +2,9 @@ import React, { Component } from "react";
 
 class DiscoverTag extends Component {
   render() {
-    const { name } = this.props;
     return (
       <li>
-        <button>{name}</button>
+        <button>{this.props.name}</button>
       </li>
     );
   }
