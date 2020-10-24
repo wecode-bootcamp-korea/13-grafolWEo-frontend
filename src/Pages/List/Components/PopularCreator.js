@@ -13,7 +13,7 @@ class PopularCreator extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/List/POPULARLIST.json`)
+    fetch(`http://10.58.7.192:8000/works/category/list/popular_creator`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -49,13 +49,13 @@ class PopularCreator extends Component {
                       </li>
                       <li className="like">
                         <span className="icon">
-                          <IoMdPaper />
+                          <FaRegSmile />
                         </span>
                         <em>{tag.like}</em>
                       </li>
                       <li className="illust">
                         <span className="icon">
-                          <FaRegSmile />
+                          <IoMdPaper />
                         </span>
                         <em>{tag.illust}</em>
                       </li>

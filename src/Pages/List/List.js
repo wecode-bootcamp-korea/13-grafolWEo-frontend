@@ -41,7 +41,7 @@ class List extends Component {
         });
       });
 
-    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
+    fetch(`http://10.58.7.192:8000/works/category/일러스트`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
