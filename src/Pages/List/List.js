@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LISTBANNERBGSRC, API } from "../../config";
+import { CATEGORY, LISTBANNERBGSRC, API } from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
@@ -14,12 +14,12 @@ class List extends Component {
   constructor() {
     super();
     this.state = {
-      listName: "사진",
+      listName: "",
       bannerBgSrc: [],
       categoryToggle: false,
       category: [],
-      menuTabActiveId: 0,
       listBannerTags: [],
+      menuTabActiveId: 0,
     };
   }
 
@@ -28,7 +28,10 @@ class List extends Component {
   };
 
   componentDidMount() {
-    this.setState({ bannerBgSrc: LISTBANNERBGSRC });
+    this.setState({
+      bannerBgSrc: LISTBANNERBGSRC,
+      listName: CATEGORY[0].name,
+    });
 
     fetch(`${API}/Data/List/CATEGORY.json`)
       .then((res) => res.json())
