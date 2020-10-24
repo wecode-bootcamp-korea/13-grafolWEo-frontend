@@ -3,16 +3,12 @@ import { LISTBANNERBGSRC, API } from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
-import RecommendWork from "./Components/RecommendWork";
-import LatestWork from "./Components/LatestWork";
 import PopularCreator from "./Components/PopularCreator";
 import "./List.scss";
 
-// const menuTabObj = {
-//   0: <RecommendWork />,
-//   1: <LatestWork />,
-//   2: <PopularCreator />,
-// };
+const menuTabObj = {
+  0: <PopularCreator />,
+};
 
 class List extends Component {
   constructor() {
@@ -22,9 +18,8 @@ class List extends Component {
       bannerBgSrc: [],
       categoryToggle: false,
       category: [],
-      menuTabActiveId: 2,
+      menuTabActiveId: 0,
       listBannerTags: [],
-      popularCreator: [],
     };
   }
 
@@ -50,14 +45,6 @@ class List extends Component {
           listBannerTags: res.listBannerTags,
         });
       });
-
-    fetch(`${API}/Data/List/POPULARLIST.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          popularCreator: res.popularCreator,
-        });
-      });
   }
 
   handleToggle = () => {
@@ -73,7 +60,6 @@ class List extends Component {
       category,
       categoryToggle,
       bannerBgSrc,
-      popularCreator,
     } = this.state;
 
     const tagList = listBannerTags.map(({ id, name }) => (
@@ -83,30 +69,6 @@ class List extends Component {
     const categoryList = category.map(({ id, name, src }) => (
       <ListCategory key={id} name={name} src={src} />
     ));
-
-    // const popularCreatorList = popularCreator.map(
-    //   ({
-    //     id,
-    //     profileImgSrc,
-    //     name,
-    //     desc,
-    //     imgPreviewSrc,
-    //     follower,
-    //     like,
-    //     illust,
-    //   }) => (
-    //     <PopularCreator
-    //       key={id}
-    //       profileImgSrc={profileImgSrc}
-    //       name={name}
-    //       desc={desc}
-    //       imgPreviewSrc={imgPreviewSrc}
-    //       follower={follower}
-    //       like={like}
-    //       illust={illust}
-    //     />
-    //   )
-    // );
 
     return (
       <div className="List">
@@ -144,21 +106,7 @@ class List extends Component {
               </li>
             </ul>
           </nav>
-          <section className="popular">
-            <div className="container">
-              {/* {menuTabObj[this.state.menuTabActiveId]} */}
-              <PopularCreator popularCreator={popularCreator} />
-            </div>
-          </section>
-          {/*
-          <section className="recommend"></section>
-          <section className="latest"></section>
-          <section className="popular">
-            <div className="container">
-              <ul className="clearFix list">{popularCreatorList}</ul>
-            </div>
-          </section>
-          */}
+          {menuTabObj[this.state.menuTabActiveId]}
         </main>
       </div>
     );
