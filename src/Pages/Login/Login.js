@@ -9,12 +9,38 @@ class Login extends Component {
       email: "",
       password: "",
       emailVal: true,
-      passwordVal: true,
       mostViewdArt:
         "https://usercontents-c.styleshare.io/images/21484842/700x432",
     };
   }
 
+  loginAccess = (e) => {
+    e.preventDefault();
+    const { emailVal, password } = this.state;
+    if (emailVal && password.length > 0) {
+      const SH_URL = "http://10.58.4.233:8000";
+      fetch(`${SH_URL}/user/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      })
+        .then((res) => {
+          if (res.status === 400) {
+            alert("다시 한 번 확인해주세요!");
+          } else if (res.status === 200) {
+            alert("로그인성공");
+            this.props.history.push("/");
+          }
+        })
+        .catch((error) => console.log(error.message));
+      // 페이지 넘어가는 코드 요기에
+    }
+  };
   checkVal = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -31,11 +57,11 @@ class Login extends Component {
   };
 
   validatePw = (pw) => {
-    pw.length > 7
-      ? this.setState({ passwordVal: true })
-      : this.setState({ passwordVal: false });
+    this.setState({ password: pw });
   };
+
   render() {
+    const { email, emailVal } = this.state;
     return (
       <div className="Login">
         <section>
@@ -44,9 +70,8 @@ class Login extends Component {
               <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
               <span className="loginText">로그인</span>
             </header>
-
-            <form>
-              <div className="idBox">
+            <form onSubmit={this.loginAccess}>
+              <div className="loginBox">
                 <label>이메일</label>
                 <input
                   onChange={this.checkVal}
@@ -55,7 +80,14 @@ class Login extends Component {
                   placeholder="example@naver.com"
                 />
               </div>
-              <div className="pwBox">
+              {email.length !== 0 && !emailVal && (
+                <div className="alertMessage">
+                  <span role="img" aria-label="">
+                    🔺 올바른 이메일이 아닙니다.
+                  </span>{" "}
+                </div>
+              )}
+              <div className="loginBox">
                 <label>비밀번호</label>
                 <input
                   onChange={this.checkVal}
@@ -70,7 +102,7 @@ class Login extends Component {
                   <span>회원가입하기</span>
                 </Link>
               </div>
-              <button classNam="btnStyle" type="button">
+              <button onClick={this.loginAccess} className="btnStyle">
                 로그인
               </button>
             </form>
