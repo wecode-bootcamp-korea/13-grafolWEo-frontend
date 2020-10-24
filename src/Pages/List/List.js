@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { LISTBANNERBGSRC, API } from "../../config";
+import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
+import RecommendWork from "./Components/RecommendWork";
+import LatestWork from "./Components/LatestWork";
 import PopularCreator from "./Components/PopularCreator";
-import { AiFillCaretDown } from "react-icons/ai";
 import "./List.scss";
+
+// const menuTabObj = {
+//   0: <RecommendWork />,
+//   1: <LatestWork />,
+//   2: <PopularCreator />,
+// };
 
 class List extends Component {
   constructor() {
@@ -14,10 +22,15 @@ class List extends Component {
       bannerBgSrc: [],
       categoryToggle: false,
       category: [],
+      menuTabActiveId: 2,
       listBannerTags: [],
       popularCreator: [],
     };
   }
+
+  handleClickMenuTab = (id) => {
+    this.setState({ menuTabActiveId: id });
+  };
 
   componentDidMount() {
     this.setState({ bannerBgSrc: LISTBANNERBGSRC });
@@ -71,31 +84,29 @@ class List extends Component {
       <ListCategory key={id} name={name} src={src} />
     ));
 
-    const popularCreatorList = popularCreator.map(
-      ({
-        id,
-        profileImgSrc,
-        name,
-        desc,
-        imgPreviewSrc,
-        follower,
-        like,
-        illust,
-      }) => (
-        <PopularCreator
-          key={id}
-          profileImgSrc={profileImgSrc}
-          name={name}
-          desc={desc}
-          imgPreviewSrc={imgPreviewSrc}
-          follower={follower}
-          like={like}
-          illust={illust}
-        />
-      )
-    );
-
-    console.log(this.state.bannerBgSrc);
+    // const popularCreatorList = popularCreator.map(
+    //   ({
+    //     id,
+    //     profileImgSrc,
+    //     name,
+    //     desc,
+    //     imgPreviewSrc,
+    //     follower,
+    //     like,
+    //     illust,
+    //   }) => (
+    //     <PopularCreator
+    //       key={id}
+    //       profileImgSrc={profileImgSrc}
+    //       name={name}
+    //       desc={desc}
+    //       imgPreviewSrc={imgPreviewSrc}
+    //       follower={follower}
+    //       like={like}
+    //       illust={illust}
+    //     />
+    //   )
+    // );
 
     return (
       <div className="List">
@@ -133,13 +144,21 @@ class List extends Component {
               </li>
             </ul>
           </nav>
-          <section className="recommend">{/* 추천 컴포넌트 */}</section>
-          <section className="latest">{/* 최신 컴포넌트 */}</section>
+          <section className="popular">
+            <div className="container">
+              {/* {menuTabObj[this.state.menuTabActiveId]} */}
+              <PopularCreator popularCreator={popularCreator} />
+            </div>
+          </section>
+          {/*
+          <section className="recommend"></section>
+          <section className="latest"></section>
           <section className="popular">
             <div className="container">
               <ul className="clearFix list">{popularCreatorList}</ul>
             </div>
           </section>
+          */}
         </main>
       </div>
     );
