@@ -2,35 +2,35 @@ import React, { Component } from "react";
 import { API } from "../../../config";
 import DiscoverCardViewItem from "./DiscoverCardViewItem";
 
-class DiscoverColorList extends Component {
+class DiscoverTypeList extends Component {
   constructor() {
     super();
     this.state = {
       cardViewList: [],
-      discoverColors: [],
+      discoverTypes: [],
     };
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/Wallpaper/DISCOVERCOLORS.json`)
+    fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          cardViewList: res.discoverColorData.cardViewList,
-          discoverColors: res.discoverColorData.colorList,
+          cardViewList: res.discoverTypeData.cardViewList,
+          discoverTypes: res.discoverTypeData.typeList,
         });
       });
   }
 
   render() {
-    const { discoverColors, cardViewList } = this.state;
+    const { discoverTypes, cardViewList } = this.state;
     console.log(this.state.discoverColors);
     return (
       <div className="DiscoverTagList">
         <div className="container">
-          <ul className="colorItems clearFix">
-            {discoverColors.map((tag) => (
-              <li key={tag.id} style={{ backgroundColor: tag.hexCode }}>
+          <ul className="tagItems clearFix">
+            {discoverTypes.map((tag) => (
+              <li>
                 <button>{tag.name}</button>
               </li>
             ))}
@@ -56,4 +56,4 @@ class DiscoverColorList extends Component {
   }
 }
 
-export default DiscoverColorList;
+export default DiscoverTypeList;

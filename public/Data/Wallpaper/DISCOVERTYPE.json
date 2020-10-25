@@ -1,16 +1,12 @@
 {
-  "discoverColorData" : {
-    "colorList": [
-      {"id": 1, "name": "빨강색"},
-      {"id": 2, "name": "주황색"},
-      {"id": 3, "name": "노랑색"},
-      {"id": 4, "name": "초록색"},
-      {"id": 5, "name": "파랑색"},
-      {"id": 6, "name": "남색"},
-      {"id": 7, "name": "보라색"},
-      {"id": 8, "name": "흰색"},
-      {"id": 9, "name": "검은색"},
-      {"id": 10, "name": "흑백"}
+  "discoverTypeData" : {
+    "typeList": [
+      {"id": 1, "name": "일러스트"},
+      {"id": 2, "name": "사진"},
+      {"id": 3, "name": "회화"},
+      {"id": 4, "name": "디자인"},
+      {"id": 5, "name": "캘리그라피"},
+      {"id": 6, "name": "감성"}
     ],
     "cardViewList" : [
       {

@@ -12,7 +12,7 @@ class Slide extends Component {
     } = this.props;
 
     return (
-      <div className="item">
+      <div className="Slide">
         <Link to="/" style={{ backgroundImage: `url(${wallpaperSrc})` }}>
           <div className="slideInfo">
             <h6>{subject}</h6>
@@ -24,13 +24,12 @@ class Slide extends Component {
                 ></span>
                 <em>{name}</em>
               </span>
-              <span className="dwnload">
+              <span className="download">
                 다운로드
                 <em>{downloadNum}</em>
               </span>
             </div>
             <button type="button" className="dwnBtn"></button>
-            {/* // downloadSrc X */}
           </div>
         </Link>
       </div>

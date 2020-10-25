@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { API } from "../../config";
+import Slider from "react-slick";
 import TopCreator from "./Components/TopCreator";
 import DiscoverTagList from "./Components/DiscoverTagList";
-// import DiscoverColorList from "./Components/DiscoverColorList";
+import DiscoverColorList from "./Components/DiscoverColorList";
+import DiscoverTypeList from "./Components/DiscoverTypeList";
 import Slide from "./Components/Slide";
-import Slider from "react-slick";
 import "./Wallpaper.scss";
 
 class Wallpaper extends Component {
@@ -34,6 +35,7 @@ class Wallpaper extends Component {
         });
       });
 
+    // fetch("http://10.58.7.192:8000/works/wallpaper/topcreators")
     fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
       .then((res) => res.json())
       .then((res) => {
@@ -59,7 +61,7 @@ class Wallpaper extends Component {
   };
 
   render() {
-    const { editorsPickSlides, topCreators } = this.state;
+    const { editorsPickTags, editorsPickSlides, topCreators } = this.state;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
@@ -123,7 +125,11 @@ class Wallpaper extends Component {
                   <li>
                     <button>풍경</button>
                   </li>
-                  {/* {editorsPickTagList} */}
+                  {editorsPickTags.map((tag) => (
+                    <li key={tag.id} style={{ backgroundColor: tag.hexCode }}>
+                      <button>{tag.name}</button>
+                    </li>
+                  ))}
                 </ul>
               </h2>
               <Slider {...settings} className="slideWrap">
@@ -156,6 +162,7 @@ class Wallpaper extends Component {
             </div>
             <DiscoverTagList />
             {/* <DiscoverColorList /> */}
+            {/* <DiscoverTypeList /> */}
           </article>
         </main>
       </div>

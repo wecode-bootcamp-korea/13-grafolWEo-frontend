@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { API } from "../../../config";
-import DiscoverTag from "./DiscoverTag";
 import DiscoverCardViewItem from "./DiscoverCardViewItem";
 
 class DiscoverTagList extends Component {
   constructor() {
     super();
     this.state = {
-      discoverTags: [],
       cardViewList: [],
+      discoverTags: [],
     };
   }
 
@@ -26,19 +25,19 @@ class DiscoverTagList extends Component {
   render() {
     const { discoverTags, cardViewList } = this.state;
     return (
-      <>
+      <div className="DiscoverTagList">
         <div className="container">
           <ul className="tagItems clearFix">
-            <li className="active">
-              <button>전체</button>
-            </li>
-            {discoverTags.map((tag, index) => (
-              <DiscoverTag key={index} name={tag.name} />
+            {discoverTags.map((tag) => (
+              <li>
+                <button>{tag.name}</button>
+              </li>
             ))}
           </ul>
         </div>
         <div className="wallpaperCardView">
           <div className="container">
+            <div className="ranking"></div>
             <ul className="clearFix">
               {cardViewList.map((tag) => (
                 <DiscoverCardViewItem
@@ -52,7 +51,7 @@ class DiscoverTagList extends Component {
             </ul>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -12,7 +12,7 @@ class TopCreator extends Component {
       handleClickFollow,
     } = this.props;
     return (
-      <li>
+      <li className="TopCreator">
         <span
           className="imgWrap"
           style={{ backgroundImage: `url(${profile_image_url})` }}
