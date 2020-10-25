@@ -84,7 +84,7 @@
       }
 
       .slick-prev {
-        left: 10px;
+        left: 8px;
       }
 
       .slick-next {
@@ -140,6 +140,8 @@
       /* arrows, dots -- end */
 
       .slick-list {
+        padding: 0 0 30px;
+
         .slick-track {
           height: 270px !important;
 
@@ -155,6 +157,7 @@
             .Slide {
               position: relative;
               border-radius: 15px;
+              box-shadow: 0 5px 10px rgba(0, 0, 0, 0.125);
               overflow: hidden;
 
               &:hover .slideInfo {
@@ -251,6 +254,18 @@
           }
         }
       }
+
+      &::after {
+        content: "";
+        width: 100px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: -15px;
+        background-image: url(/Images/bg_flicking_grd.png);
+        background-repeat: repeat-y;
+        background-size: contain;
+      }
     }
   }
 
@@ -317,6 +332,10 @@
   }
 
   .discover {
+    .DiscoverTagList {
+      min-height: 400px;
+    }
+
     .mainTit {
       @include secTit;
       display: flex;
@@ -428,6 +447,7 @@
 
     .wallpaperCardView {
       padding: 50px 0;
+      min-height: 340px;
       background: #f4f4f4;
 
       ul {

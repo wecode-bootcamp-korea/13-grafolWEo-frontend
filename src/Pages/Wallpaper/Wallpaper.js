@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { API } from "../../config";
+import { API, DISCOVERTABLIST } from "../../config";
 import Slider from "react-slick";
 import TopCreator from "./Components/TopCreator";
 import DiscoverTagList from "./Components/DiscoverTagList";
@@ -9,16 +9,19 @@ import Slide from "./Components/Slide";
 import "./Wallpaper.scss";
 
 const menuTabObj = {
-  0: <DiscoverTagList />,
-  1: <DiscoverColorList />,
-  2: <DiscoverTypeList />,
+  1: <DiscoverTagList />,
+  2: <DiscoverColorList />,
+  3: <DiscoverTypeList />,
 };
 
 class Wallpaper extends Component {
   constructor() {
     super();
     this.state = {
-      menuTabActiveId: 0,
+      menuTabActiveId: 1,
+      editorsPickTagActive: 1,
+      topCreatorsActive: 1,
+      discoverTabActive: 1,
       editorsPickTagList: [],
       editorsPickSlides: [],
       topCreators: [],
@@ -35,8 +38,8 @@ class Wallpaper extends Component {
         });
       });
 
-    // fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
-    fetch(`http://10.58.7.192:8000/works/wallpaper/topcreators`)
+    fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
+      // fetch(`http://10.58.7.192:8000/works/wallpaper/topcreators`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -69,8 +72,38 @@ class Wallpaper extends Component {
       });
   };
 
+  handleClickEditorPickTag = (id) => {
+    console.log(id);
+    // fetch(`http://10.58.7.192:8000/works/wallpaper/${id}`)
+    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(id);
+        this.setState({
+          editorsPickTagActive: id,
+          editorsPickSlides: res.editorsPickData.Slides,
+        });
+      });
+  };
+
+  handleClickDiscoverTab = (id) => {
+    console.log(id);
+    this.setState({
+      discoverTabActive: id,
+      menuTabActiveId: id,
+    });
+  };
+
   render() {
-    const { editorsPickTagList, editorsPickSlides, topCreators } = this.state;
+    const {
+      editorsPickTagList,
+      editorsPickSlides,
+      topCreators,
+      menuTabActiveId,
+      editorsPickTagActive,
+      discoverTabActive,
+    } = this.state;
+    const { handleClickEditorPickTag, handleClickDiscoverTab } = this;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
@@ -114,10 +147,11 @@ class Wallpaper extends Component {
       dots: false,
       arrows: true,
       infinite: true,
-      speed: 500,
+      speed: 800,
       slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
+      autoplaySpeed: 3500,
     };
 
     return (
@@ -128,12 +162,20 @@ class Wallpaper extends Component {
               <h2 className="mainTit">
                 Editor's Pick
                 <ul className="tagList clearFix">
-                  <li className="active">
-                    <button>일상</button>
-                  </li>
                   {editorsPickTagList.map((tag) => (
-                    <li key={tag.id} style={{ backgroundColor: tag.hexCode }}>
-                      <button>{tag.name}</button>
+                    <li
+                      key={tag.id}
+                      className={
+                        editorsPickTagActive === tag.id ? "active" : ""
+                      }
+                    >
+                      <button
+                        onClick={() => {
+                          handleClickEditorPickTag(tag.id);
+                        }}
+                      >
+                        {tag.name}
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -154,19 +196,24 @@ class Wallpaper extends Component {
               <h2 className="mainTit">
                 Discover
                 <ul className="categoryType clearFix">
-                  <li className="active">
-                    <button>태그별</button>
-                  </li>
-                  <li>
-                    <button>색상별</button>
-                  </li>
-                  <li>
-                    <button>유형별</button>
-                  </li>
+                  {DISCOVERTABLIST.map((tab) => (
+                    <li
+                      key={tab.id}
+                      className={discoverTabActive === tab.id ? "active" : ""}
+                    >
+                      <button
+                        onClick={() => {
+                          handleClickDiscoverTab(tab.id);
+                        }}
+                      >
+                        {tab.name}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </h2>
             </div>
-            {menuTabObj[this.state.menuTabActiveId]}
+            {menuTabObj[menuTabActiveId]}
           </article>
         </main>
       </div>

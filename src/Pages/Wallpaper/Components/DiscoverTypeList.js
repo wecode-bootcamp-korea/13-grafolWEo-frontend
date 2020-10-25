@@ -30,7 +30,7 @@ class DiscoverTypeList extends Component {
         <div className="container">
           <ul className="tagItems clearFix">
             {discoverTypes.map((tag) => (
-              <li>
+              <li key={tag.id}>
                 <button>{tag.name}</button>
               </li>
             ))}
