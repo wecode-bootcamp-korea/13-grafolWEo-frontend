@@ -13,7 +13,7 @@ class PopularCreator extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://10.58.7.192:8000/works/category/list/popular_creator`)
+    fetch(`${API}/Data/List/POPULARLIST.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({

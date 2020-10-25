@@ -4,13 +4,13 @@ import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
-import "./List.scss";
+import "./WorksList.scss";
 
 const menuTabObj = {
   0: <PopularCreator />,
 };
 
-class List extends Component {
+export default class WorksList extends Component {
   constructor() {
     super();
     this.state = {
@@ -41,7 +41,7 @@ class List extends Component {
         });
       });
 
-    fetch(`http://10.58.7.192:8000/works/category/일러스트`)
+    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -74,7 +74,7 @@ class List extends Component {
     ));
 
     return (
-      <div className="List">
+      <div className="WorksList">
         <header
           className="listBanner"
           style={{ backgroundImage: `url(${bannerBgSrc})` }}
@@ -115,5 +115,3 @@ class List extends Component {
     );
   }
 }
-
-export default List;
