@@ -8,35 +8,35 @@ import DiscoverTypeList from "./Components/DiscoverTypeList";
 import Slide from "./Components/Slide";
 import "./Wallpaper.scss";
 
+const menuTabObj = {
+  0: <DiscoverTagList />,
+  1: <DiscoverColorList />,
+  2: <DiscoverTypeList />,
+};
+
 class Wallpaper extends Component {
   constructor() {
     super();
     this.state = {
-      editorsPickTags: [],
+      menuTabActiveId: 0,
+      editorsPickTagList: [],
       editorsPickSlides: [],
       topCreators: [],
     };
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/Wallpaper/EDITORSPICKTAGS.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          editorsPickTags: res.editorsPickTags,
-        });
-      });
-
     fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          editorsPickSlides: res.editorsPickSlides,
+          editorsPickTagList: res.editorsPickData.TagList,
+          editorsPickSlides: res.editorsPickData.Slides,
         });
       });
 
-    // fetch("http://10.58.7.192:8000/works/wallpaper/topcreators")
-    fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
+    // fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
+    fetch(`http://10.58.7.192:8000/works/wallpaper/topcreators`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -51,17 +51,26 @@ class Wallpaper extends Component {
     const selected = topCreators[index];
     const nextTopCreator = [...topCreators];
 
-    nextTopCreator[index] = {
-      ...selected,
-      followBtn: !selected.followBtn,
-    };
-    this.setState({
-      topCreators: nextTopCreator,
-    });
+    fetch("http://10.58.7.192:8000/works/wallpaper/follow", {
+      method: "post",
+      body: JSON.stringify({
+        creator_id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        nextTopCreator[index] = {
+          ...selected,
+          followBtn: res.data.followBtn,
+        };
+        this.setState({
+          topCreators: nextTopCreator,
+        });
+      });
   };
 
   render() {
-    const { editorsPickTags, editorsPickSlides, topCreators } = this.state;
+    const { editorsPickTagList, editorsPickSlides, topCreators } = this.state;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
@@ -122,10 +131,7 @@ class Wallpaper extends Component {
                   <li className="active">
                     <button>일상</button>
                   </li>
-                  <li>
-                    <button>풍경</button>
-                  </li>
-                  {editorsPickTags.map((tag) => (
+                  {editorsPickTagList.map((tag) => (
                     <li key={tag.id} style={{ backgroundColor: tag.hexCode }}>
                       <button>{tag.name}</button>
                     </li>
@@ -160,9 +166,7 @@ class Wallpaper extends Component {
                 </ul>
               </h2>
             </div>
-            <DiscoverTagList />
-            {/* <DiscoverColorList /> */}
-            {/* <DiscoverTypeList /> */}
+            {menuTabObj[this.state.menuTabActiveId]}
           </article>
         </main>
       </div>

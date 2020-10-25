@@ -29,7 +29,7 @@ class DiscoverTagList extends Component {
         <div className="container">
           <ul className="tagItems clearFix">
             {discoverTags.map((tag) => (
-              <li>
+              <li key={tag.id}>
                 <button>{tag.name}</button>
               </li>
             ))}
