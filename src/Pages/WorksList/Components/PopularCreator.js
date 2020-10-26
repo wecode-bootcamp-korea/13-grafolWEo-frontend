@@ -37,7 +37,7 @@ class PopularCreator extends Component {
                       to="/"
                       className="artistProfileImg"
                       style={{ backgroundImage: `url(${tag.profileImgSrc})` }}
-                    ></Link>
+                    />
                     <h5>{tag.name}</h5>
                     <p>{tag.desc}</p>
                     <ul className="actions">
