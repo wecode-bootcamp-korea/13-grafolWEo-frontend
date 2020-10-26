@@ -1,0 +1,39 @@
+{
+  "discoverColorData" : {
+    "colorList": [
+      {"id": 1, "name": "빨강색"},
+      {"id": 2, "name": "주황색"},
+      {"id": 3, "name": "노랑색"},
+      {"id": 4, "name": "초록색"},
+      {"id": 5, "name": "파랑색"},
+      {"id": 6, "name": "남색"},
+      {"id": 7, "name": "보라색"},
+      {"id": 8, "name": "흰색"},
+      {"id": 9, "name": "검은색"},
+      {"id": 10, "name": "흑백"}
+    ],
+    "cardViewList" : [
+      {
+        "id": 1,
+        "subject": "배경화면 제목1",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      },
+      {
+        "id": 2,
+        "subject": "배경화면 제목2",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      },
+      {
+        "id": 3,
+        "subject": "배경화면 제목3",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      }
+    ]
+  }
+}
