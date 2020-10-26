@@ -87,7 +87,6 @@ class Wallpaper extends Component {
   };
 
   handleClickDiscoverTab = (id) => {
-    console.log(id);
     this.setState({
       discoverTabActive: id,
       menuTabActiveId: id,
@@ -103,7 +102,11 @@ class Wallpaper extends Component {
       editorsPickTagActive,
       discoverTabActive,
     } = this.state;
-    const { handleClickEditorPickTag, handleClickDiscoverTab } = this;
+    const {
+      handleClickEditorPickTag,
+      handleClickDiscoverTab,
+      handleClickFollow,
+    } = this;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
@@ -138,7 +141,7 @@ class Wallpaper extends Component {
           user_name={user_name}
           profile_image_url={profile_image_url}
           followBtn={followBtn}
-          handleClickFollow={this.handleClickFollow}
+          handleClickFollow={handleClickFollow}
         />
       )
     );

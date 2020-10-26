@@ -8,6 +8,7 @@ class DiscoverTypeList extends Component {
     this.state = {
       cardViewList: [],
       discoverTypes: [],
+      discoverTagActive: 1,
     };
   }
 
@@ -22,16 +23,37 @@ class DiscoverTypeList extends Component {
       });
   }
 
+  handleClickTagItem = (id) => {
+    console.log(id);
+    // fetch(`http://10.58.7.192:8000/works/wallpaper/${id}`)
+    fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          discoverTagActive: id,
+        });
+      });
+  };
+
   render() {
-    const { discoverTypes, cardViewList } = this.state;
-    console.log(this.state.discoverColors);
+    const { discoverTypes, cardViewList, discoverTagActive } = this.state;
+    const { handleClickTagItem } = this;
     return (
       <div className="DiscoverTagList">
         <div className="container">
           <ul className="tagItems clearFix">
             {discoverTypes.map((tag) => (
-              <li key={tag.id}>
-                <button>{tag.name}</button>
+              <li
+                key={tag.id}
+                className={discoverTagActive === tag.id ? "active" : ""}
+              >
+                <button
+                  onClick={() => {
+                    handleClickTagItem(tag.id);
+                  }}
+                >
+                  {tag.name}
+                </button>
               </li>
             ))}
           </ul>
