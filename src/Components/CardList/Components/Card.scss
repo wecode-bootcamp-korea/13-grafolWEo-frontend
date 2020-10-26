@@ -1,0 +1,103 @@
+.card {
+    overflow: hidden;
+    max-width: 297px;
+
+    a {
+    color: #1a1a1a;
+        text-decoration: none;
+    }
+
+    .cardListArtArea {
+
+        img {
+            display: inline-block;
+            width: 100%;
+        }
+    }
+
+    .cardListInfoArea {
+        padding: 15px 13px 15px 13px;
+        border: 1px solid #ececec;
+        border-right: 1px solid #ececec;
+        border-bottom: 1px solid #ececec;
+        
+        .cardListArtName {
+            display: block;
+            padding: 1px;
+            font-size: 15px;
+            overflow: hidden;
+            font-weight: bold;
+            margin-bottom: 10px;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .cardListAuthorProfile {
+            width: 22px;
+            margin-right: 8px;
+        }
+
+        .cardListAuthorName {
+            color: #aaaaaa;
+            font-size: 13px;
+        }
+    }
+
+    .cardListBtnArea {
+        display: flex;
+        padding: 14px 15px 14px 15px;
+        justify-content: space-between;
+        border-left: 1px solid #ececec;
+        border-right: 1px solid #ececec;
+        border-bottom: 1px solid #ececec;
+
+        div {
+            margin-right: 10px;
+        }
+
+        .flaotLeft{
+            display: flex;
+            color: #aaaaaa;
+            font-size: 13px;
+
+            .cardListIconContainer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                .cardListIcons {
+                    font-size: 18px;
+                }
+
+                .btnAreaInfo {
+                    font-size: 13px;
+                    margin-top: -2px;
+                    margin-left: 5px;
+                }
+            }
+            
+        }
+        
+        .flaotRight {
+            color: #aaaaaa;
+            font-size: 13px;
+            
+            .cardListIconContainer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                .cardListIcons {
+                    font-size: 18px;
+                }
+                
+                .btnAreaInfo {
+                    font-size: 13px;
+                    margin-top: -2px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}
