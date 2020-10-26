@@ -39,7 +39,7 @@ class Navbar extends Component {
     } = this.state;
     return (
       <nav className="Navbar">
-        <ul>
+        <ul className="menu">
           <li>
             <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
           </li>
@@ -74,7 +74,27 @@ class Navbar extends Component {
             스토리
           </li>
           <li>
-            <img src="/Images/menu.png" alt="more_icon" />
+            <div className="more">
+              <img src="/Images/menu.png" alt="more_icon" />
+              <div className="hideBox">
+                <div className="triangle">
+                  <ul className="moreSubMenu">
+                    <li>서비스 소개</li>
+                    <li>후원</li>
+                    <li>네이버 OGQ 마켓</li>
+                    <li>공식블로그</li>
+                    <li>제휴문의</li>
+                    <li>공지사항</li>
+                    <li>도움말</li>
+                    <li>한국어</li>
+                    <ul className="languages">
+                      <li>한국어</li>
+                      <li>English(US)</li>
+                    </ul>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
         <div className="rightMenu">
@@ -97,11 +117,11 @@ class Navbar extends Component {
             <img src="/Images/user.png" alt="user_icon" />
             {this.state.isHover && (
               <div
-                class="hideBox"
+                className="hideBox"
                 onMouseEnter={() => this.handleHover(true)}
                 onMouseLeave={() => this.handleHover(false)}
               >
-                <div class="triangle">
+                <div className="triangle">
                   <ul className="userSubMenu">
                     <li>그라폴위오 MY</li>
                     <li>통계</li>

@@ -8,7 +8,7 @@
   width: 100vw;
   border-bottom: #ececec solid 1px;
 
-  ul {
+  .menu {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -18,6 +18,36 @@
     color: #777777;
     font-size: 16px;
     font-weight: 600;
+
+    .more {
+      position: relative;
+
+      .moreSubMenu {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        width: 160px;
+        height: 180px;
+        border: 1px solid #ececec;
+        background-color: white;
+        top: 30px;
+        left: -70px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: -5%;
+          right: 13%;
+          height: 10px;
+          width: 10px;
+          border: 1px solid #ececec;
+          background-color: white;
+          border-bottom: none;
+          border-left: none;
+          transform: translate(-50px, 2px) rotate(-45deg);
+        }
+      }
+    }
 
     .logo {
       padding-left: 5rem;
