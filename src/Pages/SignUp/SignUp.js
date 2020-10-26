@@ -36,7 +36,7 @@ class SignUp extends Component {
       re_passwordVal &&
       user_name.length > 0
     ) {
-      const SH_URL = "http://10.58.4.233:8000";
+      const SH_URL = "http://10.58.0.139:8000";
       fetch(`${SH_URL}/user/signup`, {
         method: "POST",
         headers: {
@@ -251,19 +251,19 @@ class SignUp extends Component {
           </div>
         </div>
         <footer>
-          {/* <div> */}
-          <div className="INCName">GRAFOLWEO Inc.</div>
-          <div className="companyInfo">
-            <ul>
-              <li>이용약관</li>
-              <li>개인정보 처리방침</li>
-              <li>환불 정책</li>
-              <li>사업자 정보 확인</li>
-              <li>제휴/협력 문의</li>
-              <li>단체/기업 교육 문의</li>
-              <li>정기구독서비스 이용약관</li>
-            </ul>
-            {/* </div> */}
+          <div>
+            <div className="INCName">GRAFOLWEO Inc.</div>
+            <div className="companyInfo">
+              <ul>
+                <li>이용약관</li>
+                <li>개인정보 처리방침</li>
+                <li>환불 정책</li>
+                <li>사업자 정보 확인</li>
+                <li>제휴/협력 문의</li>
+                <li>단체/기업 교육 문의</li>
+                <li>정기구독서비스 이용약관</li>
+              </ul>
+            </div>
             <div>
               (주)GRAFOLWEO ⎮ 대표 홍길동 ⎮ 서울특별시 강남구 삼성동 143-40
               위워크타워 10층 ⎮ 사업자등록번호: 123-45-67890 ⎮ 통신판매업신고:

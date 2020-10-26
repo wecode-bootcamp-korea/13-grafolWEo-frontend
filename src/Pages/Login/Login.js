@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { SH_URL } from "../../config";
 import "./Login.scss";
 
 class Login extends Component {
@@ -9,16 +11,15 @@ class Login extends Component {
       email: "",
       password: "",
       emailVal: true,
-      mostViewdArt:
-        "https://usercontents-c.styleshare.io/images/21484842/700x432",
+      mostViewdArt: "",
     };
   }
-
+  // 사진정보받아올 때 componentdidmount메소드 사용
   loginAccess = (e) => {
     e.preventDefault();
+    console.log("login");
     const { emailVal, password } = this.state;
     if (emailVal && password.length > 0) {
-      const SH_URL = "http://10.58.4.233:8000";
       fetch(`${SH_URL}/user/login`, {
         method: "POST",
         headers: {
@@ -38,7 +39,6 @@ class Login extends Component {
           }
         })
         .catch((error) => console.log(error.message));
-      // 페이지 넘어가는 코드 요기에
     }
   };
   checkVal = (e) => {
@@ -121,4 +121,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
