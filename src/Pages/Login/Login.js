@@ -38,7 +38,6 @@ class Login extends Component {
           }
         })
         .catch((error) => console.log(error.message));
-      // 페이지 넘어가는 코드 요기에
     }
   };
   checkVal = (e) => {
