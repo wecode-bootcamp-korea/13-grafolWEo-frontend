@@ -24,7 +24,6 @@ class DiscoverColorList extends Component {
 
   render() {
     const { discoverColors, cardViewList } = this.state;
-    console.log(this.state.discoverColors);
     return (
       <div className="DiscoverColorList discoverCardListStyle">
         <div className="container">

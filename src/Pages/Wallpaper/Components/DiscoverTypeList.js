@@ -24,8 +24,6 @@ class DiscoverTypeList extends Component {
   }
 
   handleClickTagItem = (id) => {
-    console.log(id);
-    // fetch(`http://10.58.7.192:8000/works/wallpaper/${id}`)
     fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
       .then((res) => res.json())
       .then((res) => {

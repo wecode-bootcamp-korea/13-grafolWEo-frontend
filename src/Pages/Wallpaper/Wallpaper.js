@@ -75,7 +75,6 @@ class Wallpaper extends Component {
     fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(id);
         this.setState({
           editorsPickTagActive: id,
           editorsPickSlides: res.editorsPickData.Slides,

@@ -1,29 +1,39 @@
 import React, { Component } from "react";
+import { CATEGORY, LISTBANNERBGSRC, API } from "../../config";
+import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
-import { AiFillCaretDown } from "react-icons/ai";
-import "./List.scss";
+import "./WorksList.scss";
 
-class List extends Component {
+const menuTabObj = {
+  0: <PopularCreator />,
+};
+
+export default class WorksList extends Component {
   constructor() {
     super();
     this.state = {
-      listName: "사진",
-      bannerBgSrc:
-        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80",
+      listName: "",
+      bannerBgSrc: [],
       categoryToggle: false,
       category: [],
       listBannerTags: [],
-      popularCreator: [],
+      menuTabActiveId: 0,
     };
   }
 
+  handleClickMenuTab = (id) => {
+    this.setState({ menuTabActiveId: id });
+  };
+
   componentDidMount() {
-    // 상단 배너 카테고리
-    fetch("http://localhost:3000/Data/List/CATEGORY.json", {
-      method: "GET",
-    })
+    this.setState({
+      bannerBgSrc: LISTBANNERBGSRC,
+      listName: CATEGORY[0].name,
+    });
+
+    fetch(`${API}/Data/List/CATEGORY.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -31,25 +41,11 @@ class List extends Component {
         });
       });
 
-    // 상단 배너 태그
-    fetch("http://localhost:3000/Data/List/LISTBANNERTAGS.json", {
-      method: "GET",
-    })
+    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           listBannerTags: res.listBannerTags,
-        });
-      });
-
-    // 인기 크리에이터
-    fetch("http://localhost:3000/Data/List/POPULARLIST.json", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          popularCreator: res.popularCreator,
         });
       });
   }
@@ -67,7 +63,6 @@ class List extends Component {
       category,
       categoryToggle,
       bannerBgSrc,
-      popularCreator,
     } = this.state;
 
     const tagList = listBannerTags.map(({ id, name }) => (
@@ -78,36 +73,8 @@ class List extends Component {
       <ListCategory key={id} name={name} src={src} />
     ));
 
-    const popularCreatorList = popularCreator.map(
-      ({
-        id,
-        profileImgSrc,
-        profileLink,
-        name,
-        desc,
-        imgPreviewSrc,
-        imgPreviewLink,
-        follower,
-        like,
-        illust,
-      }) => (
-        <PopularCreator
-          key={id}
-          profileImgSrc={profileImgSrc}
-          profileLink={profileLink}
-          name={name}
-          desc={desc}
-          imgPreviewSrc={imgPreviewSrc}
-          imgPreviewLink={imgPreviewLink}
-          follower={follower}
-          like={like}
-          illust={illust}
-        />
-      )
-    );
-
     return (
-      <div className="List">
+      <div className="WorksList">
         <header
           className="listBanner"
           style={{ backgroundImage: `url(${bannerBgSrc})` }}
@@ -142,17 +109,9 @@ class List extends Component {
               </li>
             </ul>
           </nav>
-          <section className="recommend">{/* 추천 컴포넌트 */}</section>
-          <section className="latest">{/* 최신 컴포넌트 */}</section>
-          <section className="popular">
-            <div className="container">
-              <ul className="clearFix list">{popularCreatorList}</ul>
-            </div>
-          </section>
+          {menuTabObj[this.state.menuTabActiveId]}
         </main>
       </div>
     );
   }
 }
-
-export default List;
