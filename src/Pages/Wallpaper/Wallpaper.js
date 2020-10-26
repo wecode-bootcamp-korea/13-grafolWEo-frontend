@@ -39,7 +39,6 @@ class Wallpaper extends Component {
       });
 
     fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
-      // fetch(`http://10.58.7.192:8000/works/wallpaper/topcreators`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -73,8 +72,6 @@ class Wallpaper extends Component {
   };
 
   handleClickEditorPickTag = (id) => {
-    console.log(id);
-    // fetch(`http://10.58.7.192:8000/works/wallpaper/${id}`)
     fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
       .then((res) => res.json())
       .then((res) => {
