@@ -34,7 +34,7 @@ class Login extends Component {
             alert("다시 한 번 확인해주세요!");
           } else if (res.status === 200) {
             alert("로그인성공");
-            this.props.history.push("/");
+            // this.props.history.push("");
           }
         })
         .catch((error) => console.log(error.message));
