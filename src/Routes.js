@@ -4,7 +4,6 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import Main from "./Pages/Main/Main";
 import Navbar from "./Components/Navbar/Navbar";
-// import Feeds from "./Pages/Feeds";
 
 class Routes extends React.Component {
   render() {
@@ -13,7 +12,6 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
-          {/* <Route exact path="/Feeds" component={Feeds} /> */}
           <Route
             exact
             path="*"
