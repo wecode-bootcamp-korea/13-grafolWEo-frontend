@@ -26,7 +26,7 @@ class DiscoverColorList extends Component {
     const { discoverColors, cardViewList } = this.state;
     console.log(this.state.discoverColors);
     return (
-      <div className="DiscoverTagList">
+      <div className="DiscoverColorList discoverCardListStyle">
         <div className="container">
           <ul className="colorItems clearFix">
             {discoverColors.map((tag) => (

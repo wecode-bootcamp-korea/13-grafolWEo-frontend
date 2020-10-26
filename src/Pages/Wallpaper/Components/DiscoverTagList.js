@@ -39,7 +39,7 @@ class DiscoverTagList extends Component {
     const { discoverTags, cardViewList, discoverTagActive } = this.state;
     const { handleClickTagItem } = this;
     return (
-      <div className="DiscoverTagList">
+      <div className="DiscoverTagList discoverCardListStyle">
         <div className="container">
           <ul className="tagItems clearFix">
             {discoverTags.map((tag) => (
