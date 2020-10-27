@@ -24,3 +24,4 @@ export const LISTBANNERBGSRC =
 export const API = "http://localhost:3000";
 
 export const CARDDATA = "http://10.58.7.192:8000/works/main/list";
+export const SH_URL = "http://10.58.0.139:8000";
