@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CardWrap from "../../Components/CardList/CardWrap";
 import Categories from "./Category/Categories";
-import  { CARDDATA }  from "../../../src/config";
+import { CARDDATA } from "../../../src/config";
 import "./Main.scss";
 
 class Main extends Component {
@@ -96,9 +96,10 @@ class Main extends Component {
       );
     };
 
-    const btnList = mainPageName.map(({ name }) => {
+    const btnList = mainPageName.map(({ name, idx }) => {
       return (
         <button
+          key={idx}
           className={mainPageView === name ? "activeBtnStyle" : "defaltBtn"}
           onClick={() => {
             changeMainPage(name);

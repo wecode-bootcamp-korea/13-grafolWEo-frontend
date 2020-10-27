@@ -1,15 +1,4 @@
 {
-<<<<<<< HEAD
-  "extends": ["react-app", "plugin:prettier/recommended"],
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ]
-  } 
-=======
   "extends": [
     "eslint:recommended",
     "react-app",
@@ -34,11 +23,12 @@
   "rules": {
     "prettier/prettier": [
       "error",
-      {},
+      {
+        "endOfLine": "auto"
+      },
       {
         "usePrettierrc": false
       }
     ]
   }
->>>>>>> main
 }
