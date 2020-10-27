@@ -1,23 +1,5 @@
-.MainCardWrap {
-    margin-top: 52px;
-
-    button {
-        font-size: 17px;
-        margin-left: 20px;
-        background-color: transparent;
-    }
-    
-    .MainTitle {
-        display: inline-block;
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 30px;
-    }
-
-    .CardWrap {
-        display: grid;
-        grid-gap: 20px;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
+.CardWrap {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }

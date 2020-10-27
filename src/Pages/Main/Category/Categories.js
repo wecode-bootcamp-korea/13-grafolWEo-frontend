@@ -10,7 +10,7 @@ class Categories extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 6,
-      slidesToScroll: 1,
+      slidesToScroll: 3,
     };
 
     const { CategoriesState } = this.props;
@@ -26,7 +26,7 @@ class Categories extends Component {
                   <div
                     className="categoryImg"
                     style={{
-                      backgroundImage: `url(https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60)`,
+                      backgroundImage: `url(${tag.image_url})`,
                     }}
                   ></div>
                   <div

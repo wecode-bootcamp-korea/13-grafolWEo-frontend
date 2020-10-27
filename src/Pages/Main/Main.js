@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardWrap from "../../Components/CardList/CardWrap";
 import Categories from "./Category/Categories";
+import { CARDDATA } from "../../config";
 import "./Main.scss";
 
 class Main extends Component {
@@ -17,18 +18,18 @@ class Main extends Component {
       ],
       mainPageView: "발견",
       CardListsArr: [],
-      items: 8,
-      preItems: 0,
       timeSet: false,
+      CardDataOrder: 1,
     };
   }
 
   infiniteScroll = () => {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    if (scrollTop + clientHeight >= scrollHeight * 0.8 && !this.state.timeSet) {
+    if (
+      scrollTop + clientHeight >= scrollHeight * 0.95 &&
+      !this.state.timeSet
+    ) {
       this.setState({
-        preItems: this.state.items,
-        items: this.state.items + 4,
         timeSet: true,
       });
       this.getCardData();
@@ -37,16 +38,6 @@ class Main extends Component {
         timeSet: false,
       });
     }
-  };
-
-  getCategoryBackgroundData = () => {
-    fetch("http://localhost:3000/Data/Category/categoryData.json")
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          CategoriesArr: res.data,
-        });
-      });
   };
 
   getCategoryData = () => {
@@ -60,30 +51,21 @@ class Main extends Component {
   };
 
   getCardData = () => {
-    fetch(
-      `http://10.58.7.192:8000/works/main/list/${this.state.mainPageView}/1`,
-      {
-        method: "GET",
-      }
-    )
+    const { mainPageView, CardDataOrder } = this.state;
+    fetch(`${CARDDATA}?sort=${mainPageView}&page=${CardDataOrder}`, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          CardListsArr: res.data,
+          CardListsArr: this.state.CardListsArr.concat(res.data),
+          CardDataOrder: this.state.CardDataOrder + 1,
         });
       });
   };
 
-  changeMainPage = (name) => {
-    // this.setState({
-    //   mainPageView: name,
-    // });
-    console.log("언제나 조져지는 것은 나였다.");
-  };
-
   componentDidMount() {
     this.getCategoryData();
-    this.getCategoryBackgroundData();
     this.getCardData();
     window.addEventListener("scroll", this.infiniteScroll);
   }
@@ -93,17 +75,54 @@ class Main extends Component {
   }
 
   render() {
-    const { CardListsArr, CategoriesArr, mainPageName } = this.state;
+    const {
+      CardListsArr,
+      CategoriesArr,
+      mainPageName,
+      mainPageView,
+    } = this.state;
+
+    const changeMainPage = (name) => {
+      this.setState(
+        {
+          mainPageView: name,
+          CardListsArr: [],
+          CardDataOrder: 1,
+          buttonStyle: name,
+        },
+        () => {
+          this.getCardData();
+        }
+      );
+    };
+
+    const btnList = mainPageName.map(({ name }) => {
+      return (
+        <button
+          className={mainPageView === name ? "activeBtnStyle" : "defaltBtn"}
+          onClick={() => {
+            changeMainPage(name);
+          }}
+        >
+          {name}
+        </button>
+      );
+    });
+
     return (
       <>
         <div className="Main">
           <div className="container">
             <Categories CategoriesState={CategoriesArr} />
-            <CardWrap
-              mainPageName={mainPageName}
-              changeMainPage={this.changeMainPage}
-              CardListsArr={CardListsArr}
-            />
+            <div className="MainCardWrap">
+              <span className="MainTitle">Artwork</span>
+              {btnList}
+              <CardWrap
+                mainPageName={mainPageName}
+                changeMainPage={this.changeMainPage}
+                CardListsArr={CardListsArr}
+              />
+            </div>
           </div>
         </div>
       </>

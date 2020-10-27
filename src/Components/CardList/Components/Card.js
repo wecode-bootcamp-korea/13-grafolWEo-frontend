@@ -17,7 +17,6 @@ class Card extends Component {
   setHeight = () => {
     const height = this.cardElement.current.clientHeight;
     const devidedHeights = Math.ceil(Math.min(Math.max(height / 15), 23));
-    console.log("cardElement", devidedHeights);
     this.setState({ height: devidedHeights });
   };
 
