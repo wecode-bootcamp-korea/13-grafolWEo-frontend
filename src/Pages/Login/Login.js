@@ -41,7 +41,7 @@ class Login extends Component {
             });
           } else if (res.MESSAGE === "LOGIN_SUCCESS") {
             this.props.history.push("/");
-            localStorage.setItem("access-token", res.token);
+            localStorage.setItem("Authorization", res.AUTHORIZATION);
           }
         })
         .catch((error) => console.log(error.message));
