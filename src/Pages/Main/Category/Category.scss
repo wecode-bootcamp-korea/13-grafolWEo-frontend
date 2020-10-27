@@ -1,0 +1,91 @@
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+
+.Categories {
+
+    h3 {
+        font-size: 30px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .slider {
+        
+        .slick-prev::before,
+        .slick-next::before {
+            opacity: 0;
+        }
+        
+        .slick-prev{
+            left: 2px;
+            top: 80px;
+            z-index: 1;
+        }
+
+
+        .slick-next {
+            right: 36px;
+            top: 80px;
+            z-index: 1;
+        }
+
+        .slick-next:after, 
+        .slick-prev:after{
+            content: "";
+            display: block;
+            width: 55px;
+            height: 55px;
+            background-image: url(/Images/sp_collection.png);
+            background-repeat: no-repeat;
+            background-size: 239px 214px;
+            opacity: 0;
+            transition: 0.35s;
+        }
+        .slick-prev:after {
+            background-position: 0 -81px;
+        }
+
+        .slick-prev:hover:after {
+            opacity: 0.5;
+        }
+
+
+        .slick-next:after {
+            background-position: -183px 0;
+        }
+
+        .slick-next:hover:after {
+            opacity: 0.5;
+        }
+        
+        .categoryPictures {
+            height: 230px;
+            padding: 0px 1.5px;
+            
+            .categoryImg {
+                height: 170px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+            }
+        
+            .categoryInfobox {
+                display: flex;
+                height: 60px;
+                padding: 0px 18px;
+                color: white;
+                justify-content: space-between;
+                align-items: center;
+                
+                .categoryName {
+                    font-weight: bold;
+                }
+
+                .categoryCount{
+                    font-weight: lighter;
+                }
+            }
+        }
+    }   
+ }
