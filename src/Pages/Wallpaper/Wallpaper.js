@@ -29,15 +29,18 @@ class Wallpaper extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    // fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    fetch("http://10.58.7.192:8000/works/wallpaper/editorpick")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           editorsPickTagList: res.editorsPickData.TagList,
           editorsPickSlides: res.editorsPickData.Slides,
+          editorsPickTagActive: res.editorsPickData.TagList[0].id,
         });
       });
 
+    // fetch("http://http://10.58.7.192:8000/works/wallpaper/topcreators");
     fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
       .then((res) => res.json())
       .then((res) => {
@@ -72,7 +75,8 @@ class Wallpaper extends Component {
   };
 
   handleClickEditorPickTag = (id) => {
-    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    // fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    fetch(`http://10.58.7.192:8000/works/wallpaper/editorpick?tag=${id}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -89,6 +93,10 @@ class Wallpaper extends Component {
     });
   };
 
+  handleClickUrlDownload = () => {
+    console.log("클릭");
+  };
+
   render() {
     const {
       editorsPickTagList,
@@ -98,15 +106,17 @@ class Wallpaper extends Component {
       editorsPickTagActive,
       discoverTabActive,
     } = this.state;
+
     const {
       handleClickEditorPickTag,
       handleClickDiscoverTab,
       handleClickFollow,
+      handleClickUrlDownload,
     } = this;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
-        id,
+        wallpaper_id,
         wallpaperSrc,
         wallpaperUrl,
         subject,
@@ -116,8 +126,8 @@ class Wallpaper extends Component {
         downloadSrc,
       }) => (
         <Slide
-          key={id}
-          id={id}
+          key={wallpaper_id}
+          id={wallpaper_id}
           wallpaperSrc={wallpaperSrc}
           wallpaperUrl={wallpaperUrl}
           subject={subject}
@@ -125,6 +135,7 @@ class Wallpaper extends Component {
           name={name}
           downloadNum={downloadNum}
           downloadSrc={downloadSrc}
+          handleClickUrlDownload={handleClickUrlDownload}
         />
       )
     );
@@ -159,7 +170,7 @@ class Wallpaper extends Component {
           <article className="editorsPick">
             <div className="container">
               <h2 className="mainTit">
-                Editor's Pick
+                Editor&#39;s Pick
                 <ul className="tagList clearFix">
                   {editorsPickTagList.map((tag) => (
                     <li

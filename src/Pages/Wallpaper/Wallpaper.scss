@@ -1,4 +1,4 @@
-@import "../../Styles/common.scss";
+@import "../../Styles/theme.scss";
 
 @mixin secTit {
   margin: 0 0 25px;
@@ -165,11 +165,13 @@
               }
 
               a {
+                position: relative;
                 display: block;
                 width: 100%;
                 min-height: 270px;
                 background-position: center;
                 background-size: cover;
+                z-index: 3;
               }
 
               .slideInfo {
@@ -317,6 +319,7 @@
           border-radius: 100%;
           font-size: 20px;
           color: #fff;
+          cursor: pointer;
         }
 
         button.active {
@@ -350,6 +353,7 @@
           font-size: 17px;
           font-weight: 300;
           color: #555;
+          cursor: pointer;
         }
       }
 
@@ -368,6 +372,7 @@
 
         button {
           @include tagItems;
+          cursor: pointer;
         }
       }
 
@@ -385,6 +390,7 @@
       margin: 0 0 25px;
 
       li {
+        position: relative;
         float: left;
         width: 50px;
         height: 30px;
@@ -397,7 +403,28 @@
           width: 100%;
           height: 100%;
           text-indent: -9999em;
+          cursor: pointer;
         }
+      }
+
+      li:before {
+        content: "";
+        display: none;
+        width: 21px;
+        height: 17px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url(/Images/sp_collection.png);
+        background-size: 239px 214px;
+        background-position: -156px -52px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+
+      li.active:before {
+        display: block;
       }
 
       li + li {
@@ -450,11 +477,70 @@
       min-height: 340px;
       background: #f4f4f4;
 
-      ul {
+      .selectRanking {
+        display: flex;
+        justify-content: flex-end;
+
+        > ul {
+          width: 94px;
+          padding: 10px;
+          position: relative;
+
+          h5 {
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 300;
+            color: #999;
+
+            span {
+              font-size: 20px;
+              vertical-align: middle;
+              display: inline-block;
+              padding-left: 15px;
+            }
+          }
+
+          h5.active + .option {
+            display: block;
+          }
+
+          .option {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + -10px);
+            z-index: 10;
+            cursor: pointer;
+
+            li {
+              width: 94px;
+              padding: 10px 15px;
+              background: #fff;
+              border-bottom: 1px solid #fafafa;
+              font-weight: 300;
+              font-size: 13px;
+
+              &:hover {
+                background: #fafafa;
+              }
+            }
+
+            li:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+
+      .CardViewList {
+        margin-left: -20px;
+
         li {
           position: relative;
           float: left;
-          width: calc(33.3333% - 10px);
+          margin: 0 0 15px 20px;
+          width: calc(33.3333% - 20px);
+          border: 1px solid rgba(0, 0, 0, 0.05);
 
           a {
             display: block;
@@ -493,7 +579,7 @@
                 background-size: 239px 214px;
                 background-position: -183px -83px;
                 box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-                z-index: 10;
+                z-index: 11;
               }
 
               h6 {
@@ -549,10 +635,6 @@
               }
             }
           }
-        }
-
-        li + li {
-          margin-left: 15px;
         }
       }
     }

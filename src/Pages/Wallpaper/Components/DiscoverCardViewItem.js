@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 
 class DiscoverCardViewItem extends Component {
   render() {
-    const { profileImgSrc, subject, name, downloadNum } = this.props;
+    const {
+      wallpaper_id,
+      wallpaperSrc,
+      profileImgSrc,
+      subject,
+      name,
+      downloadNum,
+    } = this.props;
     return (
       <li>
         <Link
           to="/"
           style={{
-            backgroundImage: `url(${profileImgSrc})`,
+            backgroundImage: `url(${wallpaperSrc})`,
           }}
         >
           <div className="slideInfo">

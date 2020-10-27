@@ -10,21 +10,24 @@
     ],
     "cardViewList" : [
       {
-        "id": 1,
+        "wallpaper_id": 1,
+        "wallpaperSrc" : "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "subject": "배경화면 제목1",
         "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "name" : "작가 이름",
         "downloadNum" : 34
       },
       {
-        "id": 2,
+        "wallpaper_id": 2,
+        "wallpaperSrc" : "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "subject": "배경화면 제목2",
         "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "name" : "작가 이름",
         "downloadNum" : 34
       },
       {
-        "id": 3,
+        "wallpaper_id": 3,
+        "wallpaperSrc" : "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "subject": "배경화면 제목3",
         "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
         "name" : "작가 이름",

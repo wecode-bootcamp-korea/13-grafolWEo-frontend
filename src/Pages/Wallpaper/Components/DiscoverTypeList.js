@@ -1,41 +1,81 @@
 import React, { Component } from "react";
-import { API } from "../../../config";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { API, CATEGORY } from "../../../config";
 import DiscoverCardViewItem from "./DiscoverCardViewItem";
+import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
 class DiscoverTypeList extends Component {
   constructor() {
     super();
     this.state = {
+      discoverSort: "유형별",
+      discoverOrderCurrent: "인기순",
+      discoverOrder: "인기순",
       cardViewList: [],
-      discoverTypes: [],
-      discoverTagActive: 1,
+      discoverTypes: CATEGORY,
+      discoverTypeActive: 1,
+      discoverTypeCategory: 11,
+      orderActive: false,
     };
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
+    const { discoverSort, discoverOrder, discoverTypeCategory } = this.state;
+
+    // fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
+    fetch(
+      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}`
+    )
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           cardViewList: res.discoverTypeData.cardViewList,
-          discoverTypes: res.discoverTypeData.typeList,
+          discoverTypeActive: discoverTypeCategory,
         });
       });
   }
 
-  handleClickTagItem = (id) => {
-    fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
+  handleClickTypeItem = (id) => {
+    const { discoverSort, discoverOrderCurrent } = this.state;
+
+    // fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
+    fetch(
+      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
+    )
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          discoverTagActive: id,
+          discoverTypeActive: id,
+          cardViewList: res.discoverTypeData.cardViewList,
+          discoverOrder: "인기순",
+        });
+      });
+  };
+
+  handleClickOrder = (name) => {
+    const { discoverSort, discoverTypeActive } = this.state;
+
+    fetch(
+      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTypeActive}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cardViewList: res.discoverTypeData.cardViewList,
+          discoverOrder: name,
         });
       });
   };
 
   render() {
-    const { discoverTypes, cardViewList, discoverTagActive } = this.state;
-    const { handleClickTagItem } = this;
+    const {
+      discoverTypes,
+      cardViewList,
+      discoverTypeActive,
+      orderActive,
+      discoverOrder,
+    } = this.state;
+    const { handleClickTypeItem, handleClickOrder } = this;
     return (
       <div className="DiscoverTypeList discoverCardListStyle">
         <div className="container">
@@ -43,11 +83,11 @@ class DiscoverTypeList extends Component {
             {discoverTypes.map((tag) => (
               <li
                 key={tag.id}
-                className={discoverTagActive === tag.id ? "active" : ""}
+                className={discoverTypeActive === tag.id ? "active" : ""}
               >
                 <button
                   onClick={() => {
-                    handleClickTagItem(tag.id);
+                    handleClickTypeItem(tag.id);
                   }}
                 >
                   {tag.name}
@@ -58,10 +98,30 @@ class DiscoverTypeList extends Component {
         </div>
         <div className="wallpaperCardView">
           <div className="container">
-            <ul className="clearFix">
+            <div className="selectRanking">
+              <ul>
+                <li>
+                  <h5
+                    onClick={() => {
+                      this.setState({ orderActive: !orderActive });
+                    }}
+                    className={orderActive ? "active" : ""}
+                  >
+                    {discoverOrder}
+                    <span>
+                      <IoMdArrowDropdown />
+                    </span>
+                  </h5>
+                  <DiscoverCardViewOrder handleClickOrder={handleClickOrder} />
+                </li>
+              </ul>
+            </div>
+            <ul className="CardViewList clearFix">
               {cardViewList.map((tag) => (
                 <DiscoverCardViewItem
-                  key={tag.id}
+                  key={tag.wallpaper_id}
+                  id={tag.wallpaper_id}
+                  wallpaperSrc={tag.wallpaperSrc}
                   name={tag.name}
                   subject={tag.subject}
                   profileImgSrc={tag.profileImgSrc}

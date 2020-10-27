@@ -1,4 +1,4 @@
-@import '../../Styles/common.scss';
+@import "../../Styles/theme.scss";
 
 .DetailPages {
   margin: 0;
@@ -289,7 +289,7 @@
         display: block;
         width: 9px;
         height: 13px;
-        content: '';
+        content: "";
         background-size: 315px 314px;
         background-position: -35px -279px;
         background-image: url(/Images/sp_grafolio_ratio.png);
@@ -306,7 +306,7 @@
         right: 76px;
         width: 9px;
         height: 13px;
-        content: '';
+        content: "";
         background-size: 315px 314px;
         background-position: -65px -279px;
         background-image: url(/Images/sp_grafolio_ratio.png);

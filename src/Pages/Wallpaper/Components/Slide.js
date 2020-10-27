@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import UrlDownloadBtn from "./UrlDownloadBtn";
 
 class Slide extends Component {
   render() {
+    const { handleClickUrlDownload } = this;
     const {
       wallpaperSrc,
       subject,
@@ -29,7 +31,7 @@ class Slide extends Component {
                 <em>{downloadNum}</em>
               </span>
             </div>
-            <button type="button" className="dwnBtn"></button>
+            <UrlDownloadBtn handleClickUrlDownload={handleClickUrlDownload} />
           </div>
         </Link>
       </div>
