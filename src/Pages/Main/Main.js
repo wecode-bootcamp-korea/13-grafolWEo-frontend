@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CardWrap from "../../Components/CardList/CardWrap";
 import Categories from "./Category/Categories";
-import { CARDDATA } from "../../config";
+import  { CARDDATA }  from "../../../src/config";
 import "./Main.scss";
 
 class Main extends Component {
