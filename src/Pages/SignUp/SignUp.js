@@ -63,9 +63,9 @@ class SignUp extends Component {
           console.log(res);
           if (res.status === 200) {
             alert("가입을 축하 드립니다!");
+            this.props.history.push("/");
           } else if (res.statusd === 400) {
             alert("다시 한번 확인해주세요 !");
-            this.props.history.push("/");
           }
         });
     }
