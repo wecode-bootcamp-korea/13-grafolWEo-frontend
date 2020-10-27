@@ -1,0 +1,46 @@
+.commentList {
+  position: relative;
+  list-style: none;
+  padding-top: 10px;
+
+  .imgAndName {
+    position: relative;
+    width: 1200px;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .img {
+      color: grey;
+    }
+
+    .name {
+      position: absolute;
+      left: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      padding-left: 10px;
+    }
+  }
+  .comment {
+    font-size: 15px;
+    padding-bottom: 10px;
+  }
+
+  .date {
+    color: #999;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: 3px;
+    left: 1150px;
+    width: 30px;
+    height: 22px;
+    margin: 0 auto;
+    border: 1px solid #ededed;
+    text-align: center;
+  }
+}

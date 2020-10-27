@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./Pages/Main/Main";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import Wallpaper from "./Pages/Wallpaper/Wallpaper";
 import WorksList from "./Pages/WorksList/WorksList";
 
 class Routes extends React.Component {
@@ -13,6 +14,7 @@ class Routes extends React.Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/Wallpaper" component={Wallpaper} />
           <Route exact path="/WorksList" component={WorksList} />
         </Switch>
       </Router>
