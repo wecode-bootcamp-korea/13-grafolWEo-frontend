@@ -6,6 +6,7 @@ import DiscoverTagList from "./Components/DiscoverTagList";
 import DiscoverColorList from "./Components/DiscoverColorList";
 import DiscoverTypeList from "./Components/DiscoverTypeList";
 import Slide from "./Components/Slide";
+import DownloadComplete from "../../Components/Modal/DownloadComplete";
 import "./Wallpaper.scss";
 
 const menuTabObj = {
@@ -29,8 +30,7 @@ class Wallpaper extends Component {
   }
 
   componentDidMount() {
-    // fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
-    fetch("http://10.58.7.192:8000/works/wallpaper/editorpick")
+    fetch(`${API}/works/wallpaper/editorpick`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -40,14 +40,28 @@ class Wallpaper extends Component {
         });
       });
 
-    // fetch("http://http://10.58.7.192:8000/works/wallpaper/topcreators");
-    fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          topCreators: res.topCreators,
+    const token = localStorage.getItem("Authorization");
+    if (!token) {
+      fetch(`${API}/works/wallpaper/topcreators`)
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState({
+            topCreators: res.topCreators,
+          });
         });
-      });
+    } else {
+      fetch(`${API}/works/wallpaper/topcreators`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState({
+            topCreators: res.topCreators,
+          });
+        });
+    }
   }
 
   handleClickFollow = (id) => {
@@ -56,27 +70,34 @@ class Wallpaper extends Component {
     const selected = topCreators[index];
     const nextTopCreator = [...topCreators];
 
-    fetch("http://10.58.7.192:8000/works/wallpaper/follow", {
-      method: "post",
-      body: JSON.stringify({
-        creator_id: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        nextTopCreator[index] = {
-          ...selected,
-          followBtn: res.data.followBtn,
-        };
-        this.setState({
-          topCreators: nextTopCreator,
+    const token = localStorage.getItem("Authorization");
+    if (!token) {
+      alert("로그인 해주세요.");
+    } else {
+      fetch(`${API}/works/wallpaper/follow`, {
+        method: "post",
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          creator_id: id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          nextTopCreator[index] = {
+            ...selected,
+            followBtn: res.data.followBtn,
+          };
+          this.setState({
+            topCreators: nextTopCreator,
+          });
         });
-      });
+    }
   };
 
   handleClickEditorPickTag = (id) => {
-    // fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
-    fetch(`http://10.58.7.192:8000/works/wallpaper/editorpick?tag=${id}`)
+    fetch(`${API}/works/wallpaper/editorpick?tag=${id}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -91,10 +112,6 @@ class Wallpaper extends Component {
       discoverTabActive: id,
       menuTabActiveId: id,
     });
-  };
-
-  handleClickUrlDownload = () => {
-    console.log("클릭");
   };
 
   render() {
@@ -127,7 +144,7 @@ class Wallpaper extends Component {
       }) => (
         <Slide
           key={wallpaper_id}
-          id={wallpaper_id}
+          wallpaper_id={wallpaper_id}
           wallpaperSrc={wallpaperSrc}
           wallpaperUrl={wallpaperUrl}
           subject={subject}
@@ -225,6 +242,7 @@ class Wallpaper extends Component {
             </div>
             {menuTabObj[menuTabActiveId]}
           </article>
+          <DownloadComplete />
         </main>
       </div>
     );

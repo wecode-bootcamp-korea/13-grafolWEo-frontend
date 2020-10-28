@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { API, COLORS } from "../../../config";
-import DiscoverCardViewItem from "./DiscoverCardViewItem";
+import DiscoverCardViewItem from "../../../Components/Wallpaper/DiscoverCardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
 class DiscoverColorList extends Component {
@@ -21,9 +21,8 @@ class DiscoverColorList extends Component {
   componentDidMount() {
     const { discoverSort, discoverOrder, discoverColorActive } = this.state;
 
-    // fetch(`${API}/Data/Wallpaper/DISCOVERCOLORS.json`)
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -36,13 +35,11 @@ class DiscoverColorList extends Component {
   handleClickColorItem = (id) => {
     const { discoverSort, discoverOrderCurrent } = this.state;
 
-    // fetch(`${API}/Data/Wallpaper/DISCOVERTYPE.json`)
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(id);
         this.setState({
           discoverColorActive: id,
           cardViewList: res.discoverColorData.cardViewList,
@@ -55,7 +52,7 @@ class DiscoverColorList extends Component {
     const { discoverSort, discoverColorActive } = this.state;
 
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverColorActive}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverColorActive}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -119,7 +116,7 @@ class DiscoverColorList extends Component {
               {cardViewList.map((tag) => (
                 <DiscoverCardViewItem
                   key={tag.wallpaper_id}
-                  id={tag.wallpaper_id}
+                  wallpaper_id={tag.wallpaper_id}
                   wallpaperSrc={tag.wallpaperSrc}
                   name={tag.name}
                   subject={tag.subject}

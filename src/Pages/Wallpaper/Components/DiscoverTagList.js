@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import { API, ORDERS } from "../../../config";
+import { API } from "../../../config";
 import { IoMdArrowDropdown } from "react-icons/io";
-import DiscoverCardViewItem from "./DiscoverCardViewItem";
+import DiscoverCardViewItem from "../../../Components/Wallpaper/DiscoverCardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
 class DiscoverTagList extends Component {
@@ -22,9 +22,8 @@ class DiscoverTagList extends Component {
   componentDidMount() {
     const { discoverSort, discoverOrder } = this.state;
 
-    // fetch(`${API}/Data/Wallpaper/DISCOVERTAGS.json`)
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -39,9 +38,8 @@ class DiscoverTagList extends Component {
   handleClickTagItem = (id) => {
     const { discoverSort, discoverOrderCurrent } = this.state;
 
-    // fetch(`${API}/Data/Wallpaper/DISCOVERTAGS.json`)
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&id=${id}&order=${discoverOrderCurrent}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&id=${id}&order=${discoverOrderCurrent}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -57,7 +55,7 @@ class DiscoverTagList extends Component {
     const { discoverSort, discoverTagActive } = this.state;
 
     fetch(
-      `http://10.58.7.192:8000/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -123,7 +121,7 @@ class DiscoverTagList extends Component {
               {cardViewList.map((tag) => (
                 <DiscoverCardViewItem
                   key={tag.wallpaper_id}
-                  id={tag.wallpaper_id}
+                  wallpaper_id={tag.wallpaper_id}
                   wallpaperSrc={tag.wallpaperSrc}
                   name={tag.name}
                   subject={tag.subject}
