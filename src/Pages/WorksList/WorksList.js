@@ -1,13 +1,22 @@
 import React, { Component } from "react";
-import { CATEGORY, LISTBANNERBGSRC, API } from "../../config";
+import {
+  CATEGORY,
+  LISTBANNERBGSRC,
+  API,
+  WorksListPageView,
+} from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
+import Recommend from "./Components/Recommend";
+import New from "./Components/New";
 import "./WorksList.scss";
 
 const menuTabObj = {
-  0: <PopularCreator />,
+  1: <Recommend />,
+  2: <New />,
+  3: <PopularCreator />,
 };
 
 export default class WorksList extends Component {
@@ -20,6 +29,7 @@ export default class WorksList extends Component {
       category: [],
       listBannerTags: [],
       menuTabActiveId: 0,
+      discoverTabActive: 1,
     };
   }
 
@@ -56,6 +66,13 @@ export default class WorksList extends Component {
     });
   };
 
+  handleClickDiscoverTab = (id) => {
+    console.log(id);
+    this.setState({
+      discoverTabActive: id,
+    });
+  };
+
   render() {
     const {
       listBannerTags,
@@ -63,14 +80,16 @@ export default class WorksList extends Component {
       category,
       categoryToggle,
       bannerBgSrc,
+      discoverTabActive,
     } = this.state;
+    const { handleClickDiscoverTab, handleToggle } = this;
 
     const tagList = listBannerTags.map(({ id, name }) => (
       <ListTag key={id} name={name} />
     ));
 
     const categoryList = category.map(({ id, name, src }) => (
-      <ListCategory key={id} name={name} src={src} />
+      <ListCategory key={id} name={name} src={src} onClick />
     ));
 
     return (
@@ -82,7 +101,7 @@ export default class WorksList extends Component {
           <div className="inner">
             <div className="listCategoryWrap">
               <button
-                onClick={this.handleToggle}
+                onClick={handleToggle}
                 className={categoryToggle ? "active" : ""}
               >
                 {listName}
@@ -98,18 +117,25 @@ export default class WorksList extends Component {
         <main>
           <nav className="listFilter">
             <ul>
-              <li>
-                <button>추천</button>
-              </li>
-              <li>
-                <button>최신</button>
-              </li>
-              <li className="active">
-                <button>인기크리에이터</button>
-              </li>
+              {WorksListPageView.map((tab) => (
+                <li
+                  key={tab.id}
+                  className={discoverTabActive === tab.id ? "active" : ""}
+                >
+                  <button
+                    onClick={() => {
+                      handleClickDiscoverTab(tab.id);
+                    }}
+                  >
+                    {tab.name}
+                  </button>
+                </li>
+              ))}
             </ul>
           </nav>
-          {menuTabObj[this.state.menuTabActiveId]}
+          <div className="container">
+            {menuTabObj[this.state.discoverTabActive]}
+          </div>
         </main>
       </div>
     );

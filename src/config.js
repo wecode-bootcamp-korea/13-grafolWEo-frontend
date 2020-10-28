@@ -10,14 +10,20 @@ export const DISCOVERTABLIST = [
 ];
 
 export const CATEGORY = [
-  { id: 1, name: "일러스트" },
-  { id: 2, name: "사진" },
-  { id: 3, name: "회화" },
-  { id: 4, name: "조소/공예" },
-  { id: 5, name: "디자인" },
-  { id: 6, name: "캘리그라피" },
+  { id: 11, name: "일러스트" },
+  { id: 12, name: "사진" },
+  { id: 13, name: "회화" },
+  { id: 14, name: "조소/공예" },
+  { id: 15, name: "디자인" },
+  { id: 16, name: "캘리그라피" },
 ];
 
 export const CARDDATA = "http://10.58.7.192:8000/works/";
 
 export const SH_URL = "http://10.58.0.139:8000";
+
+export const WorksListPageView = [
+  { id: 1, name: "추천" },
+  { id: 2, name: "최신" },
+  { id: 3, name: "인기크리에이터" },
+];
