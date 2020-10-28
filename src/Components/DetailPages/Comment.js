@@ -12,30 +12,31 @@ class Comment extends Component {
       commentList: [
         {
           id: 1,
-          profileImg: <CgProfile />,
-          userName: 'dolphin',
+          profile_image_url: <CgProfile />,
+          user_name: 'dolphin',
           content: '마~니 축하드립니다~',
           date: '2020-10-15 11:17',
           button: <BiHeart />,
         },
         {
           id: 2,
-          profileImg: <CgProfile />,
-          userName: '산들',
+          profile_image_url: <CgProfile />,
+          user_name: '산들',
           content: '작가님~ 응원합니당^^',
           date: '2020-10-2 6:14',
           button: <BiHeart />,
         },
         {
           id: 3,
-          profileImg: <CgProfile />,
-          userName: '마요',
+          profile_image_url: <CgProfile />,
+          user_name: '마요',
           content: '대박 너무너무 귀여워요 흑흑',
           date: '2020-10-4 2:42',
           button: <BiHeart />,
         },
       ],
       commentValue: '',
+      artworkDetails: [],
     };
   }
 
@@ -65,6 +66,7 @@ class Comment extends Component {
 
   render() {
     const {commentList, commentValue} = this.state;
+    console.log(commentList, 'ssssss');
     return (
       <div className="Comment container">
         <form className="commentForm" onSubmit={this.addComment}>
@@ -75,7 +77,7 @@ class Comment extends Component {
             placeholder="주제와 무관한 댓글,악플은 삭제될 수 있습니다."
             value={commentValue}
           />
-          <span className="textLength">0/1000</span>
+          {/* <span className="textLength">0/1000</span> */}
           <div className="upload">
             <div className="secretComment">
               <BiLockOpen />
@@ -86,11 +88,12 @@ class Comment extends Component {
             </button>
           </div>
         </form>
-        <div className="feedComment container">
+        <div className="feedComment">
           <ul>
             {commentList.map((comment) => {
               return (
                 <CommentList
+                  artworkDetails={comment}
                   key={comment.id}
                   profile={comment.profileImg}
                   name={comment.userName}

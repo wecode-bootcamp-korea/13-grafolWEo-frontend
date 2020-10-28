@@ -1,8 +1,37 @@
-@import '../../Styles/common.scss';
+@import '../../Styles/theme.scss';
 
 .DetailPages {
   margin: 0;
   padding: 0;
+  position: relative;
+
+  .leftArrow {
+    display: block;
+    position: sticky;
+    top: 500px;
+    left: 40px;
+    width: 56px;
+    height: 56px;
+    content: '';
+    background-size: 315px 314px;
+    background-position: -232px -77px;
+    background-image: url(/Images/sp_grafolio_ratio.png);
+    background-repeat: no-repeat;
+    background-color: none;
+  }
+  .rightArrow {
+    display: block;
+    position: sticky;
+    top: 500px;
+    left: 1480px;
+    width: 56px;
+    height: 56px;
+    content: '';
+    background-size: 315px 314px;
+    background-position: -171px -140px;
+    background-image: url(/Images/sp_grafolio_ratio.png);
+    background-repeat: no-repeat;
+  }
 
   .firstContainer {
     .titleBox {
@@ -114,30 +143,40 @@
           top: 100px;
           left: 450px;
 
-          // li {
-          //   display: flex;
-          //   flex-direction: column;
-          //   margin-left: 50px;
+          li {
+            display: flex;
+            flex-direction: column;
+            margin-left: 50px;
 
-          //   img {
-          //     width: 40px;
-          //     margin: 0 auto;
-          //   }
+            button {
+              outline: none;
 
-          //   .text {
-          //     color: #aaaaaa;
-          //     font-size: 12px;
-          //     text-align: center;
-          //     margin-top: 10px;
-          //     margin-bottom: 10px;
-          //   }
+              img {
+                width: 40px;
+                margin: 0 auto;
+              }
+            }
 
-          //   .number {
-          //     font-size: 16px;
-          //     text-align: center;
-          //     margin-bottom: 15px;
-          //   }
-          // }
+            .text {
+              color: #aaaaaa;
+              font-size: 12px;
+              text-align: center;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            .text:hover {
+              color: $theme-color;
+            }
+
+            .number {
+              font-size: 16px;
+              text-align: center;
+              margin-bottom: 15px;
+            }
+            .number:hover {
+              color: $theme-color;
+            }
+          }
         }
       }
       .commentParts {
@@ -175,9 +214,11 @@
             height: 20px;
             color: #555;
           }
-
-          .downArrow {
-            color: #555;
+          button {
+            outline: none;
+            .downArrow {
+              color: #555;
+            }
           }
         }
 
@@ -244,25 +285,23 @@
         }
       }
 
-      .followIcon {
-        position: absolute;
-        top: 10px;
-        left: 1100px;
-        width: 80px;
-        height: 40px;
-        padding: 10px 12px 0 22px;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        border-radius: 3px;
-        background-color: $theme-color;
-
-        span {
-          padding-left: 10px;
-        }
-      }
+      //   .followIcon {
+      //     position: absolute;
+      //     top: 10px;
+      //     left: 1100px;
+      //     width: 90px;
+      //     height: 40px;
+      //     padding: 10px 12px 10px 22px;
+      //     color: white;
+      //     font-size: 14px;
+      //     font-weight: bold;
+      //     border-radius: 3px;
+      //     background-color: $theme-color;
+      //   }
+      //   span {
+      //     padding-left: 3px;
+      //   }
     }
-
     .otherArtworks {
       font-size: 16px;
       font-weight: bold;
@@ -278,66 +317,66 @@
       }
     }
 
-    .artworkPhotos {
-      .artworkList {
-        position: relative;
-        top: 20px;
-        left: 30px;
-      }
+    // .artworkPhotos {
+    //   .artworkList {
+    //     position: relative;
+    //     top: 20px;
+    //     left: 30px;
+    //   }
 
-      .slick-prev:before {
-        display: block;
-        width: 9px;
-        height: 13px;
-        content: '';
-        background-size: 315px 314px;
-        background-position: -35px -279px;
-        background-image: url(/Images/sp_grafolio_ratio.png);
-        background-repeat: no-repeat;
-      }
+    //   .slick-prev:before {
+    //     display: block;
+    //     width: 9px;
+    //     height: 13px;
+    //     content: '';
+    //     background-size: 315px 314px;
+    //     background-position: -35px -279px;
+    //     background-image: url(/Images/sp_grafolio_ratio.png);
+    //     background-repeat: no-repeat;
+    //   }
 
-      .slick-prev {
-        z-index: 99 !important;
-      }
+    //   .slick-prev {
+    //     z-index: 99 !important;
+    //   }
 
-      .slick-next:before {
-        display: block;
-        position: absolute;
-        right: 76px;
-        width: 9px;
-        height: 13px;
-        content: '';
-        background-size: 315px 314px;
-        background-position: -65px -279px;
-        background-image: url(/Images/sp_grafolio_ratio.png);
-        background-repeat: no-repeat;
-      }
+    //   .slick-next:before {
+    //     display: block;
+    //     position: absolute;
+    //     right: 76px;
+    //     width: 9px;
+    //     height: 13px;
+    //     content: '';
+    //     background-size: 315px 314px;
+    //     background-position: -65px -279px;
+    //     background-image: url(/Images/sp_grafolio_ratio.png);
+    //     background-repeat: no-repeat;
+    //   }
 
-      .slick-next {
-        z-index: 99 !important;
-      }
+    //   .slick-next {
+    //     z-index: 99 !important;
+    //   }
 
-      .slick-list {
-        margin-right: 63px;
+    //   .slick-list {
+    //     margin-right: 63px;
 
-        .slick-slide {
-          .photoList {
-            position: relative;
-            width: 220px !important;
-            height: 200px;
-            overflow: hidden;
+    //     .slick-slide {
+    //       .photoList {
+    //         position: relative;
+    //         width: 220px !important;
+    //         height: 200px;
+    //         overflow: hidden;
 
-            img {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              width: 400px;
-              transform: translate(-50%, -50%);
-            }
-          }
-        }
-      }
-    }
+    //         img {
+    //           position: absolute;
+    //           top: 50%;
+    //           left: 50%;
+    //           width: 400px;
+    //           transform: translate(-50%, -50%);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 .final {
@@ -350,3 +389,4 @@
     padding: 20px 0 0 10px;
   }
 }
+// }
