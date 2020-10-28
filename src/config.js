@@ -1,3 +1,4 @@
+export const SH_URL = "http://10.58.3.92:8000";
 export const API = "http://localhost:3000";
 
 export const SH_URL = "http://10.58.3.92:8000";
