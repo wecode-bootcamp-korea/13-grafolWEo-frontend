@@ -32,7 +32,6 @@ class Login extends Component {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
           if (res.MESSAGE !== "LOGIN_SUCCESS") {
             this.setState({ isModal: false }, () => {
               setTimeout(() => {
@@ -44,7 +43,6 @@ class Login extends Component {
             localStorage.setItem("Authorization", res.AUTHORIZATION);
           }
         })
-        .catch((error) => console.log(error.message));
     }
   };
   checkVal = (e) => {
