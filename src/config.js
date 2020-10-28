@@ -19,3 +19,5 @@ export const CATEGORY = [
   { id: 5, name: "디자인" },
   { id: 6, name: "캘리그라피" },
 ];
+
+export const CARDDATA = "http://10.58.7.192:8000/works/";

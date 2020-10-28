@@ -1,0 +1,26 @@
+.MainCardWrap {
+    margin-top: 52px;
+
+    .defaltBtn {
+        font-size: 17px;
+        margin-left: 20px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .activeBtnStyle {
+        font-size: 17px;
+        margin-left: 20px;
+        background-color: transparent;
+        cursor: pointer;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+    
+    .MainTitle {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+}
