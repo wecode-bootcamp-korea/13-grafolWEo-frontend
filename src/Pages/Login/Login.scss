@@ -1,14 +1,37 @@
 @import "../../Styles/common.scss";
 
 .Login {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  > div {
+    display: none;
+  }
+
+  .activated {
+    display: block;
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: #fc4903;
+    color: white;
+    font-weight: 500;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    z-index: 1000;
+
+    img {
+      width: 15px;
+    }
+  }
+
   a {
     text-decoration: none;
     color: #000;
   }
-
-  display: flex;
-  width: 100vw;
-  height: 100vh;
 
   section {
     width: 50vw;

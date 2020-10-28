@@ -11,14 +11,15 @@ class Login extends Component {
       email: "",
       password: "",
       emailVal: true,
-      mostViewdArt: "",
+      isModal: true,
+      mostViewdArt:
+        "https://usercontents-c.styleshare.io/images/21484842/700x432",
     };
   }
-  // 사진정보받아올 때 componentdidmount메소드 사용
+
   loginAccess = (e) => {
     e.preventDefault();
-    console.log("login");
-    const { emailVal, password } = this.state;
+    const { email, password, emailVal } = this.state;
     if (emailVal && password.length > 0) {
       fetch(`${SH_URL}/user/login`, {
         method: "POST",
@@ -26,19 +27,23 @@ class Login extends Component {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
+          email,
+          password,
         }),
       })
+        .then((res) => res.json())
         .then((res) => {
-          if (res.status === 400) {
-            alert("다시 한 번 확인해주세요!");
-          } else if (res.status === 200) {
-            alert("로그인성공");
-            // this.props.history.push("");
+          if (res.MESSAGE !== "LOGIN_SUCCESS") {
+            this.setState({ isModal: false }, () => {
+              setTimeout(() => {
+                this.setState({ isModal: true });
+              }, 3000);
+            });
+          } else if (res.MESSAGE === "LOGIN_SUCCESS") {
+            this.props.history.push("/");
+            localStorage.setItem("Authorization", res.AUTHORIZATION);
           }
         })
-        .catch((error) => console.log(error.message));
     }
   };
   checkVal = (e) => {
@@ -61,9 +66,16 @@ class Login extends Component {
   };
 
   render() {
-    const { email, emailVal } = this.state;
+    const { isModal, mostViewdArt } = this.state;
     return (
       <div className="Login">
+        <div className={isModal ? "" : "activated"}>
+          <img src="Images/exclamation-mark.png" alt="warning-mark" />
+          <span>
+            아이디 또는 비밀번호를 다시 확인하세요. 아이디 또는 비밀번호를 잘못
+            입력하셨습니다
+          </span>
+        </div>
         <section>
           <div className="loginContainer">
             <header>
@@ -80,13 +92,6 @@ class Login extends Component {
                   placeholder="example@naver.com"
                 />
               </div>
-              {email.length !== 0 && !emailVal && (
-                <div className="alertMessage">
-                  <span role="img" aria-label="">
-                    🔺 올바른 이메일이 아닙니다.
-                  </span>{" "}
-                </div>
-              )}
               <div className="loginBox">
                 <label>비밀번호</label>
                 <input
@@ -113,9 +118,7 @@ class Login extends Component {
             </footer>
           </div>
         </section>
-        <aside
-          style={{ backgroundImage: `url(${this.state.mostViewdArt})` }}
-        ></aside>
+        <aside style={{ backgroundImage: `url(${mostViewdArt})` }}></aside>
       </div>
     );
   }
