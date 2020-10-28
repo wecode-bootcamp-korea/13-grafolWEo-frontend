@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { SH_URL } from "../../config";
 import "./Login.scss";
 
@@ -123,4 +124,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
