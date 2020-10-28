@@ -1,78 +1,78 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import "./Navbar.scss";
+
+// let controlActivation = [
+//   { id: 1, path: "/Login", content: "피드" },
+//   { id: 2, path: "/", content: "작품" },
+//   { id: 3, path: "/", content: "아트상품" },
+//   { id: 4, path: "/Wallpaper", content: "배경화면" },
+//   { id: 5, path: "", content: "스토리" },
+// ];
+
+let controlActivation = [
+  { id: 2, path: "/", content: "작품" },
+  { id: 3, path: "/", content: "아트상품" },
+  { id: 4, path: "/Wallpaper", content: "배경화면" },
+  { id: 5, path: "", content: "스토리" },
+];
 
 class Navbar extends Component {
   constructor() {
     super();
     this.state = {
-      feedIsActivated: false,
-      artIsActivated: false,
-      artProductIsActivated: false,
-      wallpaperIsActivated: false,
-      storyIsActivated: false,
+      activatedIndex: 0,
       isHover: false,
+      isLogin: false,
     };
   }
 
-  handleColor = (name, location) => {
+  handleCategory = (id, path) => {
     this.setState({
-      feedIsActivated: name === "feedIsActivated",
-      artIsActivated: name === "artIsActivated",
-      artProductIsActivated: name === "artProductIsActivated",
-      wallpaperIsActivated: name === "wallpaperIsActivated",
-      storyIsActivated: name === "storyIsActivated",
+      activatedIndex: id,
     });
-    location && this.props.history.push(location);
+    path && this.props.history.push(path);
   };
 
   handleHover = (state) => {
     this.setState({ isHover: state });
   };
+
+  componentDidMount() {
+    if (localStorage.getItem("Authorization")) {
+      controlActivation.unshift({ id: 1, path: "/Login", content: "피드" });
+      this.setState({ isLogin: true });
+    }
+  }
+
+  logout() {
+    this.setState({ isLogin: false });
+  }
+
   render() {
-    const {
-      feedIsActivated,
-      artIsActivated,
-      artProductIsActivated,
-      wallpaperIsActivated,
-      storyIsActivated,
-    } = this.state;
+    const { isLogin } = this.state;
     return (
       <nav className="Navbar">
         <ul className="menu">
           <li>
             <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
           </li>
-          <li
-            className={feedIsActivated ? "activated" : "deactivated"}
-            onClick={() => this.handleColor("feedIsActivated", "/login")}
-          >
-            피드
-          </li>
-          <li
-            className={artIsActivated ? "activated" : "deactivated"}
-            onClick={() => this.handleColor("artIsActivated")}
-          >
-            작품
-          </li>
-          <li
-            className={artProductIsActivated ? "activated" : "deactivated"}
-            onClick={() => this.handleColor("artProductIsActivated")}
-          >
-            아트상품
-          </li>
-          <li
-            className={wallpaperIsActivated ? "activated" : "deactivated"}
-            onClick={() => this.handleColor("wallpaperIsActivated")}
-          >
-            배경화면
-          </li>
-          <li
-            className={storyIsActivated ? "activated" : "deactivated"}
-            onClick={() => this.handleColor("storyIsActivated")}
-          >
-            스토리
-          </li>
+          {controlActivation.map((category, idx) => {
+            return (
+              <li
+                key={idx}
+                className={
+                  category.id === this.state.activatedIndex
+                    ? "activated"
+                    : "deactivated"
+                }
+                onClick={() => this.handleCategory(category.id, category.path)}
+              >
+                {category.content}
+              </li>
+            );
+          })}
           <li>
             <div className="more">
               <img src="/Images/menu.png" alt="more_icon" />
@@ -102,6 +102,11 @@ class Navbar extends Component {
             <input />
             <img src="Images/magnifying-glass.png" alt="search_icon" />
           </div>
+          {!isLogin && (
+            <button>
+              <Link to="/Login">로그인</Link>
+            </button>
+          )}
           <div className="upload">
             <img src="/Images/upload.png" alt="upload_icon" />
             업로드
@@ -125,7 +130,7 @@ class Navbar extends Component {
                   <ul className="userSubMenu">
                     <li>그라폴위오 MY</li>
                     <li>통계</li>
-                    <li>로그아웃</li>
+                    <li onClick={this.logout}>로그아웃</li>
                   </ul>
                 </div>
               </div>
