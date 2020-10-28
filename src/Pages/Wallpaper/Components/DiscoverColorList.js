@@ -24,6 +24,7 @@ class DiscoverColorList extends Component {
 
   componentDidMount() {
     const { discoverSort, discoverOrder, discoverColorActive } = this.state;
+    const { infiniteScroll } = this;
 
     fetch(
       `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}&limit=${LIMIT}`
@@ -34,10 +35,13 @@ class DiscoverColorList extends Component {
           cardViewList: res.discoverColorData.cardViewList,
         });
       });
+
+    window.addEventListener("scroll", infiniteScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.infiniteScroll);
+    const { infiniteScroll } = this;
+    window.removeEventListener("scroll", infiniteScroll);
   }
 
   handleClickOrder = (name) => {

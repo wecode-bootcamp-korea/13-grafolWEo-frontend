@@ -25,6 +25,7 @@ class DiscoverTypeList extends Component {
 
   componentDidMount() {
     const { discoverSort, discoverOrder, discoverTypeCategory } = this.state;
+    const { infiniteScroll } = this;
 
     fetch(
       `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit={LIMIT}`
@@ -36,11 +37,12 @@ class DiscoverTypeList extends Component {
         });
       });
 
-    window.addEventListener("scroll", this.infiniteScroll);
+    window.addEventListener("scroll", infiniteScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.infiniteScroll);
+    const { infiniteScroll } = this;
+    window.removeEventListener("scroll", infiniteScroll);
   }
 
   infiniteScroll = () => {

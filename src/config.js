@@ -32,3 +32,7 @@ export const COLORS = [
 ];
 
 export const ORDERS = [{ name: "인기순" }, { name: "최신순" }];
+
+export const CARDDATA = "http://10.58.7.192:8000/works/";
+
+export const SH_URL = "http://10.58.0.139:8000";
