@@ -1,7 +1,28 @@
-.card {
+@mixin borderProperty {
+    border: 1px solid #ececec;;
+    border-top: none;
+}
+
+@mixin itemAlign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin btnItemAlign {
+    font-size: 13px;
+    margin-top: -2px;
+    margin-left: 5px;
+}
+
+@mixin fontSettings {
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+.Card {
     overflow: hidden;
     max-width: 297px;
-    // max-height: ;
 
     a {
     color: #1a1a1a;
@@ -9,7 +30,6 @@
     }
 
     .cardListArtArea {
-
         img {
             display: inline-block;
             width: 100%;
@@ -17,21 +37,19 @@
     }
 
     .cardListInfoArea {
-        padding: 15px 13px 15px 13px;
-        border: 1px solid #ececec;
-        border-right: 1px solid #ececec;
-        border-bottom: 1px solid #ececec;
+        padding: 15px 13px;
+        @include borderProperty();
+
         
         .cardListArtName {
             display: block;
-            padding: 1px;
-            font-size: 15px;
-            overflow: hidden;
-            font-weight: bold;
             margin-bottom: 10px;
-
-            text-overflow: ellipsis;
+            padding: 1px;
+            overflow: hidden;
             white-space: nowrap;
+            font-size: 15px;
+            font-weight: bold;
+            text-overflow: ellipsis;
         }
         
         .cardListAuthorProfile {
@@ -40,18 +58,17 @@
         }
 
         .cardListAuthorName {
-            color: #aaaaaa;
-            font-size: 13px;
+            @include fontSettings();
         }
     }
 
     .cardListBtnArea {
+        @include borderProperty();
         display: flex;
-        padding: 14px 15px 14px 15px;
+        padding: 14px 15px;
         justify-content: space-between;
-        border-left: 1px solid #ececec;
-        border-right: 1px solid #ececec;
-        border-bottom: 1px solid #ececec;
+        border-top: none;
+
 
         div {
             margin-right: 10px;
@@ -59,44 +76,34 @@
 
         .flaotLeft{
             display: flex;
-            color: #aaaaaa;
-            font-size: 13px;
+            @include fontSettings();
 
             .cardListIconContainer {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include itemAlign();
                 
                 .cardListIcons {
                     font-size: 18px;
                 }
 
                 .btnAreaInfo {
-                    font-size: 13px;
-                    margin-top: -2px;
-                    margin-left: 5px;
+                    @include btnItemAlign();
                 }
             }
             
         }
         
         .flaotRight {
-            color: #aaaaaa;
-            font-size: 13px;
+            @include fontSettings();
             
             .cardListIconContainer {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                @include itemAlign();
                 
                 .cardListIcons {
                     font-size: 18px;
                 }
                 
                 .btnAreaInfo {
-                    font-size: 13px;
-                    margin-top: -2px;
-                    margin-left: 5px;
+                    @include btnItemAlign();
                 }
             }
         }

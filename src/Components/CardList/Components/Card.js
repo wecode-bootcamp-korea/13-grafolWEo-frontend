@@ -35,7 +35,7 @@ class Card extends Component {
       Views,
     } = this.props;
     return (
-      <div className="card" style={{ gridRowEnd: `span ${this.state.height}` }}>
+      <div className="Card" style={{ gridRowEnd: `span ${this.state.height}` }}>
         <div className="cardListArtArea">
           <Link className="cardListImg" to="/Detail" title="작품 페이지로 이동">
             <img ref={this.cardElement} src={Img} alt={PostName} />

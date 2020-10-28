@@ -4,10 +4,11 @@ import Categories from "./Category/Categories";
 import { CARDDATA } from "../../../src/config";
 import "./Main.scss";
 
+const LIMIT = 12;
+
 class Main extends Component {
   constructor() {
     super();
-
     this.state = {
       CategoriesArr: [],
       mainPageName: [
@@ -19,7 +20,7 @@ class Main extends Component {
       mainPageView: "발견",
       CardListsArr: [],
       timeSet: false,
-      CardDataOrder: 1,
+      CardDataOrder: 0,
     };
   }
 
@@ -29,19 +30,13 @@ class Main extends Component {
       scrollTop + clientHeight >= scrollHeight * 0.95 &&
       !this.state.timeSet
     ) {
-      this.setState({
-        timeSet: true,
-      });
+      this.setState({ timeSet: true });
       this.getCardData();
-    } else {
-      this.setState({
-        timeSet: false,
-      });
     }
   };
 
   getCategoryData = () => {
-    fetch("http://10.58.7.192:8000/works/main/category")
+    fetch(`${CARDDATA}category`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -51,17 +46,32 @@ class Main extends Component {
   };
 
   getCardData = () => {
-    const { mainPageView, CardDataOrder } = this.state;
-    fetch(`${CARDDATA}?sort=${mainPageView}&page=${CardDataOrder}`, {
-      method: "GET",
-    })
+    const { mainPageView, CardListsArr, CardDataOrder } = this.state;
+    fetch(
+      `${CARDDATA}list?sort=${mainPageView}&limit=${LIMIT}&offset=${CardDataOrder}`
+    )
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          CardListsArr: this.state.CardListsArr.concat(res.data),
-          CardDataOrder: this.state.CardDataOrder + 1,
+          CardListsArr: [...CardListsArr, ...res.data],
+          CardDataOrder: CardDataOrder + LIMIT,
+          timeSet: false,
         });
       });
+  };
+
+  changeMainPage = (name) => {
+    this.setState(
+      {
+        mainPageView: name,
+        CardListsArr: [],
+        CardDataOrder: 0,
+        buttonStyle: name,
+      },
+      () => {
+        this.getCardData();
+      }
+    );
   };
 
   componentDidMount() {
@@ -82,34 +92,6 @@ class Main extends Component {
       mainPageView,
     } = this.state;
 
-    const changeMainPage = (name) => {
-      this.setState(
-        {
-          mainPageView: name,
-          CardListsArr: [],
-          CardDataOrder: 1,
-          buttonStyle: name,
-        },
-        () => {
-          this.getCardData();
-        }
-      );
-    };
-
-    const btnList = mainPageName.map(({ name, idx }) => {
-      return (
-        <button
-          key={idx}
-          className={mainPageView === name ? "activeBtnStyle" : "defaltBtn"}
-          onClick={() => {
-            changeMainPage(name);
-          }}
-        >
-          {name}
-        </button>
-      );
-    });
-
     return (
       <>
         <div className="Main">
@@ -117,7 +99,21 @@ class Main extends Component {
             <Categories CategoriesState={CategoriesArr} />
             <div className="MainCardWrap">
               <span className="MainTitle">Artwork</span>
-              {btnList}
+              {mainPageName.map(({ name, idx }) => {
+                return (
+                  <button
+                    key={idx}
+                    className={
+                      mainPageView === name ? "activeBtnStyle" : "defaltBtn"
+                    }
+                    onClick={() => {
+                      this.changeMainPage(name);
+                    }}
+                  >
+                    {name}
+                  </button>
+                );
+              })}
               <CardWrap
                 mainPageName={mainPageName}
                 changeMainPage={this.changeMainPage}
