@@ -10,7 +10,9 @@ class UrlDownloadBtn extends Component {
       }),
     })
       .then((res) => res.json())
-      .then((res) => {});
+      .then((res) => {
+        alert("클립보드에 복사 되었습니다.");
+      });
   };
 
   render() {

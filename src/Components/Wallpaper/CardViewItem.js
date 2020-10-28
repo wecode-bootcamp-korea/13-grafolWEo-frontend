@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UrlDownloadBtn from "./UrlDownloadBtn";
-import "./DiscoverCardViewItem.scss";
+import "./CardViewItem.scss";
 
-class DiscoverCardViewItem extends Component {
+export default class CardViewItem extends Component {
   render() {
     const {
       wallpaper_id,
@@ -44,5 +44,3 @@ class DiscoverCardViewItem extends Component {
     );
   }
 }
-
-export default DiscoverCardViewItem;

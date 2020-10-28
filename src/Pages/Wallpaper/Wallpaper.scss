@@ -209,6 +209,10 @@
                 .download {
                   display: flex;
                   align-items: center;
+
+                  em {
+                    margin-left: 5px;
+                  }
                 }
 
                 .userInfo {

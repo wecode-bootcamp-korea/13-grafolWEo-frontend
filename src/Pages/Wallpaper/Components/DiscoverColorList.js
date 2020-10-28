@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { API, COLORS } from "../../../config";
-import DiscoverCardViewItem from "../../../Components/Wallpaper/DiscoverCardViewItem";
+import { IoMdArrowDropdown } from "react-icons/io";
+import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
+
+const LIMIT = 9;
 
 class DiscoverColorList extends Component {
   constructor() {
@@ -15,6 +17,8 @@ class DiscoverColorList extends Component {
       discoverColors: COLORS,
       discoverColorActive: 1,
       orderActive: false,
+      cardDataOrder: 0,
+      timeSet: false,
     };
   }
 
@@ -22,7 +26,7 @@ class DiscoverColorList extends Component {
     const { discoverSort, discoverOrder, discoverColorActive } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}`
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -31,6 +35,57 @@ class DiscoverColorList extends Component {
         });
       });
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.infiniteScroll);
+  }
+
+  handleClickOrder = (name) => {
+    const { discoverSort, discoverTagActive } = this.state;
+
+    fetch(
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}&limit=${LIMIT}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cardViewList: res.discoverTagData.cardViewList,
+          discoverOrder: name,
+        });
+      });
+  };
+
+  infiniteScroll = () => {
+    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+    if (
+      scrollTop + clientHeight >= scrollHeight * 0.95 &&
+      !this.state.timeSet
+    ) {
+      this.setState({ timeSet: true });
+      this.getCardData();
+    }
+  };
+
+  getCardData = () => {
+    const {
+      cardViewList,
+      discoverOrder,
+      discoverSort,
+      cardDataOrder,
+    } = this.state;
+
+    fetch(
+      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          cardViewList: cardViewList.concat(res.discoverColorData.cardViewList),
+          cardDataOrder: cardDataOrder + LIMIT,
+          timeSet: false,
+        });
+      });
+  };
 
   handleClickColorItem = (id) => {
     const { discoverSort, discoverOrderCurrent } = this.state;
@@ -114,7 +169,7 @@ class DiscoverColorList extends Component {
             </div>
             <ul className="CardViewList clearFix">
               {cardViewList.map((tag) => (
-                <DiscoverCardViewItem
+                <CardViewItem
                   key={tag.wallpaper_id}
                   wallpaper_id={tag.wallpaper_id}
                   wallpaperSrc={tag.wallpaperSrc}

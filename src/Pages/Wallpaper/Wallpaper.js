@@ -6,7 +6,6 @@ import DiscoverTagList from "./Components/DiscoverTagList";
 import DiscoverColorList from "./Components/DiscoverColorList";
 import DiscoverTypeList from "./Components/DiscoverTypeList";
 import Slide from "./Components/Slide";
-import DownloadComplete from "../../Components/Modal/DownloadComplete";
 import "./Wallpaper.scss";
 
 const menuTabObj = {
@@ -72,7 +71,7 @@ class Wallpaper extends Component {
 
     const token = localStorage.getItem("Authorization");
     if (!token) {
-      alert("로그인 해주세요.");
+      alert("로그인을 해주세요.");
     } else {
       fetch(`${API}/works/wallpaper/follow`, {
         method: "post",
@@ -242,7 +241,6 @@ class Wallpaper extends Component {
             </div>
             {menuTabObj[menuTabActiveId]}
           </article>
-          <DownloadComplete />
         </main>
       </div>
     );
