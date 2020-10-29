@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 
 class ListCategory extends Component {
   render() {
-    const { src, name } = this.props;
+    const { id, name, changeMainPage } = this.props;
     return (
       <li>
-        <Link to={src}>{name}</Link>
+        <Link
+          onClick={() => {
+            changeMainPage(id, name);
+          }}
+        >
+          {name}
+        </Link>
       </li>
     );
   }

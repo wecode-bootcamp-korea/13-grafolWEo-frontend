@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { API } from "../../../config";
+import { CARDDATA } from "../../../config";
 import { FaRegSmile, FaRegUser } from "react-icons/fa";
 import { IoMdPaper } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ class PopularCreator extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/List/POPULARLIST.json`)
+    fetch(`${CARDDATA}popular_creator?category_id=12`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({

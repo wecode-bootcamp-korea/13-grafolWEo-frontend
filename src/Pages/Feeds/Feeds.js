@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "../../Components/Navbar/Navbar";
 import CardWrap from "../../Components/CardList/CardWrap";
 import { CARDDATA } from "../../../src/config";
 import "./Feeds.scss";
@@ -31,7 +30,6 @@ class Feeds extends Component {
     const { CardListsArr, CardDataOrder } = this.state;
     const token =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s";
-    // const token = localStorage.getItem("token");
     if (token) {
       fetch(
         `${CARDDATA}list?sort=피드&limit=${LIMIT}&offset=${CardDataOrder}`,
@@ -66,7 +64,6 @@ class Feeds extends Component {
 
     return (
       <>
-        <Navbar />
         <div className="FeedsCardWrap">
           <CardWrap CardListsArr={CardListsArr} />
         </div>
