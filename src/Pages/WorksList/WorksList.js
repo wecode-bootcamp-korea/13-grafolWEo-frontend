@@ -56,8 +56,6 @@ export default class WorksList extends Component {
           listBannerTags: res.listBannerTags,
           bannerBgSrc: res.categoryImage,
         });
-        console.log(res.json);
-        console.log(res);
       });
   };
 
