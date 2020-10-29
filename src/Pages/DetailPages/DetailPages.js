@@ -1,14 +1,14 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
-import Slider from 'react-slick';
-import {API} from '../../config';
-import {FaRegCommentDots, FaRegUser} from 'react-icons/fa';
-import {IoIosArrowDown} from 'react-icons/io';
-import Comment from '../DetailPages/Comment';
-import LikeImoji from './LikeEmoji';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './DetailPages.scss';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import Slider from "react-slick";
+import { API } from "../../config";
+import { FaRegCommentDots, FaRegUser } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import Comment from "../DetailPages/Comment";
+import LikeImoji from "./LikeEmoji";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./DetailPages.scss";
 
 class DetailPages extends React.Component {
   constructor() {

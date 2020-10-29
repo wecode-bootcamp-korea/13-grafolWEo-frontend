@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { API, DISCOVERTABLIST } from "../../config";
 import Slider from "react-slick";
+import { ST_URL, DISCOVERTABLIST } from "../../config";
 import TopCreator from "./Components/TopCreator";
 import DiscoverTagList from "./Components/DiscoverTagList";
 import DiscoverColorList from "./Components/DiscoverColorList";
@@ -29,22 +29,38 @@ class Wallpaper extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    fetch(`${ST_URL}/works/wallpaper/editorpick`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           editorsPickTagList: res.editorsPickData.TagList,
           editorsPickSlides: res.editorsPickData.Slides,
+          editorsPickTagActive: res.editorsPickData.TagList[0].id,
         });
       });
 
-    fetch(`${API}/Data/Wallpaper/TOPCREATORS.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          topCreators: res.topCreators,
+    const token = localStorage.getItem("Authorization");
+    if (!token) {
+      fetch(`${ST_URL}/works/wallpaper/topcreators`)
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState({
+            topCreators: res.topCreators,
+          });
         });
-      });
+    } else {
+      fetch(`${ST_URL}/works/wallpaper/topcreators`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          this.setState({
+            topCreators: res.topCreators,
+          });
+        });
+    }
   }
 
   handleClickFollow = (id) => {
@@ -53,26 +69,34 @@ class Wallpaper extends Component {
     const selected = topCreators[index];
     const nextTopCreator = [...topCreators];
 
-    fetch("http://10.58.7.192:8000/works/wallpaper/follow", {
-      method: "post",
-      body: JSON.stringify({
-        creator_id: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        nextTopCreator[index] = {
-          ...selected,
-          followBtn: res.data.followBtn,
-        };
-        this.setState({
-          topCreators: nextTopCreator,
+    const token = localStorage.getItem("Authorization");
+    if (!token) {
+      alert("로그인을 해주세요.");
+    } else {
+      fetch(`${ST_URL}/works/wallpaper/follow`, {
+        method: "post",
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          creator_id: id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          nextTopCreator[index] = {
+            ...selected,
+            followBtn: res.data.followBtn,
+          };
+          this.setState({
+            topCreators: nextTopCreator,
+          });
         });
-      });
+    }
   };
 
   handleClickEditorPickTag = (id) => {
-    fetch(`${API}/Data/Wallpaper/EDITORSPICKSLIDES.json`)
+    fetch(`${ST_URL}/works/wallpaper/editorpick?tag=${id}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -98,15 +122,17 @@ class Wallpaper extends Component {
       editorsPickTagActive,
       discoverTabActive,
     } = this.state;
+
     const {
       handleClickEditorPickTag,
       handleClickDiscoverTab,
       handleClickFollow,
+      handleClickUrlDownload,
     } = this;
 
     const editorsPickSlideList = editorsPickSlides.map(
       ({
-        id,
+        wallpaper_id,
         wallpaperSrc,
         wallpaperUrl,
         subject,
@@ -116,8 +142,8 @@ class Wallpaper extends Component {
         downloadSrc,
       }) => (
         <Slide
-          key={id}
-          id={id}
+          key={wallpaper_id}
+          wallpaper_id={wallpaper_id}
           wallpaperSrc={wallpaperSrc}
           wallpaperUrl={wallpaperUrl}
           subject={subject}
@@ -125,6 +151,7 @@ class Wallpaper extends Component {
           name={name}
           downloadNum={downloadNum}
           downloadSrc={downloadSrc}
+          handleClickUrlDownload={handleClickUrlDownload}
         />
       )
     );
@@ -159,7 +186,7 @@ class Wallpaper extends Component {
           <article className="editorsPick">
             <div className="container">
               <h2 className="mainTit">
-                Editor's Pick
+                Editor&#39;s Pick
                 <ul className="tagList clearFix">
                   {editorsPickTagList.map((tag) => (
                     <li

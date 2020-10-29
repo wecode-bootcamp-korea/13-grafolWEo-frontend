@@ -1,0 +1,16 @@
+.dwnBtn {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-image: url(/Images/sp_collection.png);
+  background-repeat: no-repeat;
+  background-size: 239px 214px;
+  background-position: -183px -83px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
