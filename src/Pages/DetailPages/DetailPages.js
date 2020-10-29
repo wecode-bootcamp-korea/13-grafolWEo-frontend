@@ -13,8 +13,8 @@ import './DetailPages.scss';
 const LIMIT = 12;
 
 class DetailPages extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super ();
     this.state = {
       artworkDetails: [],
       showComponent: false,
@@ -26,43 +26,41 @@ class DetailPages extends React.Component {
   }
 
   artWorkDetails = () => {
-    fetch('http://10.58.7.192:8000/works/14', {
+    fetch ('http://10.58.3.92:8000/works/14', {
       method: 'get',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
+        Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log('dd:', res.artworkDetails);
-        this.setState({
+      .then (res => res.json ())
+      .then (res => {
+        console.log ('dd:', res.artworkDetails);
+        this.setState ({
           artworkDetails: res.artworkDetails,
           userName: res.artworkDetails.user_name,
         });
       });
   }; //`${API}/Data/DetailPages/ARTWORKDETAILS.json`,'http://10.58.3.92:8000/works/13'
 
-  getLikeit = (id) => {
-    console.log(id);
-    fetch(`http://10.58.3.92:8000/works/14/likeit`, {
+  getLikeit = id => {
+    console.log (id);
+    fetch (`http://10.58.3.92:8000/works/14/likeit`, {
       method: 'post',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
+        Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
       },
-      body: JSON.stringify({
+      body: JSON.stringify ({
         like_it_kind_id: id,
       }),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+      .then (res => res.json ())
+      .then (res => {
+        console.log (res);
       });
   };
 
-  changeMainPage = (name) => {
-    this.setState(
+  changeMainPage = name => {
+    this.setState (
       {
         mainPageView: name,
         CardListsArr: [],
@@ -70,7 +68,7 @@ class DetailPages extends React.Component {
         buttonStyle: name,
       },
       () => {
-        this.getCardData();
+        this.getCardData ();
       }
     );
   };
@@ -81,19 +79,17 @@ class DetailPages extends React.Component {
       scrollTop + clientHeight >= scrollHeight * 0.95 &&
       !this.state.timeSet
     ) {
-      this.setState({timeSet: true});
-      this.getCardData();
+      this.setState ({timeSet: true});
+      this.getCardData ();
     }
   };
 
   getCardData = () => {
     const {mainPageView, CardListsArr, CardDataOrder} = this.state;
-    fetch(
-      `${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
+    fetch (`${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}`)
+      .then (res => res.json ())
+      .then (res => {
+        this.setState ({
           CardListsArr: [...CardListsArr, ...res.data],
           CardDataOrder: CardDataOrder + LIMIT,
           timeSet: false,
@@ -101,24 +97,24 @@ class DetailPages extends React.Component {
       });
   };
 
-  componentDidMount() {
-    this.artWorkDetails();
-    this.getCardData();
-    window.addEventListener('scroll', this.infiniteScroll);
+  componentDidMount () {
+    this.artWorkDetails ();
+    this.getCardData ();
+    window.addEventListener ('scroll', this.infiniteScroll);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.infiniteScroll);
+  componentWillUnmount () {
+    window.removeEventListener ('scroll', this.infiniteScroll);
   }
 
   // toggle
   handleCommentState = () => {
-    this.setState({
+    this.setState ({
       showComponent: !this.state.showComponent,
     });
   };
 
-  render() {
+  render () {
     const {
       title,
       creator,
@@ -142,15 +138,11 @@ class DetailPages extends React.Component {
     // console.log(this.state.showComponent);
 
     //const numbers = `${+likeNum + +touchNum + +wantToBuyNum}`;
-    console.log(this.state.artworkDetails.comment);
+    console.log (this.state.artworkDetails.comment);
     return (
       <div className="DetailPages">
-        <img className="leftArrow" src="Images/left.png" alt="left_arrow"></img>
-        <img
-          className="rightArrow"
-          src="Images/right.png"
-          alt="right_arrow"
-        ></img>
+        <img className="leftArrow" src="Images/left.png" alt="left_arrow" />
+        <img className="rightArrow" src="Images/right.png" alt="right_arrow" />
         <div className="firstContainer container">
           <div className="titleBox">
             <div className="title">
@@ -179,7 +171,7 @@ class DetailPages extends React.Component {
             </div>
             <div className="tag">
               {tag &&
-                tag.map((tag, idx) => {
+                tag.map ((tag, idx) => {
                   return <span key={idx}>{tag}</span>;
                 })}
             </div>
@@ -189,7 +181,7 @@ class DetailPages extends React.Component {
             <div className="likeBtn">
               <ul>
                 <li>
-                  <button onClick={() => this.getLikeit(1)}>
+                  <button onClick={() => this.getLikeit (1)}>
                     <img src="Images/hearteyes.png" alt="icon" />
                   </button>
                   <span className="text">좋아요</span>
@@ -199,7 +191,7 @@ class DetailPages extends React.Component {
                 </li>
                 {/* </li>{Number(likeNum) + likeCount},{Number(likeNum)} */}
                 <li>
-                  <button onClick={() => this.getLikeit(2)}>
+                  <button onClick={() => this.getLikeit (2)}>
                     <img src="Images/starred.png" alt="icon" />
                   </button>
                   <span className="text">감동받았어요</span>
@@ -208,7 +200,7 @@ class DetailPages extends React.Component {
                   </span>
                 </li>
                 <li>
-                  <button onClick={() => this.getLikeit(3)}>
+                  <button onClick={() => this.getLikeit (3)}>
                     <img src="Images/sunglasses.png" alt="icon" />
                   </button>
 
@@ -235,9 +227,8 @@ class DetailPages extends React.Component {
             </div>
           </main>
         </div>
-        {this.state.showComponent && (
-          <Comment comment={comment} userName={userName} />
-        )}
+        {this.state.showComponent &&
+          <Comment comment={comment} userName={userName} />}
 
         <div className="emptyBar" />
         <div className="secondContainer">
@@ -277,4 +268,4 @@ class DetailPages extends React.Component {
   }
 }
 
-export default withRouter(DetailPages);
+export default withRouter (DetailPages);
