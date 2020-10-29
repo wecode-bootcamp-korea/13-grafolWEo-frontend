@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "./Category.scss";
 
@@ -21,7 +22,7 @@ class Categories extends Component {
           <Slider className="slider" {...settings}>
             {CategoriesState.map((tag, idx) => {
               return (
-                <li className="categoryPictures" key={idx}>
+                <Link to="/WorksList" className="categoryPictures" key={idx}>
                   <div
                     className="categoryImg"
                     style={{
@@ -35,7 +36,7 @@ class Categories extends Component {
                     <div className="categoryName">{tag.categoryName}</div>
                     <div className="categoryCount">{tag.categoryCount}</div>
                   </div>
-                </li>
+                </Link>
               );
             })}
           </Slider>

@@ -1,58 +1,78 @@
 import React, { Component } from "react";
-import { CATEGORY, LISTBANNERBGSRC, API } from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
+import { CATEGORY, WorksListPageView, CARDDATA } from "../../config";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
+import WorksListRecommend from "./Components/WorksListRecommend";
+import WorksListNew from "./Components/WorksListNew";
 import "./WorksList.scss";
-
-const menuTabObj = {
-  0: <PopularCreator />,
-};
 
 export default class WorksList extends Component {
   constructor() {
     super();
     this.state = {
-      listName: "",
-      bannerBgSrc: [],
+      listName: CATEGORY[0].name,
+      categoryName: "11",
+      bannerBgSrc: "",
       categoryToggle: false,
-      category: [],
+      category: CATEGORY,
       listBannerTags: [],
       menuTabActiveId: 0,
+      discoverTabActive: 1,
     };
   }
+
+  menuTabObj = (categoryName) => {
+    return [
+      <></>,
+      <WorksListRecommend categoryName={categoryName} key={categoryName} />,
+      <WorksListNew categoryName={categoryName} key={categoryName} />,
+      <PopularCreator key={categoryName} />,
+    ];
+  };
 
   handleClickMenuTab = (id) => {
     this.setState({ menuTabActiveId: id });
   };
 
-  componentDidMount() {
-    this.setState({
-      bannerBgSrc: LISTBANNERBGSRC,
-      listName: CATEGORY[0].name,
-    });
+  changeMainPage = (id, name) => {
+    this.setState(
+      {
+        categoryName: id,
+        listName: name,
+      },
+      () => {
+        this.getCategoryId();
+      }
+    );
+  };
 
-    fetch(`${API}/Data/List/CATEGORY.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          category: res.category,
-        });
-      });
-
-    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
+  getCategoryId = () => {
+    fetch(`${CARDDATA}tag?category_id=${this.state.categoryName}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           listBannerTags: res.listBannerTags,
+          bannerBgSrc: res.categoryImage,
         });
+        console.log(res.json);
       });
+  };
+
+  componentDidMount() {
+    this.getCategoryId();
   }
 
   handleToggle = () => {
     this.setState({
       categoryToggle: !this.state.categoryToggle,
+    });
+  };
+
+  handleClickDiscoverTab = (id) => {
+    this.setState({
+      discoverTabActive: id,
     });
   };
 
@@ -63,14 +83,22 @@ export default class WorksList extends Component {
       category,
       categoryToggle,
       bannerBgSrc,
+      discoverTabActive,
+      categoryName,
     } = this.state;
+    const { handleClickDiscoverTab, handleToggle } = this;
 
     const tagList = listBannerTags.map(({ id, name }) => (
       <ListTag key={id} name={name} />
     ));
 
-    const categoryList = category.map(({ id, name, src }) => (
-      <ListCategory key={id} name={name} src={src} />
+    const categoryList = category.map(({ id, name }) => (
+      <ListCategory
+        key={id}
+        id={id}
+        name={name}
+        changeMainPage={this.changeMainPage}
+      />
     ));
 
     return (
@@ -82,7 +110,7 @@ export default class WorksList extends Component {
           <div className="inner">
             <div className="listCategoryWrap">
               <button
-                onClick={this.handleToggle}
+                onClick={handleToggle}
                 className={categoryToggle ? "active" : ""}
               >
                 {listName}
@@ -98,18 +126,25 @@ export default class WorksList extends Component {
         <main>
           <nav className="listFilter">
             <ul>
-              <li>
-                <button>추천</button>
-              </li>
-              <li>
-                <button>최신</button>
-              </li>
-              <li className="active">
-                <button>인기크리에이터</button>
-              </li>
+              {WorksListPageView.map((tab) => (
+                <li
+                  key={tab.id}
+                  className={discoverTabActive === tab.id ? "active" : ""}
+                >
+                  <button
+                    onClick={() => {
+                      handleClickDiscoverTab(tab.id);
+                    }}
+                  >
+                    {tab.name}
+                  </button>
+                </li>
+              ))}
             </ul>
           </nav>
-          {menuTabObj[this.state.menuTabActiveId]}
+          <div className="container">
+            {this.menuTabObj(categoryName)[this.state.discoverTabActive]}
+          </div>
         </main>
       </div>
     );

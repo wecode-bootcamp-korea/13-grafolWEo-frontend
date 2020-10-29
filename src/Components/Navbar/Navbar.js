@@ -58,9 +58,7 @@ class Navbar extends Component {
                 <li
                   key={idx}
                   className={
-                    category.id === activatedIndex
-                      ? "activated"
-                      : "deactivated"
+                    category.id === activatedIndex ? "activated" : "deactivated"
                   }
                   onClick={() =>
                     this.handleCategory(category.id, category.path)
