@@ -4,10 +4,10 @@ import { withRouter } from "react-router-dom";
 import "./Navbar.scss";
 
 let controlActivation = [
-  { id: 2, path: "/worksList", content: "작품" },
+  { id: 2, path: "/", content: "작품" },
   { id: 3, path: "/", content: "아트상품" },
   { id: 4, path: "/Wallpaper", content: "배경화면" },
-  { id: 5, path: "", content: "스토리" },
+  { id: 5, path: "/", content: "스토리" },
 ];
 
 class Navbar extends Component {
@@ -39,7 +39,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     if (localStorage.getItem("Authorization")) {
-      controlActivation.unshift({ id: 1, path: "/qwe", content: "피드" });
+      controlActivation.unshift({ id: 1, path: "/Feeds", content: "피드" });
       this.setState({ isLogin: true });
     }
   }
