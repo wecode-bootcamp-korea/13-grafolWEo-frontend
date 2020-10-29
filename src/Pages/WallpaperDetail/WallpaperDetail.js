@@ -13,9 +13,13 @@ export default class WallpaperDetail extends Component {
   }
 
   componentDidMount() {
-    fetch(`${SH_URL}/works/wallpaper/35`)
+    const adr = this.props.location.pathname.split("/");
+
+    fetch(`${SH_URL}/works/wallpaper/${adr[2]}`)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
+
         const date = res.wallpaperDetails.created_at;
         const year = date.substring(0, 4);
         const month = date.substring(5, 7);
@@ -39,29 +43,34 @@ export default class WallpaperDetail extends Component {
       tag,
     } = this.state.wallpaperDetailData;
 
-    console.log(this.props);
-
     const { wallpaperDate } = this.state;
+
+    console.log(this.props.location.pathname);
     return (
       <div className="WallpaperDetail">
         <main>
           <div className="container">
-            <div
+            <img
+              src={image_url}
               className="wallpaperImg"
               style={{ backgroundImage: `url(${image_url})` }}
-            >
+              alt="배경화면 이미지"
+            />
+            <div>
               <UrlDownloadBtn />
             </div>
             <div className="creatorInfo">
               <h4>{title}</h4>
               <ul className="detailes">
                 <li>
-                  <span
+                  <img
                     className="profileImg"
+                    src={image_url}
                     style={{
-                      backgroundImage: `url(https://g-grafolio.pstatic.net/20200303_11/1583211339754C3IGv_PNG/%B4%EB%C1%F6_3_%BB%E7%BA%BB_2.png)`,
+                      backgroundImage: `url(${image_url})`,
                     }}
-                  ></span>
+                    alt="프로필 이미지"
+                  />
                   <em className="creator">{creator}</em>
                 </li>
                 <li>

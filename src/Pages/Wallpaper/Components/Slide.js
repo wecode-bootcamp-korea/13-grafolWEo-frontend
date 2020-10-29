@@ -15,7 +15,10 @@ class Slide extends Component {
 
     return (
       <div className="Slide DiscoverCardViewItem">
-        <Link to="/" style={{ backgroundImage: `url(${wallpaperSrc})` }} />
+        <Link
+          to={`/WallpaperDetail/${wallpaper_id}`}
+          style={{ backgroundImage: `url(${wallpaperSrc})` }}
+        />
         <div className="slideInfo">
           <h6>{subject}</h6>
           <div className="box">
