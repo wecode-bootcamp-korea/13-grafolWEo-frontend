@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {CgProfile} from 'react-icons/cg';
-import {BiHeart} from 'react-icons/bi';
 import {BiLockOpen} from 'react-icons/bi';
 import CommentList from './CommentList';
 import './Comment.scss';
@@ -9,33 +7,10 @@ class Comment extends Component {
   constructor() {
     super();
     this.state = {
-      commentList: [
-        {
-          id: 1,
-          profileImg: <CgProfile />,
-          userName: 'dolphin',
-          content: '마~니 축하드립니다~',
-          date: '2020-10-15 11:17',
-          button: <BiHeart />,
-        },
-        {
-          id: 2,
-          profileImg: <CgProfile />,
-          userName: '산들',
-          content: '작가님~ 응원합니당^^',
-          date: '2020-10-2 6:14',
-          button: <BiHeart />,
-        },
-        {
-          id: 3,
-          profileImg: <CgProfile />,
-          userName: '마요',
-          content: '대박 너무너무 귀여워요 흑흑',
-          date: '2020-10-4 2:42',
-          button: <BiHeart />,
-        },
-      ],
+      commentList: [],
+
       commentValue: '',
+      artworkDetails: [],
     };
   }
 
@@ -45,37 +20,51 @@ class Comment extends Component {
     });
   };
 
+  componentDidMount = () => {
+    this.setState({commentList: this.props.comment});
+  };
+
   addComment = (e) => {
+    const {commentValue} = this.state;
+
     e.preventDefault();
-    const {commentList, commentValue} = this.state;
-    this.setState({
-      commentList: [
-        ...commentList,
-        {
-          id: commentList.length + 1,
-          profileImg: <CgProfile />,
-          userName: 'chloe kim',
-          content: commentValue,
-          button: <BiHeart />,
-        },
-      ],
-      commentValue: '',
-    });
+    console.log('addComment');
+
+    fetch('http://10.58.3.92:8000/works/13/comments', {
+      method: 'POST',
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNX0.iwV4cMiriHCEjaL2UrmnRoX3FTfIhAcgnaZnXqZ5hTM',
+      },
+      body: JSON.stringify({
+        comment_content: commentValue,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          artworkDetails: res.artworkDetails.comment,
+        });
+      });
   };
 
   render() {
+    //console.log('props: ', this.props.userName);
+
     const {commentList, commentValue} = this.state;
+    // console.log(commentList, 'ssssss');
+    // console.log('전달', commentList);
     return (
       <div className="Comment container">
         <form className="commentForm" onSubmit={this.addComment}>
-          <span className="name">chloe Kim</span>
+          <span className="name">{this.props.userName}</span>
           <input
             onChange={this.handleCommentValue}
             type="text"
             placeholder="주제와 무관한 댓글,악플은 삭제될 수 있습니다."
             value={commentValue}
           />
-          <span className="textLength">0/1000</span>
+
           <div className="upload">
             <div className="secretComment">
               <BiLockOpen />
@@ -86,20 +75,9 @@ class Comment extends Component {
             </button>
           </div>
         </form>
-        <div className="feedComment container">
+        <div className="feedComment">
           <ul>
-            {commentList.map((comment) => {
-              return (
-                <CommentList
-                  key={comment.id}
-                  profile={comment.profileImg}
-                  name={comment.userName}
-                  comment={comment.content}
-                  date={comment.date}
-                  heart={comment.button}
-                />
-              );
-            })}
+            <CommentList comment={commentList} userName={this.props.userName} />
           </ul>
         </div>
       </div>
