@@ -1,0 +1,560 @@
+@import '../../Styles/theme.scss';
+
+@mixin secTit {
+  margin: 0 0 25px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+@mixin tagList {
+  height: 30px;
+  padding: 0 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.06);
+  background: #fff;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+@mixin bgDefault {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@mixin tagItems {
+  height: 32px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 19px;
+  border: solid 1px #ddd;
+  font-weight: 300;
+}
+
+.Wallpaper {
+  article {
+    margin-top: 50px;
+  }
+
+  .editorsPick {
+    .mainTit {
+      @include secTit;
+      display: flex;
+      align-items: center;
+    }
+
+    .tagList {
+      margin-left: 35px;
+
+      li {
+        float: left;
+      }
+
+      li + li {
+        margin-left: 10px;
+      }
+
+      li.active button {
+        background: #e4bc2c;
+        color: #fff;
+      }
+
+      button {
+        @include tagList;
+      }
+    }
+
+    .slideWrap {
+      margin: 0 -10px;
+      height: 270px !important;
+
+      /* arrows, dots */
+      .slick-arrow {
+        background: rgba(0, 0, 0, 0.3);
+        width: 55px;
+        height: 55px;
+        z-index: 10;
+        opacity: 0;
+        transition: 0.35s ease;
+      }
+
+      &:hover .slick-arrow {
+        opacity: 0.8 !important;
+      }
+
+      .slick-prev {
+        left: 8px;
+      }
+
+      .slick-next {
+        right: 8px;
+      }
+
+      .slick-next:before,
+      .slick-prev:before {
+        display: none;
+      }
+
+      .slick-next:after,
+      .slick-prev:after {
+        content: '';
+        display: block;
+        width: 55px;
+        height: 55px;
+        background-image: url(/Images/sp_collection.png);
+        background-repeat: no-repeat;
+        opacity: 0.5;
+        transition: 0.35s;
+      }
+
+      .slick-prev:after {
+        background-size: 239px 214px;
+        background-position: 0 -81px;
+      }
+
+      .slick-next:after {
+        background-size: 239px 214px;
+        background-position: -183px 0;
+      }
+
+      .slick-next:hover:after,
+      .slick-prev:hover:after {
+        opacity: 1;
+      }
+
+      .slick-dots {
+        bottom: -45px;
+
+        .slick-active button:before {
+          color: #e4bc2c;
+        }
+
+        button {
+          &:hover:before,
+          &:focus:before {
+            color: #e4bc2c;
+          }
+        }
+      }
+      /* arrows, dots -- end */
+
+      .slick-list {
+        padding: 0 0 30px;
+
+        .slick-track {
+          height: 270px !important;
+
+          .slick-slide {
+            padding: 0 7px;
+            height: 270px;
+            transition: 0.35s ease;
+
+            &:hover {
+              width: 430px !important;
+            }
+
+            .Slide {
+              position: relative;
+              border-radius: 15px;
+              box-shadow: 0 5px 10px rgba(0, 0, 0, 0.125);
+              overflow: hidden;
+
+              &:hover .slideInfo {
+                opacity: 1;
+              }
+
+              a {
+                display: block;
+                width: 100%;
+                min-height: 270px;
+                background-position: center;
+                background-size: cover;
+              }
+
+              .slideInfo {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 0 15px 15px;
+                background: linear-gradient(
+                  to top,
+                  rgba(0, 0, 0, 0.3),
+                  transparent
+                );
+                transition: 0.35s ease;
+                opacity: 0;
+
+                .dwnBtn {
+                  position: absolute;
+                  right: 15px;
+                  bottom: 15px;
+                  width: 36px;
+                  height: 36px;
+                  padding: 0;
+                  border: none;
+                  border-radius: 3px;
+                  background-image: url(/Images/sp_collection.png);
+                  background-repeat: no-repeat;
+                  background-size: 239px 214px;
+                  background-position: -183px -83px;
+                  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+                  z-index: 10;
+                }
+
+                h6 {
+                  margin-bottom: 7px;
+                  letter-spacing: 0.05rem;
+                  font-size: 17px;
+                  color: #fff;
+                }
+
+                .box {
+                  display: flex;
+                  align-items: center;
+                  font-size: 13px;
+                  font-weight: 300;
+                  color: #fff;
+                }
+
+                .userInfo,
+                .download {
+                  display: flex;
+                  align-items: center;
+                }
+
+                .userInfo {
+                  &:after {
+                    content: '';
+                    display: block;
+                    width: 1px;
+                    height: 10px;
+                    margin: 0 8px;
+                    background: #fff;
+                  }
+
+                  .imgWrap {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 7px;
+                    border-radius: 100%;
+                    @include bgDefault;
+                  }
+                }
+                .dwnload {
+                  em {
+                    margin-left: 5px;
+                    font-weight: 500;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &::after {
+        content: '';
+        width: 100px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: -15px;
+        background-image: url(/Images/bg_flicking_grd.png);
+        background-repeat: repeat-y;
+        background-size: contain;
+      }
+    }
+  }
+
+  .topCreators {
+    .mainTit {
+      @include secTit;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+
+      li {
+        position: relative;
+
+        .imgWrap {
+          @include bgDefault;
+          display: inline-block;
+          width: 110px;
+          height: 110px;
+          border-radius: 100%;
+          overflow: hidden;
+
+          img {
+            pointer-events: none;
+            opacity: 0;
+          }
+        }
+
+        h5 {
+          margin: 7px 0 0;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 300;
+        }
+
+        button {
+          position: absolute;
+          right: 0;
+          bottom: 30px;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+          border: 1px solid $theme-color;
+          background: $theme-color;
+          border-radius: 100%;
+          font-size: 20px;
+          color: #fff;
+        }
+
+        button.active {
+          background: #fff;
+          color: $theme-color;
+        }
+      }
+
+      li + li {
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .discover {
+    .discoverCardListStyle {
+      min-height: 400px;
+    }
+
+    .mainTit {
+      @include secTit;
+      display: flex;
+      align-items: center;
+
+      .categoryType li {
+        float: left;
+        margin-left: 35px;
+
+        button {
+          padding: 0 0 3px;
+          font-size: 17px;
+          font-weight: 300;
+          color: #555;
+        }
+      }
+
+      .categoryType li.active button {
+        border-bottom: 2px solid #222;
+        font-weight: 500;
+        color: #222;
+      }
+    }
+
+    .tagItems {
+      margin: 0 0 25px;
+
+      li {
+        float: left;
+
+        button {
+          @include tagItems;
+        }
+      }
+
+      li.active button {
+        background: #111;
+        color: #fff;
+      }
+
+      li + li {
+        margin-left: 10px;
+      }
+    }
+
+    .colorItems {
+      margin: 0 0 25px;
+
+      li {
+        float: left;
+        width: 50px;
+        height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+
+        button {
+          display: block;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          text-indent: -9999em;
+        }
+      }
+
+      li + li {
+        margin-left: 10px;
+      }
+
+      li:nth-child(1) {
+        background-color: #ff0000;
+      }
+
+      li:nth-child(2) {
+        background-color: #ff6d01;
+      }
+
+      li:nth-child(3) {
+        background-color: #ffc002;
+      }
+
+      li:nth-child(4) {
+        background-color: #55c40c;
+      }
+
+      li:nth-child(5) {
+        background-color: #0166ff;
+      }
+
+      li:nth-child(6) {
+        background-color: #1e447d;
+      }
+
+      li:nth-child(7) {
+        background-color: #8a00ff;
+      }
+
+      li:nth-child(8) {
+        background-color: #fff;
+      }
+
+      li:nth-child(9) {
+        background-color: #000;
+      }
+
+      li:nth-child(10) {
+        background-color: #949494;
+      }
+    }
+
+    .wallpaperCardView {
+      padding: 50px 0;
+      min-height: 340px;
+      background: #f4f4f4;
+
+      ul {
+        li {
+          position: relative;
+          float: left;
+          width: calc(33.3333% - 10px);
+
+          a {
+            display: block;
+            height: 226px;
+            @include bgDefault;
+
+            &:hover .slideInfo {
+              opacity: 1;
+            }
+
+            .slideInfo {
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              padding: 0 15px 15px;
+              background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.3),
+                transparent
+              );
+              transition: 0.35s ease;
+              opacity: 0;
+
+              .dwnBtn {
+                position: absolute;
+                right: 15px;
+                bottom: 15px;
+                width: 36px;
+                height: 36px;
+                padding: 0;
+                border: none;
+                border-radius: 3px;
+                background-image: url(/Images/sp_collection.png);
+                background-repeat: no-repeat;
+                background-size: 239px 214px;
+                background-position: -183px -83px;
+                box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+                z-index: 10;
+              }
+
+              h6 {
+                margin-bottom: 7px;
+                letter-spacing: 0.05rem;
+                font-size: 17px;
+                color: #fff;
+              }
+
+              .box {
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                font-weight: 300;
+                color: #fff;
+              }
+
+              .userInfo,
+              .dwnload {
+                display: flex;
+                align-items: center;
+              }
+
+              .userInfo {
+                &:after {
+                  content: '';
+                  display: block;
+                  width: 1px;
+                  height: 10px;
+                  margin: 0 8px;
+                  background: #fff;
+                }
+
+                .imgWrap {
+                  display: inline-block;
+                  width: 20px;
+                  height: 20px;
+                  margin-right: 7px;
+                  border-radius: 100%;
+                  @include bgDefault;
+
+                  img {
+                    pointer-events: none;
+                    opacity: 0;
+                  }
+                }
+              }
+              .dwnload {
+                em {
+                  margin-left: 5px;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+
+        li + li {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

@@ -13,11 +13,10 @@
       padding-top: 10px;
       padding-bottom: 10px;
 
-      .img {
-        color: grey;
+      img {
         width: 30px;
-        height: 25px;
-        border-radius: 50%;
+        height: 30px;
+        border-radius: 100%;
       }
 
       .name {
@@ -51,6 +50,11 @@
       margin: 0 auto;
       border: 1px solid #ededed;
       text-align: center;
+    }
+    .cancel {
+      position: absolute;
+      left: 1120px;
+      bottom: 10px;
     }
   }
 }

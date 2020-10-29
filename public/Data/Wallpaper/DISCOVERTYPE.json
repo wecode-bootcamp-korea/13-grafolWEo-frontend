@@ -1,0 +1,35 @@
+{
+  "discoverTypeData" : {
+    "typeList": [
+      {"id": 1, "name": "일러스트"},
+      {"id": 2, "name": "사진"},
+      {"id": 3, "name": "회화"},
+      {"id": 4, "name": "디자인"},
+      {"id": 5, "name": "캘리그라피"},
+      {"id": 6, "name": "감성"}
+    ],
+    "cardViewList" : [
+      {
+        "id": 1,
+        "subject": "배경화면 제목1",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      },
+      {
+        "id": 2,
+        "subject": "배경화면 제목2",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      },
+      {
+        "id": 3,
+        "subject": "배경화면 제목3",
+        "profileImgSrc": "https://images.unsplash.com/photo-1579762593175-20226054cad0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1107&q=80",
+        "name" : "작가 이름",
+        "downloadNum" : 34
+      }
+    ]
+  }
+}
