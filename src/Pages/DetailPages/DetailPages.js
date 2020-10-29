@@ -26,7 +26,7 @@ class DetailPages extends React.Component {
   }
 
   artWorkDetails = () => {
-    fetch('http://10.58.7.192:8000/works/13', {
+    fetch('http://10.58.7.192:8000/works/14', {
       method: 'get',
       headers: {
         Authorization:
@@ -45,7 +45,7 @@ class DetailPages extends React.Component {
 
   getLikeit = (id) => {
     console.log(id);
-    fetch(`http://10.58.3.92:8000/works/13/likeit`, {
+    fetch(`http://10.58.3.92:8000/works/14/likeit`, {
       method: 'post',
       headers: {
         Authorization:
