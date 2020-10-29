@@ -40,8 +40,8 @@ class Login extends Component {
               }, 3000);
             });
           } else if (res.MESSAGE === "LOGIN_SUCCESS") {
-            this.props.history.push("/");
             localStorage.setItem("Authorization", res.AUTHORIZATION);
+            this.props.history.push("/");
           }
         });
     }
@@ -79,7 +79,9 @@ class Login extends Component {
         <section>
           <div className="loginContainer">
             <header>
-              <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
+              <Link to="/main">
+                <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
+              </Link>
               <span className="loginText">로그인</span>
             </header>
             <form onSubmit={this.loginAccess}>

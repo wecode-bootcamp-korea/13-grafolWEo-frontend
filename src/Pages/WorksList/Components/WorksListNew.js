@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Card from "../../../Components/CardList/Components/Card";
-import { CARDDATA, WorksListPageView } from "../../../config";
+import { CARDDATA } from "../../../config";
 import "../../../Components/CardList/CardWrap.scss";
 
 const LIMIT = 12;
 
-class Recommend extends Component {
+class WorksListNew extends Component {
   constructor() {
     super();
     this.state = {
@@ -28,10 +28,10 @@ class Recommend extends Component {
 
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
-    const { categoryName, discoverTabActive } = this.props;
-    if ()
+    const { categoryName } = this.props;
+
     fetch(
-      `${CARDDATA}list?sort=${discoverTabActive}&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
+      `${CARDDATA}list?sort=최신&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -54,6 +54,7 @@ class Recommend extends Component {
 
   render() {
     const { CardListsArr } = this.state;
+
     return (
       <div className="CardWrap">
         {CardListsArr &&
@@ -88,4 +89,4 @@ class Recommend extends Component {
   }
 }
 
-export default Recommend;
+export default WorksListNew;

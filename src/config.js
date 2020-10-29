@@ -1,4 +1,5 @@
 export const SH_URL = "http://10.58.3.92:8000";
+export const ST_URL = "http://10.58.7.192:8000";
 export const API = "http://localhost:3000";
 
 export const DISCOVERTABLIST = [
@@ -16,7 +17,22 @@ export const CATEGORY = [
   { id: 16, name: "캘리그라피" },
 ];
 
-export const CARDDATA = "http://10.58.7.192:8000/works/";
+export const COLORS = [
+  { id: 1, name: "빨강색" },
+  { id: 2, name: "주황색" },
+  { id: 3, name: "노랑색" },
+  { id: 4, name: "초록색" },
+  { id: 5, name: "파랑색" },
+  { id: 6, name: "남색" },
+  { id: 7, name: "보라색" },
+  { id: 8, name: "흰색" },
+  { id: 9, name: "검은색" },
+  { id: 10, name: "흑백" },
+];
+
+export const ORDERS = [{ name: "인기순" }, { name: "최신순" }];
+
+export const CARDDATA = "http://10.58.3.92:8000/works/";
 
 export const WorksListPageView = [
   { id: 1, name: "추천" },

@@ -1,0 +1,45 @@
+.downloadModal {
+  position: fixed;
+  left: 100%;
+  bottom: 30px;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-left: 3px solid #00d084;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125);
+
+  h4 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .icon {
+    display: inline-block;
+    margin: 0 0 13px;
+    font-size: 30px;
+    color: #00d084;
+  }
+}
+
+.downloadModal.active {
+  // left: calc(100% - 300px);
+  animation: slideLeft 5s 5s 1 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  10% {
+    transform: translateX(-2rem);
+  }
+  90% {
+    transform: translateX(-2rem);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -4,8 +4,8 @@ import { CATEGORY, WorksListPageView, CARDDATA } from "../../config";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
 import PopularCreator from "./Components/PopularCreator";
-import Recommend from "./Components/Recommend";
-import New from "./Components/New";
+import WorksListRecommend from "./Components/WorksListRecommend";
+import WorksListNew from "./Components/WorksListNew";
 import "./WorksList.scss";
 
 export default class WorksList extends Component {
@@ -23,19 +23,11 @@ export default class WorksList extends Component {
     };
   }
 
-  menuTabObj = (categoryName, discoverTabActive) => {
+  menuTabObj = (categoryName) => {
     return [
       <></>,
-      <Recommend
-        categoryName={categoryName}
-        key={categoryName}
-        discoverTabActive={discoverTabActive}
-      />,
-      <Recommend
-        categoryName={categoryName}
-        key={categoryName}
-        discoverTabActive={discoverTabActive}
-      />,
+      <WorksListRecommend categoryName={categoryName} key={categoryName} />,
+      <WorksListNew categoryName={categoryName} key={categoryName} />,
       <PopularCreator key={categoryName} />,
     ];
   };
@@ -64,6 +56,7 @@ export default class WorksList extends Component {
           listBannerTags: res.listBannerTags,
           bannerBgSrc: res.categoryImage,
         });
+        console.log(res.json);
       });
   };
 
@@ -150,11 +143,7 @@ export default class WorksList extends Component {
             </ul>
           </nav>
           <div className="container">
-            {
-              this.menuTabObj(categoryName, discoverTabActive)[
-                this.state.discoverTabActive
-              ]
-            }
+            {this.menuTabObj(categoryName)[this.state.discoverTabActive]}
           </div>
         </main>
       </div>

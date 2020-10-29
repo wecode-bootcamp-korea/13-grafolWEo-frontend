@@ -5,7 +5,7 @@ import "../../../Components/CardList/CardWrap.scss";
 
 const LIMIT = 12;
 
-class New extends Component {
+class WorksListRecommend extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,9 +29,8 @@ class New extends Component {
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
     const { categoryName } = this.props;
-
     fetch(
-      `${CARDDATA}list?sort=최신&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
+      `${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -54,7 +53,6 @@ class New extends Component {
 
   render() {
     const { CardListsArr } = this.state;
-
     return (
       <div className="CardWrap">
         {CardListsArr &&
@@ -89,4 +87,4 @@ class New extends Component {
   }
 }
 
-export default New;
+export default WorksListRecommend;

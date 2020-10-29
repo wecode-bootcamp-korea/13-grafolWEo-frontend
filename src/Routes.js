@@ -6,7 +6,9 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import Wallpaper from "./Pages/Wallpaper/Wallpaper";
 import WorksList from "./Pages/WorksList/WorksList";
+import DetailPages from "./Pages/DetailPages/DetailPages";
 import Feeds from "./Pages/Feeds/Feeds";
+import Footer from "./Components/Footer/Footer";
 
 class Routes extends React.Component {
   render() {
@@ -25,6 +27,8 @@ class Routes extends React.Component {
                 <Route exact path="/" component={Main} />
                 <Route exact path="/Wallpaper" component={Wallpaper} />
                 <Route exact path="/WorksList" component={WorksList} />
+                <Route exact path="/DetailPages" component={DetailPages} />
+                <Footer />
               </>
             )}
           />
