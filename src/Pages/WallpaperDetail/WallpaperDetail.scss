@@ -1,0 +1,163 @@
+@import "../../Styles/theme.scss";
+
+@mixin bgDefault {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.WallpaperDetail {
+  padding-top: 50px;
+
+  main {
+    .wallpaperImg {
+      width: 100%;
+      min-height: 702px;
+      max-height: 702px;
+      @include bgDefault;
+    }
+
+    .creatorInfo {
+      position: relative;
+      margin-top: 70px;
+      padding: 30px 0 50px;
+      border-top: 1px solid #ecf0f2;
+
+      h4 {
+        margin: 0 0 15px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .detailes {
+        margin: 0 0 35px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        li {
+          display: flex;
+          align-items: center;
+          .profileImg {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            @include bgDefault;
+          }
+
+          &:after {
+            content: "";
+            display: inline-block;
+            height: 11px;
+            width: 1px;
+            margin: 0 10px 0 10px;
+            background: #ccc;
+          }
+
+          &:last-child:after {
+            display: none;
+          }
+
+          em,
+          span {
+            font-size: 14px;
+            font-weight: 300;
+            color: #959595;
+          }
+
+          em {
+            display: inline-block;
+            margin: 0 5px;
+          }
+
+          .creator {
+            color: #111;
+          }
+
+          .color {
+            color: $theme-color;
+          }
+        }
+      }
+
+      .btnWrap {
+        position: absolute;
+        top: 31px;
+        right: 0;
+
+        ul {
+          display: flex;
+          align-items: center;
+
+          li {
+            .share {
+              display: inline-block;
+              width: 24px;
+              height: 20px;
+              background-size: 315px 314px;
+              background-position: -272px -171px;
+              background-image: url(/Images/sp_grafolio_ratio.png);
+              text-indent: -9999em;
+            }
+
+            .declaration {
+              display: inline-block;
+              width: 3px;
+              height: 17px;
+              background-size: 315px 314px;
+              background-position: 0 -297px;
+              background-image: url(/Images/sp_grafolio_ratio.png);
+              text-indent: -9999em;
+            }
+          }
+
+          li + li {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .tag {
+        ul li {
+          float: left;
+          margin: 0 10px 10px 0;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          padding: 0 14px;
+          border-radius: 16px;
+          background-color: #f4f4f4;
+          font-size: 14px;
+          font-weight: 300;
+          color: #aaa;
+          vertical-align: top;
+          word-break: break-all;
+
+          &:before {
+            content: "#";
+            margin-right: 2px;
+          }
+        }
+      }
+
+      .copyRight p {
+        padding: 5px 0;
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+        color: #aeaeae;
+      }
+    }
+  }
+
+  aside {
+    border-top: 20px solid #f4f4f4;
+
+    .similarTit {
+      padding: 49px 0 16px;
+      font-weight: 600;
+      color: #555;
+    }
+  }
+}
