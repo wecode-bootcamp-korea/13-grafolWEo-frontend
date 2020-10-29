@@ -23,11 +23,19 @@ export default class WorksList extends Component {
     };
   }
 
-  menuTabObj = (categoryName) => {
+  menuTabObj = (categoryName, discoverTabActive) => {
     return [
       <></>,
-      <Recommend categoryName={categoryName} key={categoryName} />,
-      <New categoryName={categoryName} key={categoryName} />,
+      <Recommend
+        categoryName={categoryName}
+        key={categoryName}
+        discoverTabActive={discoverTabActive}
+      />,
+      <Recommend
+        categoryName={categoryName}
+        key={categoryName}
+        discoverTabActive={discoverTabActive}
+      />,
       <PopularCreator key={categoryName} />,
     ];
   };
@@ -142,7 +150,11 @@ export default class WorksList extends Component {
             </ul>
           </nav>
           <div className="container">
-            {this.menuTabObj(categoryName)[this.state.discoverTabActive]}
+            {
+              this.menuTabObj(categoryName, discoverTabActive)[
+                this.state.discoverTabActive
+              ]
+            }
           </div>
         </main>
       </div>

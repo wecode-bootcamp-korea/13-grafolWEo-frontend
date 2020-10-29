@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Card from "../../../Components/CardList/Components/Card";
 import { CARDDATA } from "../../../config";
-import { CATEGORY } from "../../../config";
 import "../../../Components/CardList/CardWrap.scss";
 
 const LIMIT = 12;
@@ -30,6 +29,7 @@ class New extends Component {
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
     const { categoryName } = this.props;
+
     fetch(
       `${CARDDATA}list?sort=최신&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
     )
@@ -41,7 +41,6 @@ class New extends Component {
           timeSet: false,
         });
       });
-    console.log({ CATEGORY });
   };
 
   componentDidMount() {
