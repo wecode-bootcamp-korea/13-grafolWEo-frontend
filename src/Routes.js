@@ -7,6 +7,8 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Wallpaper from "./Pages/Wallpaper/Wallpaper";
 import WallpaperDetail from "./Pages/WallpaperDetail/WallpaperDetail";
 import WorksList from "./Pages/WorksList/WorksList";
+import DetailPages from "./Pages/DetailPages/DetailPages";
+import Footer from "./Components/Footer/Footer";
 
 class Routes extends React.Component {
   render() {
@@ -29,6 +31,13 @@ class Routes extends React.Component {
                   path="/WallpaperDetail"
                   component={WallpaperDetail}
                 />
+                <Route
+                  exact
+                  path="/WallpaperDetail/:id"
+                  component={WallpaperDetail}
+                />
+                <Route exact path="/DetailPages" component={DetailPages} />
+                <Footer />
               </>
             )}
           />

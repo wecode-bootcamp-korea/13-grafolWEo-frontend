@@ -16,8 +16,6 @@ export default class WallpaperDetail extends Component {
     fetch(`${SH_URL}/works/wallpaper/35`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-
         const date = res.wallpaperDetails.created_at;
         const year = date.substring(0, 4);
         const month = date.substring(5, 7);
@@ -31,8 +29,6 @@ export default class WallpaperDetail extends Component {
       });
   }
 
-  dateconversion = () => {};
-
   render() {
     const {
       title,
@@ -42,6 +38,9 @@ export default class WallpaperDetail extends Component {
       downloadNum,
       tag,
     } = this.state.wallpaperDetailData;
+
+    console.log(this.props);
+
     const { wallpaperDate } = this.state;
     return (
       <div className="WallpaperDetail">

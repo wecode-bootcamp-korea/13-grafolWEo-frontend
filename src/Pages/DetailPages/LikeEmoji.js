@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './LikeEmoji.scss';
+import React, { Component } from "react";
+import "./LikeEmoji.scss";
 
 class LikeEmoji extends Component {
   constructor() {
@@ -8,23 +8,23 @@ class LikeEmoji extends Component {
       emoji: [
         {
           id: 1,
-          src: 'Images/hearteyes.png',
-          alt: 'icon',
-          text: '좋아요',
+          src: "Images/hearteyes.png",
+          alt: "icon",
+          text: "좋아요",
           num: 60,
         },
         {
           id: 2,
-          src: 'Images/starred.png',
-          alt: 'icon',
-          text: '감동받았어요',
+          src: "Images/starred.png",
+          alt: "icon",
+          text: "감동받았어요",
           num: 13,
         },
         {
           id: 3,
-          src: 'Images/sunglasses.png',
-          alt: 'icon',
-          text: '사고 싶어요',
+          src: "Images/sunglasses.png",
+          alt: "icon",
+          text: "사고 싶어요",
           num: 6,
         },
       ],
@@ -33,7 +33,7 @@ class LikeEmoji extends Component {
 
   render() {
     return (
-      <>
+      <div className="LikeEmoji">
         {this.state.emoji.map((emoji) => {
           return (
             <li>
@@ -43,7 +43,7 @@ class LikeEmoji extends Component {
             </li>
           );
         })}
-      </>
+      </div>
     );
   }
 }
