@@ -43,7 +43,7 @@ class Login extends Component {
             this.props.history.push("/");
             localStorage.setItem("Authorization", res.AUTHORIZATION);
           }
-        })
+        });
     }
   };
   checkVal = (e) => {

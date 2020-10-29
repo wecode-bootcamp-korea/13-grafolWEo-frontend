@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CATEGORY, API, WorksListPageView, CARDDATA } from "../../config";
+import { CATEGORY, WorksListPageView, CARDDATA } from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
@@ -8,33 +8,48 @@ import Recommend from "./Components/Recommend";
 import New from "./Components/New";
 import "./WorksList.scss";
 
-const menuTabObj = {
-  1: <Recommend />,
-  2: <New />,
-  3: <PopularCreator />,
-};
-
 export default class WorksList extends Component {
   constructor() {
     super();
     this.state = {
-      listName: "",
+      listName: CATEGORY[0].name,
+      categoryName: "11",
       bannerBgSrc: "",
       categoryToggle: false,
-      category: [],
+      category: CATEGORY,
       listBannerTags: [],
       menuTabActiveId: 0,
       discoverTabActive: 1,
-      category: 11,
     };
   }
+
+  menuTabObj = (categoryName) => {
+    return [
+      <></>,
+      <Recommend categoryName={categoryName} key={categoryName} />,
+      <New categoryName={categoryName} key={categoryName} />,
+      <PopularCreator key={categoryName} />,
+    ];
+  };
 
   handleClickMenuTab = (id) => {
     this.setState({ menuTabActiveId: id });
   };
 
+  changeMainPage = (id, name) => {
+    this.setState(
+      {
+        categoryName: id,
+        listName: name,
+      },
+      () => {
+        this.getCategoryId();
+      }
+    );
+  };
+
   getCategoryId = () => {
-    fetch(`${CARDDATA}tag?category_id=${this.state.category}`)
+    fetch(`${CARDDATA}tag?category_id=${this.state.categoryName}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -44,21 +59,7 @@ export default class WorksList extends Component {
       });
   };
 
-  getCategoryName = () => {
-    fetch(`${API}/Data/List/CATEGORY.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          category: res.category,
-        });
-      });
-  };
-
   componentDidMount() {
-    this.setState({
-      listName: CATEGORY[0].name,
-    });
-    this.getCategoryName();
     this.getCategoryId();
   }
 
@@ -82,6 +83,7 @@ export default class WorksList extends Component {
       categoryToggle,
       bannerBgSrc,
       discoverTabActive,
+      categoryName,
     } = this.state;
     const { handleClickDiscoverTab, handleToggle } = this;
 
@@ -92,8 +94,9 @@ export default class WorksList extends Component {
     const categoryList = category.map(({ id, name }) => (
       <ListCategory
         key={id}
+        id={id}
         name={name}
-        onClick={(id) => this.getCategoryId(id)}
+        changeMainPage={this.changeMainPage}
       />
     ));
 
@@ -139,7 +142,7 @@ export default class WorksList extends Component {
             </ul>
           </nav>
           <div className="container">
-            {menuTabObj[this.state.discoverTabActive]}
+            {this.menuTabObj(categoryName)[this.state.discoverTabActive]}
           </div>
         </main>
       </div>

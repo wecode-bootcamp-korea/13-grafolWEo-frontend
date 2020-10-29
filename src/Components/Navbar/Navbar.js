@@ -40,7 +40,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     if (localStorage.getItem("Authorization")) {
-      controlActivation.unshift({ id: 1, path: "/Login", content: "피드" });
+      controlActivation.unshift({ id: 1, path: "/Feeds", content: "피드" });
       this.setState({ isLogin: true });
     } else {
       controlActivation.shift();

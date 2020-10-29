@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Card from "../../../Components/CardList/Components/Card";
 import { CARDDATA } from "../../../config";
-import { CATEGORY } from "../../../config";
 import "../../../Components/CardList/CardWrap.scss";
 
 const LIMIT = 12;
@@ -29,8 +28,9 @@ class Recommend extends Component {
 
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
+    const { categoryName } = this.props;
     fetch(
-      `${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${CATEGORY[0].id}`
+      `${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -40,7 +40,6 @@ class Recommend extends Component {
           timeSet: false,
         });
       });
-    console.log({ CATEGORY });
   };
 
   componentDidMount() {
@@ -54,7 +53,7 @@ class Recommend extends Component {
 
   render() {
     const { CardListsArr } = this.state;
-
+    console.log(this.props, "234827429479274972498724982748972498723498");
     return (
       <div className="CardWrap">
         {CardListsArr &&

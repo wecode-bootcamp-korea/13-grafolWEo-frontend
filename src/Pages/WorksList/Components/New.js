@@ -29,8 +29,9 @@ class New extends Component {
 
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
+    const { categoryName } = this.props;
     fetch(
-      `${CARDDATA}list?sort=최신&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${CATEGORY[0].id}`
+      `${CARDDATA}list?sort=최신&limit=${LIMIT}&offset=${CardDataOrder}&category_id=${categoryName}`
     )
       .then((res) => res.json())
       .then((res) => {
