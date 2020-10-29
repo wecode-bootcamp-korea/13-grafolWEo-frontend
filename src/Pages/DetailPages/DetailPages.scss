@@ -1,7 +1,6 @@
 @import "../../Styles/theme.scss";
 
 .DetailPages {
-  margin: 0;
   padding: 0;
 
   .firstContainer {
@@ -285,36 +284,30 @@
         left: 30px;
       }
 
-      .slick-prev:before {
-        display: block;
+      .slick-prev,
+      .slick-next {
+        z-index: 99 !important;
+      }
+
+      .slick-prev:before,
+      .slick-next:before {
+        content: "";
         width: 9px;
         height: 13px;
-        content: "";
+        display: block;
         background-size: 315px 314px;
-        background-position: -35px -279px;
         background-image: url(/Images/sp_grafolio_ratio.png);
         background-repeat: no-repeat;
       }
 
-      .slick-prev {
-        z-index: 99 !important;
+      .slick-prev:before {
+        background-position: -35px -279px;
       }
 
       .slick-next:before {
-        display: block;
         position: absolute;
         right: 76px;
-        width: 9px;
-        height: 13px;
-        content: "";
-        background-size: 315px 314px;
         background-position: -65px -279px;
-        background-image: url(/Images/sp_grafolio_ratio.png);
-        background-repeat: no-repeat;
-      }
-
-      .slick-next {
-        z-index: 99 !important;
       }
 
       .slick-list {

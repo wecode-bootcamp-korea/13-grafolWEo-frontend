@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { API, CATEGORY } from "../../../config";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { API, CATEGORY } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 

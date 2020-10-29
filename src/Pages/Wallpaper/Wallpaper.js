@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { API, DISCOVERTABLIST } from "../../config";
 import Slider from "react-slick";
+import { API, DISCOVERTABLIST } from "../../config";
 import TopCreator from "./Components/TopCreator";
 import DiscoverTagList from "./Components/DiscoverTagList";
 import DiscoverColorList from "./Components/DiscoverColorList";
