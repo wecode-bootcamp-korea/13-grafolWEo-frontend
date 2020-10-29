@@ -15,11 +15,6 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
-<<<<<<< HEAD
-          <Route exact path="/Wallpaper" component={Wallpaper} />
-          <Route exact path="/WorksList" component={WorksList} />
-          <Route exact path="/Feeds" component={Feeds} />
-=======
           <Route
             exact
             path="*"
@@ -32,7 +27,6 @@ class Routes extends React.Component {
               </>
             )}
           />
->>>>>>> main
         </Switch>
       </Router>
     );
