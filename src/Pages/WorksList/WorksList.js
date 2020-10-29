@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  CATEGORY,
-  LISTBANNERBGSRC,
-  API,
-  WorksListPageView,
-} from "../../config";
+import { CATEGORY, API, WorksListPageView, CARDDATA } from "../../config";
 import { AiFillCaretDown } from "react-icons/ai";
 import ListTag from "./Components/ListTag";
 import ListCategory from "./Components/ListCategory";
@@ -24,12 +19,13 @@ export default class WorksList extends Component {
     super();
     this.state = {
       listName: "",
-      bannerBgSrc: [],
+      bannerBgSrc: "",
       categoryToggle: false,
       category: [],
       listBannerTags: [],
       menuTabActiveId: 0,
       discoverTabActive: 1,
+      category: 11,
     };
   }
 
@@ -37,12 +33,18 @@ export default class WorksList extends Component {
     this.setState({ menuTabActiveId: id });
   };
 
-  componentDidMount() {
-    this.setState({
-      bannerBgSrc: LISTBANNERBGSRC,
-      listName: CATEGORY[0].name,
-    });
+  getCategoryId = () => {
+    fetch(`${CARDDATA}tag?category_id=${this.state.category}`)
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          listBannerTags: res.listBannerTags,
+          bannerBgSrc: res.categoryImage,
+        });
+      });
+  };
 
+  getCategoryName = () => {
     fetch(`${API}/Data/List/CATEGORY.json`)
       .then((res) => res.json())
       .then((res) => {
@@ -50,14 +52,14 @@ export default class WorksList extends Component {
           category: res.category,
         });
       });
+  };
 
-    fetch(`${API}/Data/List/LISTBANNERTAGS.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          listBannerTags: res.listBannerTags,
-        });
-      });
+  componentDidMount() {
+    this.setState({
+      listName: CATEGORY[0].name,
+    });
+    this.getCategoryName();
+    this.getCategoryId();
   }
 
   handleToggle = () => {
@@ -67,7 +69,6 @@ export default class WorksList extends Component {
   };
 
   handleClickDiscoverTab = (id) => {
-    console.log(id);
     this.setState({
       discoverTabActive: id,
     });
@@ -88,8 +89,12 @@ export default class WorksList extends Component {
       <ListTag key={id} name={name} />
     ));
 
-    const categoryList = category.map(({ id, name, src }) => (
-      <ListCategory key={id} name={name} src={src} onClick />
+    const categoryList = category.map(({ id, name }) => (
+      <ListCategory
+        key={id}
+        name={name}
+        onClick={(id) => this.getCategoryId(id)}
+      />
     ));
 
     return (
