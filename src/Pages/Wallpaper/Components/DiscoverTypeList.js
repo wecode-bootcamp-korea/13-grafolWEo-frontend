@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { API, CATEGORY } from "../../../config";
+import { ST_URL, CATEGORY } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
@@ -28,7 +28,7 @@ class DiscoverTypeList extends Component {
     const { infiniteScroll } = this;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit={LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit={LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -66,7 +66,7 @@ class DiscoverTypeList extends Component {
     } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit=${LIMIT}&offset=${cardDataOrder}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit=${LIMIT}&offset=${cardDataOrder}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -82,7 +82,7 @@ class DiscoverTypeList extends Component {
     const { discoverSort, discoverOrderCurrent } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -98,7 +98,7 @@ class DiscoverTypeList extends Component {
     const { discoverSort, discoverTypeActive } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTypeActive}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTypeActive}`
     )
       .then((res) => res.json())
       .then((res) => {

@@ -58,12 +58,12 @@ class SignUp extends Component {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res.MESSAGE);
           if (res.MESSAGE === "SUCCESS") {
             alert("가입을 축하 드립니다!");
-            this.props.history.push("/");
+            this.props.history.push("/Main");
           } else {
             alert("다시 한번 확인해주세요 !");
+            console.log(res.MESSAGE);
           }
         });
     }
@@ -87,6 +87,9 @@ class SignUp extends Component {
         break;
       case "re_password":
         this.handleRePw(value);
+        break;
+      case "introduction":
+        this.handleIntroduction(value);
         break;
       default:
         break;
@@ -123,6 +126,10 @@ class SignUp extends Component {
       : this.setState({ re_passwordVal: false });
   };
 
+  handleIntroduction = (intro) => {
+    this.setState({ introduction: intro });
+  };
+
   render() {
     const {
       profile_image_url,
@@ -137,7 +144,9 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <nav>
-          <img src="Images/GrafolWEo.png" alt="logo" />
+          <Link to="/main">
+            <img src="Images/GrafolWEo.png" alt="logo" />
+          </Link>
           <span>
             <Link to="/Login">로그인</Link>
           </span>
@@ -266,7 +275,11 @@ class SignUp extends Component {
             )}
             <div className="itemBox">
               <label>한 줄 소개</label>
-              <textarea type="text"></textarea>
+              <textarea
+                name="introduction"
+                onChange={this.checkVal}
+                type="text"
+              ></textarea>
             </div>
             <button>회원가입하기</button>
           </form>

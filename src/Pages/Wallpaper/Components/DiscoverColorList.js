@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { API, COLORS } from "../../../config";
+import { ST_URL, COLORS } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
@@ -27,7 +27,7 @@ class DiscoverColorList extends Component {
     const { infiniteScroll } = this;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -48,7 +48,7 @@ class DiscoverColorList extends Component {
     const { discoverSort, discoverTagActive } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -79,7 +79,7 @@ class DiscoverColorList extends Component {
     } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -95,7 +95,7 @@ class DiscoverColorList extends Component {
     const { discoverSort, discoverOrderCurrent } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrderCurrent}&id=${id}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -111,7 +111,7 @@ class DiscoverColorList extends Component {
     const { discoverSort, discoverColorActive } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverColorActive}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverColorActive}`
     )
       .then((res) => res.json())
       .then((res) => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { API, DISCOVERTABLIST } from "../../config";
+import { ST_URL, DISCOVERTABLIST } from "../../config";
 import TopCreator from "./Components/TopCreator";
 import DiscoverTagList from "./Components/DiscoverTagList";
 import DiscoverColorList from "./Components/DiscoverColorList";
@@ -29,7 +29,7 @@ class Wallpaper extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/works/wallpaper/editorpick`)
+    fetch(`${ST_URL}/works/wallpaper/editorpick`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -41,7 +41,7 @@ class Wallpaper extends Component {
 
     const token = localStorage.getItem("Authorization");
     if (!token) {
-      fetch(`${API}/works/wallpaper/topcreators`)
+      fetch(`${ST_URL}/works/wallpaper/topcreators`)
         .then((res) => res.json())
         .then((res) => {
           this.setState({
@@ -49,7 +49,7 @@ class Wallpaper extends Component {
           });
         });
     } else {
-      fetch(`${API}/works/wallpaper/topcreators`, {
+      fetch(`${ST_URL}/works/wallpaper/topcreators`, {
         headers: {
           Authorization: token,
         },
@@ -73,7 +73,7 @@ class Wallpaper extends Component {
     if (!token) {
       alert("로그인을 해주세요.");
     } else {
-      fetch(`${API}/works/wallpaper/follow`, {
+      fetch(`${ST_URL}/works/wallpaper/follow`, {
         method: "post",
         headers: {
           Authorization: token,
@@ -96,7 +96,7 @@ class Wallpaper extends Component {
   };
 
   handleClickEditorPickTag = (id) => {
-    fetch(`${API}/works/wallpaper/editorpick?tag=${id}`)
+    fetch(`${ST_URL}/works/wallpaper/editorpick?tag=${id}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({

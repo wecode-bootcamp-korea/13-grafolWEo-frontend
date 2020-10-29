@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { ST_URL } from "../../config";
 import "./UrlDownloadBtn.scss";
 
 class UrlDownloadBtn extends Component {
   handleClickDownload = (wallpaper_id) => {
-    fetch("http://10.58.7.192:8000/works/wallpaper/download", {
+    fetch(`${ST_URL}/works/wallpaper/download`, {
       method: "post",
       body: JSON.stringify({
         wallpaper_id: wallpaper_id,

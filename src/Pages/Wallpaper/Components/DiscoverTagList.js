@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { API } from "../../../config";
+import { ST_URL } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
@@ -28,7 +28,7 @@ class DiscoverTagList extends Component {
     const { infiniteScroll } = this;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -51,7 +51,7 @@ class DiscoverTagList extends Component {
     const { discoverSort, discoverOrderCurrent } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&id=${id}&order=${discoverOrderCurrent}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&id=${id}&order=${discoverOrderCurrent}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -67,7 +67,7 @@ class DiscoverTagList extends Component {
     const { discoverSort, discoverTagActive } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -98,7 +98,7 @@ class DiscoverTagList extends Component {
     } = this.state;
 
     fetch(
-      `${API}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
     )
       .then((res) => res.json())
       .then((res) => {
