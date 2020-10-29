@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { SH_URL } from "../../config";
+import UrlDownloadBtn from "../../Components/Wallpaper/UrlDownloadBtn";
 import "./WallpaperDetail.scss";
 
 export default class WallpaperDetail extends Component {
@@ -49,7 +50,9 @@ export default class WallpaperDetail extends Component {
             <div
               className="wallpaperImg"
               style={{ backgroundImage: `url(${image_url})` }}
-            ></div>
+            >
+              <UrlDownloadBtn />
+            </div>
             <div className="creatorInfo">
               <h4>{title}</h4>
               <ul className="detailes">
