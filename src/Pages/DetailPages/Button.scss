@@ -1,0 +1,19 @@
+@import '../../Styles/theme.scss';
+
+.followIcon {
+  position: absolute;
+  top: 10px;
+  left: 1100px;
+  width: 90px;
+  height: 40px;
+  padding: 10px 12px 10px 22px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: $theme-color;
+  outline: none;
+}
+span {
+  padding-left: 3px;
+}
