@@ -7,6 +7,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Wallpaper from "./Pages/Wallpaper/Wallpaper";
 import WorksList from "./Pages/WorksList/WorksList";
 import Footer from "./Components/Footer/Footer";
+import Feeds from "./Pages/Feeds/Feeds";
 
 class Routes extends React.Component {
   render() {
