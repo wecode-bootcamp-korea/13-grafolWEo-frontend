@@ -13,7 +13,8 @@ class PopularCreator extends Component {
   }
 
   componentDidMount() {
-    fetch(`${CARDDATA}popular_creator?category_id=12`)
+    const { categoryName } = this.props;
+    fetch(`${CARDDATA}popular_creator?category_id=${categoryName}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({

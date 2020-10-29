@@ -28,7 +28,7 @@ export default class WorksList extends Component {
       <></>,
       <WorksListRecommend categoryName={categoryName} key={categoryName} />,
       <WorksListNew categoryName={categoryName} key={categoryName} />,
-      <PopularCreator key={categoryName} />,
+      <PopularCreator categoryName={categoryName} key={categoryName} />,
     ];
   };
 
@@ -57,6 +57,7 @@ export default class WorksList extends Component {
           bannerBgSrc: res.categoryImage,
         });
         console.log(res.json);
+        console.log(res);
       });
   };
 
