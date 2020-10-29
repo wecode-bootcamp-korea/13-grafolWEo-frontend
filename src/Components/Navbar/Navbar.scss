@@ -43,6 +43,10 @@
 
     .deactivated {
       color: #777777;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
