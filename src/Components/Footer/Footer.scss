@@ -1,0 +1,28 @@
+.Footer {
+  border-top: 1px solid #ececec;
+  padding: 24px 0 23px;
+
+  div {
+    position: relative;
+    margin: 0 auto;
+    width: 1248px;
+    height: 65px;
+
+    ul {
+      display: flex;
+      text-align: right;
+      justify-content: flex-end;
+      font-size: 15px;
+      font-weight: bold;
+      color: #858585;
+
+      li {
+          padding-left: 20px;
+      }
+
+      li:nth-child(-n + 2) {
+        cursor: pointer;
+      }
+    }
+  }
+}
