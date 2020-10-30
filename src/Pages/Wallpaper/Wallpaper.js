@@ -40,6 +40,7 @@ class Wallpaper extends Component {
       });
 
     const token = localStorage.getItem("Authorization");
+
     if (!token) {
       fetch(`${ST_URL}/works/wallpaper/topcreators`)
         .then((res) => res.json())
@@ -73,7 +74,7 @@ class Wallpaper extends Component {
     if (!token) {
       alert("로그인을 해주세요.");
     } else {
-      fetch(`${ST_URL}/works/wallpaper/follow`, {
+      fetch(`${ST_URL}/works/follow`, {
         method: "post",
         headers: {
           Authorization: token,
@@ -156,8 +157,9 @@ class Wallpaper extends Component {
       )
     );
 
-    const topCreatorList = topCreators.map(
-      ({ id, user_name, profile_image_url, followBtn }) => (
+    const topCreatorList =
+      topCreators &&
+      topCreators.map(({ id, user_name, profile_image_url, followBtn }) => (
         <TopCreator
           key={id}
           id={id}
@@ -166,8 +168,7 @@ class Wallpaper extends Component {
           followBtn={followBtn}
           handleClickFollow={handleClickFollow}
         />
-      )
-    );
+      ));
 
     const settings = {
       dots: false,

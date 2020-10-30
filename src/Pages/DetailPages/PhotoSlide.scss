@@ -1,0 +1,62 @@
+.artworkList {
+  position: relative;
+  top: 20px;
+  left: 30px;
+
+  .slick-prev:before {
+    display: block;
+    width: 9px;
+    height: 13px;
+    content: '';
+    background-size: 315px 314px;
+    background-position: -35px -279px;
+    background-image: url(/Images/sp_grafolio_ratio.png);
+    background-repeat: no-repeat;
+  }
+
+  .slick-prev {
+    z-index: 99 !important;
+  }
+
+  .slick-next:before {
+    display: block;
+    position: absolute;
+    right: 76px;
+    width: 9px;
+    height: 13px;
+    content: '';
+    background-size: 315px 314px;
+    background-position: -65px -279px;
+    background-image: url(/Images/sp_grafolio_ratio.png);
+    background-repeat: no-repeat;
+  }
+
+  .slick-next {
+    z-index: 99 !important;
+  }
+
+  .slick-list {
+    margin-right: 63px;
+
+    .slick-slide {
+      .photoList {
+        position: relative;
+        width: 220px !important;
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 30px;
+
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 300px;
+          transform: translate(-50%, -50%);
+        }
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+}

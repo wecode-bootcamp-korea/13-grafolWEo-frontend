@@ -39,6 +39,7 @@ class Routes extends React.Component {
                   component={WallpaperDetail}
                 />
                 <Route exact path="/DetailPages" component={DetailPages} />
+                <Route exact path="/DetailPages/:id" component={DetailPages} />
                 <Footer />
               </>
             )}

@@ -1,26 +1,30 @@
 .MainCardWrap {
-    margin-top: 52px;
+  margin-top: 52px;
 
-    .defaltBtn {
-        font-size: 17px;
-        margin-left: 20px;
-        background-color: transparent;
-        cursor: pointer;
-    }
+  .defaltBtn {
+    font-size: 17px;
+    margin-left: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #555;
+  }
 
-    .activeBtnStyle {
-        font-size: 17px;
-        margin-left: 20px;
-        background-color: transparent;
-        cursor: pointer;
-        text-decoration: underline;
-        font-weight: bold;
-    }
-    
-    .MainTitle {
-        display: inline-block;
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 30px;
-    }
+  .activeBtnStyle {
+    font-size: 17px;
+    margin-left: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    // text-decoration: underline;
+    padding: 0 0 3px;
+    border-bottom: 1px solid #222;
+    font-weight: bold;
+  }
+
+  .MainTitle {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
 }

@@ -10,9 +10,15 @@
   padding-top: 50px;
 
   main {
-    .wallpaperImg {
+    .imgWrap {
       position: relative;
-      width: 100%;
+    }
+
+    .wallpaperImg {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+      width: auto;
       min-height: 702px;
       max-height: 702px;
       @include bgDefault;

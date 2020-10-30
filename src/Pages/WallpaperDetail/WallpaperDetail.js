@@ -1,21 +1,25 @@
 import React, { Component } from "react";
-import { SH_URL } from "../../config";
-import UrlDownloadBtn from "../../Components/Wallpaper/UrlDownloadBtn";
+import { withRouter } from "react-router-dom";
+import { ST_URL } from "../../config";
+import CardViewItem from "../../Components/Wallpaper/CardViewItem";
+
 import "./WallpaperDetail.scss";
 
-export default class WallpaperDetail extends Component {
+class WallpaperDetail extends Component {
   constructor() {
     super();
     this.state = {
       wallpaperDetailData: [],
+      SimilarCardListData: [],
       wallpaperDate: "",
+      themecolorId: 1,
     };
   }
 
   componentDidMount() {
     const adr = this.props.location.pathname.split("/");
 
-    fetch(`${SH_URL}/works/wallpaper/${adr[2]}`)
+    fetch(`${ST_URL}/works/wallpaper/${adr[2]}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -26,12 +30,36 @@ export default class WallpaperDetail extends Component {
         const day = date.substring(8, 10);
         const resultDate = year + "." + month + "." + day;
 
-        this.setState({
-          wallpaperDetailData: res.wallpaperDetails,
-          wallpaperDate: resultDate,
-        });
+        this.setState(
+          {
+            wallpaperDetailData: res.wallpaperDetails,
+            wallpaperDate: resultDate,
+            themecolorId: res.wallpaperDetails.themecolor_id,
+          },
+          () => {
+            this.changeThemeColor();
+          }
+        );
       });
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.prevProps);
+  }
+
+  changeThemeColor = () => {
+    const adr = this.props.location.pathname.split("/");
+    const { themecolorId } = this.state;
+    fetch(
+      `${ST_URL}/works/wallpaper/cardlist?sort=색상별&id=${themecolorId}&wallpaper_id=${adr[2]}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          SimilarCardListData: res.discoverColorData.cardViewList,
+        });
+      });
+  };
 
   render() {
     const {
@@ -43,21 +71,20 @@ export default class WallpaperDetail extends Component {
       tag,
     } = this.state.wallpaperDetailData;
 
-    const { wallpaperDate } = this.state;
+    const { wallpaperDate, SimilarCardListData } = this.state;
+    console.log(this.state.SimilarCardListData);
 
-    console.log(this.props.location.pathname);
     return (
       <div className="WallpaperDetail">
         <main>
           <div className="container">
-            <img
-              src={image_url}
-              className="wallpaperImg"
-              style={{ backgroundImage: `url(${image_url})` }}
-              alt="배경화면 이미지"
-            />
-            <div>
-              <UrlDownloadBtn />
+            <div className="imgWrap">
+              <img
+                src={image_url}
+                className="wallpaperImg"
+                style={{ backgroundImage: `url(${image_url})` }}
+                alt="배경화면 이미지"
+              />
             </div>
             <div className="creatorInfo">
               <h4>{title}</h4>
@@ -115,9 +142,24 @@ export default class WallpaperDetail extends Component {
         <aside>
           <div className="container">
             <h4 className="similarTit">유사한 배경화면</h4>
+            <ul className="CardViewList clearFix">
+              {SimilarCardListData.map((tag) => (
+                <CardViewItem
+                  key={tag.wallpaper_id}
+                  wallpaper_id={tag.wallpaper_id}
+                  wallpaperSrc={tag.wallpaperSrc}
+                  name={tag.name}
+                  subject={tag.subject}
+                  profileImgSrc={tag.profileImgSrc}
+                  downloadNum={tag.downloadNum}
+                />
+              ))}
+            </ul>
           </div>
         </aside>
       </div>
     );
   }
 }
+
+export default withRouter(WallpaperDetail);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { SH_URL } from "../../../src/config";
+import { ST_URL } from "../../../src/config";
 import "./SignUp.scss";
 
 class SignUp extends Component {
@@ -42,7 +42,7 @@ class SignUp extends Component {
       re_passwordVal &&
       user_name.length > 0
     ) {
-      fetch(`${SH_URL}/user/signup`, {
+      fetch(`${ST_URL}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ class SignUp extends Component {
         .then((res) => {
           if (res.MESSAGE === "SUCCESS") {
             alert("가입을 축하 드립니다!");
-            this.props.history.push("/Main");
+            this.props.history.push("/");
           } else {
             alert("다시 한번 확인해주세요 !");
             console.log(res.MESSAGE);

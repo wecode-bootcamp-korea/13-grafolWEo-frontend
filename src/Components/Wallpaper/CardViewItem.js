@@ -13,15 +13,14 @@ export default class CardViewItem extends Component {
       name,
       downloadNum,
     } = this.props;
-
     return (
       <li>
         <Link
           to={`/WallpaperDetail/${wallpaper_id}`}
-          className="img"
           style={{
             backgroundImage: `url(${wallpaperSrc})`,
           }}
+          className="img"
         />
         <div className="slideInfo">
           <h6>{subject}</h6>
