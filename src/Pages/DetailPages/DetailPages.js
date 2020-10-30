@@ -1,66 +1,92 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
-import {API} from '../../config';
-import {FaRegCommentDots} from 'react-icons/fa';
-import {IoIosArrowDown} from 'react-icons/io';
-import {CARDDATA} from '../../../src/config';
-import Comment from './Comment';
-import Button from './Button';
-import PhotoSlide from './PhotoSlide';
-import CardWrap from '../../Components/CardList/CardWrap';
-import './DetailPages.scss';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { ST_URL } from "../../config";
+import { FaRegCommentDots } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { CARDDATA } from "../../../src/config";
+import Comment from "./Comment";
+import Button from "./Button";
+import PhotoSlide from "./PhotoSlide";
+import CardWrap from "../../Components/CardList/CardWrap";
+import "./DetailPages.scss";
 
 const LIMIT = 12;
 
 class DetailPages extends React.Component {
-  constructor () {
-    super ();
+  constructor() {
+    super();
     this.state = {
       artworkDetails: [],
       showComponent: false,
-      userName: 'user',
+      userName: "user",
       CardListsArr: [],
       timeSet: false,
       CardDataOrder: 0,
+      workId: 0,
+      imageUrl: [],
     };
   }
 
   artWorkDetails = () => {
-    fetch ('http://10.58.3.92:8000/works/14', {
-      method: 'get',
-      headers: {
-        Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
-      },
-    })
-      .then (res => res.json ())
-      .then (res => {
-        console.log ('dd:', res.artworkDetails);
-        this.setState ({
-          artworkDetails: res.artworkDetails,
-          userName: res.artworkDetails.user_name,
-        });
-      });
-  }; //`${API}/Data/DetailPages/ARTWORKDETAILS.json`,'http://10.58.3.92:8000/works/13'
+    const adr = this.props.location.pathname.split("/");
+    const token = localStorage.getItem("Authorization");
 
-  getLikeit = id => {
-    console.log (id);
-    fetch (`http://10.58.3.92:8000/works/14/likeit`, {
-      method: 'post',
-      headers: {
-        Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s',
-      },
-      body: JSON.stringify ({
-        like_it_kind_id: id,
-      }),
-    })
-      .then (res => res.json ())
-      .then (res => {
-        console.log (res);
-      });
+    if (!token) {
+      fetch(`${ST_URL}/works/${adr[2]}`)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log("dd:", res.artworkDetails);
+          this.setState({
+            artworkDetails: res.artworkDetails,
+            workId: res.artworkDetails.id,
+            imageUrl: res.artworkDetails.image_url,
+          });
+        });
+    } else {
+      fetch(`${ST_URL}/works/${adr[2]}`, {
+        method: "get",
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log("data:", res.artworkDetails);
+          this.setState({
+            artworkDetails: res.artworkDetails,
+            userName: res.artworkDetails.user_name,
+            workId: res.artworkDetails.id,
+            imageUrl: res.artworkDetails.image_url,
+          });
+        });
+    }
   };
 
-  changeMainPage = name => {
-    this.setState (
+  getLikeit = (id) => {
+    const token = localStorage.getItem("Authorization");
+    const { workId } = this.state;
+
+    if (!token) {
+      alert("로그인을 해주세요.");
+    } else {
+      fetch(`${ST_URL}/works/${workId}/likeit`, {
+        method: "post",
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          like_it_kind_id: id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  };
+
+  changeMainPage = (name) => {
+    this.setState(
       {
         mainPageView: name,
         CardListsArr: [],
@@ -68,28 +94,30 @@ class DetailPages extends React.Component {
         buttonStyle: name,
       },
       () => {
-        this.getCardData ();
+        this.getCardData();
       }
     );
   };
 
   infiniteScroll = () => {
-    const {scrollHeight, scrollTop, clientHeight} = document.documentElement;
+    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     if (
       scrollTop + clientHeight >= scrollHeight * 0.95 &&
       !this.state.timeSet
     ) {
-      this.setState ({timeSet: true});
-      this.getCardData ();
+      this.setState({ timeSet: true });
+      this.getCardData();
     }
   };
 
   getCardData = () => {
-    const {mainPageView, CardListsArr, CardDataOrder} = this.state;
-    fetch (`${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}`)
-      .then (res => res.json ())
-      .then (res => {
-        this.setState ({
+    const { mainPageView, CardListsArr, CardDataOrder } = this.state;
+    fetch(
+      `${CARDDATA}list?sort=주목받는&limit=${LIMIT}&offset=${CardDataOrder}`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
           CardListsArr: [...CardListsArr, ...res.data],
           CardDataOrder: CardDataOrder + LIMIT,
           timeSet: false,
@@ -97,24 +125,30 @@ class DetailPages extends React.Component {
       });
   };
 
-  componentDidMount () {
-    this.artWorkDetails ();
-    this.getCardData ();
-    window.addEventListener ('scroll', this.infiniteScroll);
+  componentDidMount() {
+    this.artWorkDetails();
+    this.getCardData();
+    window.addEventListener("scroll", this.infiniteScroll);
   }
 
-  componentWillUnmount () {
-    window.removeEventListener ('scroll', this.infiniteScroll);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.artWorkDetails();
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.infiniteScroll);
   }
 
   // toggle
   handleCommentState = () => {
-    this.setState ({
+    this.setState({
       showComponent: !this.state.showComponent,
     });
   };
 
-  render () {
+  render() {
     const {
       title,
       creator,
@@ -130,24 +164,21 @@ class DetailPages extends React.Component {
       comment,
       likeIt,
       likeBtnNum,
+      creator_img,
+      worksCount,
     } = this.state.artworkDetails;
 
-    const {userName} = this.state;
+    const { userName, workId, imageUrl } = this.state;
 
-    // const {likeCount, touchedCount, wantedBuyCount} = this.state;
-    // console.log(this.state.showComponent);
-
-    //const numbers = `${+likeNum + +touchNum + +wantToBuyNum}`;
-    console.log (this.state.artworkDetails.comment);
     return (
       <div className="DetailPages">
-        <img className="leftArrow" src="Images/left.png" alt="left_arrow" />
-        <img className="rightArrow" src="Images/right.png" alt="right_arrow" />
+        <img className="leftArrow" src="/Images/left.png" alt="left_arrow" />
+        <img className="rightArrow" src="/Images/right.png" alt="right_arrow" />
         <div className="firstContainer container">
           <div className="titleBox">
             <div className="title">
               <span>{title}</span>
-              <img src="Images/ellipsis.png" alt="dot" />
+              <img src="/Images/ellipsis.png" alt="dot" />
             </div>
             <div className="titleWriter">
               <span className="titleby">by</span>
@@ -157,13 +188,24 @@ class DetailPages extends React.Component {
             </div>
           </div>
           <main>
-            <img
+            {/* <img
               className="artwork"
               src={image_url && image_url[0]}
               alt="london"
-            />
+            /> */}
+            {imageUrl &&
+              imageUrl.map((tag, idx) => (
+                <img key={idx} className="artwork" src={tag} alt="london" />
+                // <span
+                //   key={idx}
+                //   className="artwork"
+                //   src={tag}
+                //   alt="london"
+                //   style={{ backgroundImage: `url(${tag})` }}
+                // />
+              ))}
             <div className="artworkDescribe">
-              <img src="Images/grafolweo.ico" alt="icon" />
+              <img src="/Images/grafolweo.ico" alt="icon" />
               <span className="artworkSelect">
                 그라폴리오 '주목받는'에 선정된 작품입니다.
               </span>
@@ -171,7 +213,7 @@ class DetailPages extends React.Component {
             </div>
             <div className="tag">
               {tag &&
-                tag.map ((tag, idx) => {
+                tag.map((tag, idx) => {
                   return <span key={idx}>{tag}</span>;
                 })}
             </div>
@@ -181,8 +223,8 @@ class DetailPages extends React.Component {
             <div className="likeBtn">
               <ul>
                 <li>
-                  <button onClick={() => this.getLikeit (1)}>
-                    <img src="Images/hearteyes.png" alt="icon" />
+                  <button onClick={() => this.getLikeit(1)}>
+                    <img src="/Images/hearteyes.png" alt="icon" />
                   </button>
                   <span className="text">좋아요</span>
                   <span className="number">
@@ -191,8 +233,8 @@ class DetailPages extends React.Component {
                 </li>
                 {/* </li>{Number(likeNum) + likeCount},{Number(likeNum)} */}
                 <li>
-                  <button onClick={() => this.getLikeit (2)}>
-                    <img src="Images/starred.png" alt="icon" />
+                  <button onClick={() => this.getLikeit(2)}>
+                    <img src="/Images/starred.png" alt="icon" />
                   </button>
                   <span className="text">감동받았어요</span>
                   <span className="number">
@@ -200,8 +242,8 @@ class DetailPages extends React.Component {
                   </span>
                 </li>
                 <li>
-                  <button onClick={() => this.getLikeit (3)}>
-                    <img src="Images/sunglasses.png" alt="icon" />
+                  <button onClick={() => this.getLikeit(3)}>
+                    <img src="/Images/sunglasses.png" alt="icon" />
                   </button>
 
                   <span className="text">사고 싶어요</span>
@@ -213,27 +255,28 @@ class DetailPages extends React.Component {
             </div>
             <div className="commentParts">
               <div className="commentImg">
-                <img src="Images/starred.png" alt="icon" />
+                <img src="/Images/starred.png" alt="icon" />
                 <span>{likeBtnNum}</span>
               </div>
               <div className="comment">
                 <FaRegCommentDots className="commentDot" />
                 <span>{commentNum}</span>
                 <button onClick={this.handleCommentState}>
-                  <IoIosArrowDown className="downArrow" />{' '}
+                  <IoIosArrowDown className="downArrow" />{" "}
                 </button>
               </div>
-              <img className="share" src="Images/share.png" alt="icon" />
+              <img className="share" src="/Images/share.png" alt="icon" />
             </div>
           </main>
         </div>
-        {this.state.showComponent &&
-          <Comment comment={comment} userName={userName} />}
+        {this.state.showComponent && (
+          <Comment comment={comment} userName={userName} workId={workId} />
+        )}
 
         <div className="emptyBar" />
         <div className="secondContainer">
           <header>
-            <img src={image_url && image_url[1]} alt="icon" />
+            <img src={creator_img && creator_img} alt="icon" />
             <div className="writerAndFollower">
               <div className="writer">{creator} </div>
               <div className="followers">
@@ -251,7 +294,7 @@ class DetailPages extends React.Component {
           </header>
           <div className="otherArtworks">
             <span className="others">이 크리에이터의 다른작품</span>
-            <span className="numbers">10</span>
+            <span className="numbers">{worksCount}</span>
           </div>
           <div className="artworkPhotos">
             {others && <PhotoSlide artworkDetails={others} />}
@@ -268,4 +311,4 @@ class DetailPages extends React.Component {
   }
 }
 
-export default withRouter (DetailPages);
+export default withRouter(DetailPages);

@@ -51,7 +51,9 @@ class Navbar extends Component {
         <div className="container">
           <ul className="menu">
             <li>
-              <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
+              <Link to="/">
+                <img className="logo" src="/Images/GrafolWeo.png" alt="logo" />
+              </Link>
             </li>
             {controlActivation.map((category, idx) => {
               return (
@@ -77,7 +79,7 @@ class Navbar extends Component {
           <div className="rightMenu">
             <div className="searchBar">
               <input />
-              <img src="Images/magnifying-glass.png" alt="search_icon" />
+              <img src="/Images/magnifying-glass.png" alt="search_icon" />
             </div>
             {!isLogin && (
               <button>

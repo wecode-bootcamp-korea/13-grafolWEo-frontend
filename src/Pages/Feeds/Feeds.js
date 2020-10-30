@@ -28,8 +28,8 @@ class Feeds extends Component {
 
   getCardData = () => {
     const { CardListsArr, CardDataOrder } = this.state;
-    const token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMn0.b5rBeum65kbz38B97IV8O-CMhdJXptXV4gK00a3DV2s";
+    const token = localStorage.getItem("Authorization");
+
     if (token) {
       fetch(
         `${CARDDATA}list?sort=피드&limit=${LIMIT}&offset=${CardDataOrder}`,

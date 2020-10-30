@@ -25,7 +25,7 @@
           border: none;
           font-size: 33px;
           color: $color-white;
-          &:hover{
+          &:hover {
             cursor: pointer;
           }
 
@@ -104,7 +104,7 @@
         line-height: 1.7;
         color: #555;
 
-        &:hover{
+        &:hover {
           cursor: pointer;
         }
       }
@@ -113,8 +113,8 @@
     li.active button {
       border-bottom: 2px solid #111;
       font-weight: 500;
-      
-      &:hover{
+
+      &:hover {
         cursor: pointer;
       }
     }

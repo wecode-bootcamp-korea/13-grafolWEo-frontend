@@ -16,9 +16,13 @@ export default class CardViewItem extends Component {
     return (
       <li>
         <Link
-          to="/"
+          to={`/WallpaperDetail/${wallpaper_id}`}
           style={{
             backgroundImage: `url(${wallpaperSrc})`,
+          }}
+          className="img"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         />
         <div className="slideInfo">

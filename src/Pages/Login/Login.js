@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { SH_URL } from "../../config";
+import { ST_URL } from "../../config";
 import "./Login.scss";
 
 class Login extends Component {
@@ -21,7 +21,7 @@ class Login extends Component {
     e.preventDefault();
     const { email, password, emailVal } = this.state;
     if (emailVal && password.length > 0) {
-      fetch(`${SH_URL}/user/login`, {
+      fetch(`${ST_URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,12 +40,13 @@ class Login extends Component {
               }, 3000);
             });
           } else if (res.MESSAGE === "LOGIN_SUCCESS") {
-            localStorage.setItem("Authorization", res.AUTHORIZATION);
+            localStorage.setItem("Authorization", res.Authorization);
             this.props.history.push("/");
           }
         });
     }
   };
+
   checkVal = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });

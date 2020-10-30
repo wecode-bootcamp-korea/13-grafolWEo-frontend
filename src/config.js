@@ -1,6 +1,7 @@
 export const SH_URL = "http://10.58.3.92:8000";
 export const ST_URL = "http://10.58.7.192:8000";
 export const API = "http://localhost:3000";
+export const CARDDATA = "http://10.58.7.192:8000/works/";
 
 export const DISCOVERTABLIST = [
   { id: 1, name: "태그별" },
@@ -31,8 +32,6 @@ export const COLORS = [
 ];
 
 export const ORDERS = [{ name: "인기순" }, { name: "최신순" }];
-
-export const CARDDATA = "http://10.58.7.192:8000/works/";
 
 export const WorksListPageView = [
   { id: 1, name: "추천" },

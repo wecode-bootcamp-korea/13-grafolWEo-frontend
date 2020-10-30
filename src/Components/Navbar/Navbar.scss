@@ -1,14 +1,15 @@
 @import "../../Styles/theme.scss";
 
 .Navbar {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
-  margin-bottom: 50px;
   border-bottom: #ececec solid 1px;
-  
+  background: #fff;
+  z-index: 999;
+
   .container {
     display: flex;
     align-items: center;
@@ -25,8 +26,8 @@
     align-items: center;
 
     > li + li {
-      margin-left: 40px;
-      font-size: 18px;
+      margin-left: 34px;
+      font-size: 16px;
     }
 
     .logo {

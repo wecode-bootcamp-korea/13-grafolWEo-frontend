@@ -1,111 +1,112 @@
 @mixin borderProperty {
-    border: 1px solid #ececec;;
-    border-top: none;
+  border: 1px solid #ececec;
+  border-top: none;
 }
 
 @mixin itemAlign {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin btnItemAlign {
-    font-size: 13px;
-    margin-top: -2px;
-    margin-left: 5px;
+  font-size: 13px;
+  margin-top: -2px;
+  margin-left: 5px;
 }
 
 @mixin fontSettings {
-    color: #aaaaaa;
-    font-size: 13px;
+  color: #aaaaaa;
+  font-size: 13px;
 }
 
 .Card {
-    overflow: hidden;
-    max-width: 297px;
+  overflow: hidden;
+  max-width: 297px;
 
-    a {
+  a {
     color: #1a1a1a;
-        text-decoration: none;
+    text-decoration: none;
+  }
+
+  .cardListArtArea {
+    img {
+      display: inline-block;
+      width: 100%;
+      max-height: 400px;
+    }
+  }
+
+  .cardListInfoArea {
+    padding: 15px 13px;
+    background: #fff;
+    @include borderProperty();
+
+    .cardListArtName {
+      display: block;
+      margin-bottom: 10px;
+      padding: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 15px;
+      font-weight: bold;
+      text-overflow: ellipsis;
     }
 
-    .cardListArtArea {
-        img {
-            display: inline-block;
-            width: 100%;
-        }
+    .cardListAuthorProfile {
+      width: 22px;
+      margin-right: 8px;
+      border-radius: 50%;
     }
 
-    .cardListInfoArea {
-        padding: 15px 13px;
-        @include borderProperty();
+    .cardListAuthorName {
+      @include fontSettings();
+    }
+  }
 
-        
-        .cardListArtName {
-            display: block;
-            margin-bottom: 10px;
-            padding: 1px;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 15px;
-            font-weight: bold;
-            text-overflow: ellipsis;
-        }
-        
-        .cardListAuthorProfile {
-            width: 22px;
-            margin-right: 8px;
-        }
+  .cardListBtnArea {
+    @include borderProperty();
+    display: flex;
+    padding: 14px 15px;
+    justify-content: space-between;
+    border-top: none;
+    background: #fff;
 
-        .cardListAuthorName {
-            @include fontSettings();
-        }
+    div {
+      margin-right: 10px;
     }
 
-    .cardListBtnArea {
-        @include borderProperty();
-        display: flex;
-        padding: 14px 15px;
-        justify-content: space-between;
-        border-top: none;
+    .flaotLeft {
+      display: flex;
+      @include fontSettings();
 
+      .cardListIconContainer {
+        @include itemAlign();
 
-        div {
-            margin-right: 10px;
+        .cardListIcons {
+          font-size: 18px;
         }
 
-        .flaotLeft{
-            display: flex;
-            @include fontSettings();
-
-            .cardListIconContainer {
-                @include itemAlign();
-                
-                .cardListIcons {
-                    font-size: 18px;
-                }
-
-                .btnAreaInfo {
-                    @include btnItemAlign();
-                }
-            }
-            
+        .btnAreaInfo {
+          @include btnItemAlign();
         }
-        
-        .flaotRight {
-            @include fontSettings();
-            
-            .cardListIconContainer {
-                @include itemAlign();
-                
-                .cardListIcons {
-                    font-size: 18px;
-                }
-                
-                .btnAreaInfo {
-                    @include btnItemAlign();
-                }
-            }
-        }
+      }
     }
+
+    .flaotRight {
+      @include fontSettings();
+
+      .cardListIconContainer {
+        @include itemAlign();
+
+        .cardListIcons {
+          font-size: 18px;
+        }
+
+        .btnAreaInfo {
+          @include btnItemAlign();
+        }
+      }
+    }
+  }
 }
