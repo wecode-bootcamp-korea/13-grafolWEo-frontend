@@ -23,6 +23,7 @@ class DetailPages extends React.Component {
       timeSet: false,
       CardDataOrder: 0,
       workId: 0,
+      imageUrl: [],
     };
   }
 
@@ -37,8 +38,8 @@ class DetailPages extends React.Component {
           console.log("dd:", res.artworkDetails);
           this.setState({
             artworkDetails: res.artworkDetails,
-            // userName: res.artworkDetails.user_name,
             workId: res.artworkDetails.id,
+            imageUrl: res.artworkDetails.image_url,
           });
         });
     } else {
@@ -50,11 +51,12 @@ class DetailPages extends React.Component {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log("dd:", res.artworkDetails);
+          console.log("data:", res.artworkDetails);
           this.setState({
             artworkDetails: res.artworkDetails,
             userName: res.artworkDetails.user_name,
             workId: res.artworkDetails.id,
+            imageUrl: res.artworkDetails.image_url,
           });
         });
     }
@@ -129,6 +131,12 @@ class DetailPages extends React.Component {
     window.addEventListener("scroll", this.infiniteScroll);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.artWorkDetails();
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener("scroll", this.infiniteScroll);
   }
@@ -160,11 +168,7 @@ class DetailPages extends React.Component {
       worksCount,
     } = this.state.artworkDetails;
 
-    const { userName, workId } = this.state;
-
-    console.log("this.props >>>>>>");
-    console.log(this.props);
-    console.log(this.state.artworkDetails.comment);
+    const { userName, workId, imageUrl } = this.state;
 
     return (
       <div className="DetailPages">
@@ -184,11 +188,22 @@ class DetailPages extends React.Component {
             </div>
           </div>
           <main>
-            <img
+            {/* <img
               className="artwork"
               src={image_url && image_url[0]}
               alt="london"
-            />
+            /> */}
+            {imageUrl &&
+              imageUrl.map((tag, idx) => (
+                <img key={idx} className="artwork" src={tag} alt="london" />
+                // <span
+                //   key={idx}
+                //   className="artwork"
+                //   src={tag}
+                //   alt="london"
+                //   style={{ backgroundImage: `url(${tag})` }}
+                // />
+              ))}
             <div className="artworkDescribe">
               <img src="/Images/grafolweo.ico" alt="icon" />
               <span className="artworkSelect">

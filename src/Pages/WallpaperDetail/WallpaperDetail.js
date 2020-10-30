@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { ST_URL } from "../../config";
 import CardViewItem from "../../Components/Wallpaper/CardViewItem";
 
@@ -13,13 +13,19 @@ class WallpaperDetail extends Component {
       SimilarCardListData: [],
       wallpaperDate: "",
       themecolorId: 1,
+      workId: 1,
     };
   }
 
   componentDidMount() {
-    const adr = this.props.location.pathname.split("/");
+    this.getData();
+  }
 
-    fetch(`${ST_URL}/works/wallpaper/${adr[2]}`)
+  getData = () => {
+    // const adr = this.props.location.pathname.split("/");
+    const adr = this.props.match.params.id;
+    fetch(`${ST_URL}/works/wallpaper/${adr}`)
+      // fetch(`${ST_URL}/works/wallpaper/${adr[2]}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -35,16 +41,19 @@ class WallpaperDetail extends Component {
             wallpaperDetailData: res.wallpaperDetails,
             wallpaperDate: resultDate,
             themecolorId: res.wallpaperDetails.themecolor_id,
+            workId: res.wallpaperDetails.work_id,
           },
           () => {
             this.changeThemeColor();
           }
         );
       });
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.prevProps);
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.getData();
+    }
   }
 
   changeThemeColor = () => {
@@ -71,8 +80,7 @@ class WallpaperDetail extends Component {
       tag,
     } = this.state.wallpaperDetailData;
 
-    const { wallpaperDate, SimilarCardListData } = this.state;
-    console.log(this.state.SimilarCardListData);
+    const { wallpaperDate, SimilarCardListData, workId } = this.state;
 
     return (
       <div className="WallpaperDetail">
@@ -87,7 +95,9 @@ class WallpaperDetail extends Component {
               />
             </div>
             <div className="creatorInfo">
-              <h4>{title}</h4>
+              <h4>
+                <Link to={`/DetailPages/${workId}`}>{title}</Link>
+              </h4>
               <ul className="detailes">
                 <li>
                   <img

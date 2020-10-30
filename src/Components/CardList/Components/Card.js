@@ -43,6 +43,9 @@ class Card extends Component {
             className="cardListImg"
             to={`/DetailPages/${id}`}
             title="작품 페이지로 이동"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
             <img ref={this.cardElement} src={Img} alt={PostName} />
           </Link>

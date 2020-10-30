@@ -21,6 +21,9 @@ export default class CardViewItem extends Component {
             backgroundImage: `url(${wallpaperSrc})`,
           }}
           className="img"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         />
         <div className="slideInfo">
           <h6>{subject}</h6>
