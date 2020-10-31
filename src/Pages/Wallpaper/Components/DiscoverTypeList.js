@@ -4,8 +4,6 @@ import { ST_URL, CATEGORY } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
-const LIMIT = 9;
-
 class DiscoverTypeList extends Component {
   constructor() {
     super();
@@ -18,8 +16,6 @@ class DiscoverTypeList extends Component {
       discoverTypeActive: 11,
       discoverTypeCategory: 11,
       orderActive: false,
-      cardDataOrder: 0,
-      timeSet: false,
     };
   }
 
@@ -28,7 +24,7 @@ class DiscoverTypeList extends Component {
     const { infiniteScroll } = this;
 
     fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit={LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -39,44 +35,6 @@ class DiscoverTypeList extends Component {
 
     window.addEventListener("scroll", infiniteScroll);
   }
-
-  componentWillUnmount() {
-    const { infiniteScroll } = this;
-    window.removeEventListener("scroll", infiniteScroll);
-  }
-
-  infiniteScroll = () => {
-    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    if (
-      scrollTop + clientHeight >= scrollHeight * 0.95 &&
-      !this.state.timeSet
-    ) {
-      this.setState({ timeSet: true });
-      this.getCardData();
-    }
-  };
-
-  getCardData = () => {
-    const {
-      cardViewList,
-      discoverOrder,
-      discoverSort,
-      cardDataOrder,
-      discoverTypeCategory,
-    } = this.state;
-
-    fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverTypeCategory}&limit=${LIMIT}&offset=${cardDataOrder}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          cardViewList: cardViewList.concat(res.discoverTypeData.cardViewList),
-          cardDataOrder: cardDataOrder + LIMIT,
-          timeSet: false,
-        });
-      });
-  };
 
   handleClickTypeItem = (id) => {
     const { discoverSort, discoverOrderCurrent } = this.state;

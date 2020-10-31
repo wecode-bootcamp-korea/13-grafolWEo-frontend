@@ -1,19 +1,31 @@
-@import '../../Styles/theme.scss';
+@import "../../Styles/theme.scss";
 
 .followIcon {
-  position: absolute;
-  top: 10px;
-  left: 1100px;
-  width: 90px;
-  height: 40px;
-  padding: 10px 12px 10px 22px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 3px;
-  background-color: $theme-color;
-  outline: none;
-}
-span {
-  padding-left: 3px;
+  button {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    min-width: 100px;
+    height: 40px;
+    padding: 10px 22px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: $theme-color;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  button.active {
+    background: #fff;
+    border: 1px solid $theme-color;
+    color: $theme-color;
+  }
+  span {
+    display: inline-block;
+    margin-left: 3px;
+    padding-left: 3px;
+  }
 }

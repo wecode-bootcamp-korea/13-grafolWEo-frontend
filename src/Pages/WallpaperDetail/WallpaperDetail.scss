@@ -16,12 +16,9 @@
 
     .wallpaperImg {
       display: block;
-      position: relative;
+      max-width: 100%;
       margin: 0 auto;
-      width: auto;
-      min-height: 702px;
-      max-height: 702px;
-      @include bgDefault;
+      max-height: 1080px;
     }
 
     .creatorInfo {

@@ -13,6 +13,7 @@ export default class CardViewItem extends Component {
       name,
       downloadNum,
     } = this.props;
+
     return (
       <li>
         <Link

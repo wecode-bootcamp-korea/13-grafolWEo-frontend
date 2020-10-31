@@ -90,7 +90,6 @@ class WallpaperDetail extends Component {
               <img
                 src={image_url}
                 className="wallpaperImg"
-                style={{ backgroundImage: `url(${image_url})` }}
                 alt="배경화면 이미지"
               />
             </div>
