@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {API} from '../../config';
-import {GiCancel} from 'react-icons/gi';
-import {BiHeart} from 'react-icons/bi';
-import './CommentList.scss';
+import React, { Component } from "react";
+import { API } from "../../config";
+import { GiCancel } from "react-icons/gi";
+import { BiHeart } from "react-icons/bi";
+import "./CommentList.scss";
 
 class CommentList extends Component {
   constructor() {
@@ -10,25 +10,25 @@ class CommentList extends Component {
     this.state = {};
   }
 
-  deleteComment = (id) => {
-    console.log(id);
-    fetch(`http://10.58.3.92:8000/works/13/comment`, {
-      method: 'post',
-      headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNX0.iwV4cMiriHCEjaL2UrmnRoX3FTfIhAcgnaZnXqZ5hTM',
-      },
-      body: JSON.stringify({
-        comment_content: 'id',
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          btnColor: res.data.heartBtn,
-        });
-      });
-  };
+  // deleteComment = (id) => {
+  //   console.log(id);
+  //   fetch(`http://10.58.3.92:8000/works/13/comment`, {
+  //     method: 'post',
+  //     headers: {
+  //       Authorization:
+  //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNX0.iwV4cMiriHCEjaL2UrmnRoX3FTfIhAcgnaZnXqZ5hTM',
+  //     },
+  //     body: JSON.stringify({
+  //       comment_content: 'id',
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       this.setState({
+  //         btnColor: res.data.heartBtn,
+  //       });
+  //     });
+  // };
 
   render() {
     return (
@@ -36,8 +36,8 @@ class CommentList extends Component {
         {this.props.comment &&
           this.props.comment.map((comment) => {
             return (
-              <div className="commentWrap">
-                <div className="imgAndName" key={comment.id}>
+              <div className="commentWrap" key={comment.id}>
+                <div className="imgAndName">
                   <img
                     classsName="profileImg"
                     src={comment.commenter_image}

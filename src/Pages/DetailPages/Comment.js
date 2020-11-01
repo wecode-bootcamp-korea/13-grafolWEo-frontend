@@ -27,6 +27,7 @@ class Comment extends Component {
 
   addComment = (e) => {
     const { commentValue } = this.state;
+    const { workId } = this.props;
 
     e.preventDefault();
 
@@ -35,7 +36,7 @@ class Comment extends Component {
     if (!token) {
       alert("로그인을 해주세요.");
     } else {
-      fetch(`${ST_URL}/works/13/comments`, {
+      fetch(`${ST_URL}/works/${workId}/comments`, {
         method: "POST",
         headers: {
           Authorization: token,

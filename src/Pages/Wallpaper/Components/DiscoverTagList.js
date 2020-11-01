@@ -24,11 +24,11 @@ class DiscoverTagList extends Component {
   }
 
   componentDidMount() {
-    const { discoverSort, discoverOrder } = this.state;
+    const { discoverSort, discoverOrder, cardDataOrder } = this.state;
     const { infiniteScroll } = this;
 
     fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -36,6 +36,7 @@ class DiscoverTagList extends Component {
           cardViewList: res.discoverTagData.cardViewList,
           discoverTags: res.discoverTagData.tagList,
           discoverTagActive: res.discoverTagData.tagList[0].id,
+          cardDataOrder: cardDataOrder + LIMIT,
         });
       });
 
@@ -90,6 +91,8 @@ class DiscoverTagList extends Component {
   };
 
   getCardData = () => {
+    const { discoverTagActive } = this.state;
+
     const {
       cardViewList,
       discoverOrder,
@@ -98,7 +101,7 @@ class DiscoverTagList extends Component {
     } = this.state;
 
     fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}&id=${discoverTagActive}`
     )
       .then((res) => res.json())
       .then((res) => {

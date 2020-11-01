@@ -60,7 +60,7 @@ class SignUp extends Component {
         .then((res) => {
           if (res.MESSAGE === "SUCCESS") {
             alert("가입을 축하 드립니다!");
-            this.props.history.push("/");
+            this.props.history.push("/Login");
           } else {
             alert("다시 한번 확인해주세요 !");
             console.log(res.MESSAGE);
@@ -144,7 +144,7 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <nav>
-          <Link to="/main">
+          <Link to="/">
             <img src="Images/GrafolWEo.png" alt="logo" />
           </Link>
           <span>

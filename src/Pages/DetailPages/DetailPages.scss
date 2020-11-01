@@ -2,7 +2,7 @@
 
 .DetailPages {
   margin: 0;
-  padding: 0;
+  padding: 50px 0 0;
   position: relative;
 
   .leftArrow {
@@ -26,7 +26,6 @@
     .titleBox {
       width: 100%;
       height: 120px;
-      margin-top: -50px;
 
       .title {
         display: flex;
@@ -41,8 +40,9 @@
 
         img {
           position: absolute;
-          right: 0px;
-          left: 1250px;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
           width: 15px;
           height: 16px;
         }
@@ -146,6 +146,7 @@
 
             button {
               outline: none;
+              cursor: pointer;
 
               img {
                 width: 40px;
@@ -168,9 +169,6 @@
               font-size: 16px;
               text-align: center;
               margin-bottom: 15px;
-            }
-            .number:hover {
-              color: $theme-color;
             }
           }
         }
@@ -198,6 +196,7 @@
         .comment {
           display: flex;
           align-items: center;
+          cursor: pointer;
 
           span {
             color: #555;
@@ -302,9 +301,9 @@
 
   .finalContainer {
     font-size: 14px;
-    margin-top: 40px;
+    margin-top: 80px;
     font-weight: bold;
-    padding: 20px 0 0 10px;
+    padding: 50px 0 0 10px;
 
     .photo {
       display: block;

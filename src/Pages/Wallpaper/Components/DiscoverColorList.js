@@ -4,8 +4,6 @@ import { ST_URL, COLORS } from "../../../config";
 import CardViewItem from "../../../Components/Wallpaper/CardViewItem";
 import DiscoverCardViewOrder from "./DiscoverCardViewOrder";
 
-const LIMIT = 9;
-
 class DiscoverColorList extends Component {
   constructor() {
     super();
@@ -17,8 +15,6 @@ class DiscoverColorList extends Component {
       discoverColors: COLORS,
       discoverColorActive: 1,
       orderActive: false,
-      cardDataOrder: 0,
-      timeSet: false,
     };
   }
 
@@ -27,7 +23,7 @@ class DiscoverColorList extends Component {
     const { infiniteScroll } = this;
 
     fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&id=${discoverColorActive}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -39,54 +35,17 @@ class DiscoverColorList extends Component {
     window.addEventListener("scroll", infiniteScroll);
   }
 
-  componentWillUnmount() {
-    const { infiniteScroll } = this;
-    window.removeEventListener("scroll", infiniteScroll);
-  }
-
   handleClickOrder = (name) => {
     const { discoverSort, discoverTagActive } = this.state;
 
     fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}&limit=${LIMIT}`
+      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${name}&id=${discoverTagActive}`
     )
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           cardViewList: res.discoverTagData.cardViewList,
           discoverOrder: name,
-        });
-      });
-  };
-
-  infiniteScroll = () => {
-    const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    if (
-      scrollTop + clientHeight >= scrollHeight * 0.95 &&
-      !this.state.timeSet
-    ) {
-      this.setState({ timeSet: true });
-      this.getCardData();
-    }
-  };
-
-  getCardData = () => {
-    const {
-      cardViewList,
-      discoverOrder,
-      discoverSort,
-      cardDataOrder,
-    } = this.state;
-
-    fetch(
-      `${ST_URL}/works/wallpaper/cardlist?sort=${discoverSort}&order=${discoverOrder}&limit=${LIMIT}&offset=${cardDataOrder}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          cardViewList: cardViewList.concat(res.discoverColorData.cardViewList),
-          cardDataOrder: cardDataOrder + LIMIT,
-          timeSet: false,
         });
       });
   };

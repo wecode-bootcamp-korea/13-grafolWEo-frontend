@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ST_URL } from "../../config";
-import "./UrlDownloadBtn.scss";
 
 class UrlDownloadBtn extends Component {
   handleClickDownload = (wallpaper_id) => {

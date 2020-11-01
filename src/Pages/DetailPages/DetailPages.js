@@ -24,6 +24,7 @@ class DetailPages extends React.Component {
       CardDataOrder: 0,
       workId: 0,
       imageUrl: [],
+      creatorId: 0,
     };
   }
 
@@ -57,6 +58,7 @@ class DetailPages extends React.Component {
             userName: res.artworkDetails.user_name,
             workId: res.artworkDetails.id,
             imageUrl: res.artworkDetails.image_url,
+            creatorId: res.artworkDetails.creator_id,
           });
         });
     }
@@ -156,7 +158,6 @@ class DetailPages extends React.Component {
       views,
       followerNum,
       followingNum,
-      image_url,
       others,
       commentNum,
       uploadDate,
@@ -168,7 +169,7 @@ class DetailPages extends React.Component {
       worksCount,
     } = this.state.artworkDetails;
 
-    const { userName, workId, imageUrl } = this.state;
+    const { userName, workId, imageUrl, creatorId } = this.state;
 
     return (
       <div className="DetailPages">
@@ -188,21 +189,9 @@ class DetailPages extends React.Component {
             </div>
           </div>
           <main>
-            {/* <img
-              className="artwork"
-              src={image_url && image_url[0]}
-              alt="london"
-            /> */}
             {imageUrl &&
               imageUrl.map((tag, idx) => (
                 <img key={idx} className="artwork" src={tag} alt="london" />
-                // <span
-                //   key={idx}
-                //   className="artwork"
-                //   src={tag}
-                //   alt="london"
-                //   style={{ backgroundImage: `url(${tag})` }}
-                // />
               ))}
             <div className="artworkDescribe">
               <img src="/Images/grafolweo.ico" alt="icon" />
@@ -258,10 +247,10 @@ class DetailPages extends React.Component {
                 <img src="/Images/starred.png" alt="icon" />
                 <span>{likeBtnNum}</span>
               </div>
-              <div className="comment">
+              <div className="comment" onClick={this.handleCommentState}>
                 <FaRegCommentDots className="commentDot" />
                 <span>{commentNum}</span>
-                <button onClick={this.handleCommentState}>
+                <button>
                   <IoIosArrowDown className="downArrow" />{" "}
                 </button>
               </div>
@@ -290,7 +279,7 @@ class DetailPages extends React.Component {
                 </div>
               </div>
             </div>
-            <Button />
+            {creatorId && <Button creatorId={creatorId} />}
           </header>
           <div className="otherArtworks">
             <span className="others">이 크리에이터의 다른작품</span>
