@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./UrlDownloadBtn.scss";
 import { ST_URL } from "../../config";
 
 class UrlDownloadBtn extends Component {

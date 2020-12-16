@@ -16,15 +16,15 @@
 
     .wallpaperImg {
       display: block;
-      max-width: 100%;
       margin: 0 auto;
+      max-width: 100%;
       max-height: 1080px;
     }
 
     .creatorInfo {
       position: relative;
-      margin-top: 70px;
       padding: 30px 0 50px;
+      margin-top: 70px;
       border-top: 1px solid #ecf0f2;
 
       h4 {
@@ -34,8 +34,8 @@
       }
 
       .detailes {
-        margin: 0 0 35px;
         display: flex;
+        margin: 0 0 35px;
         justify-content: flex-start;
         align-items: center;
 
@@ -51,12 +51,12 @@
           }
 
           &:after {
-            content: "";
             display: inline-block;
-            height: 11px;
             width: 1px;
+            height: 11px;
             margin: 0 10px 0 10px;
             background: #ccc;
+            content: "";
           }
 
           &:last-child:after {
@@ -65,9 +65,9 @@
 
           em,
           span {
+            color: #959595;
             font-size: 14px;
             font-weight: 300;
-            color: #959595;
           }
 
           em {
@@ -125,16 +125,16 @@
       .tag {
         ul li {
           float: left;
-          margin: 0 10px 10px 0;
           height: 30px;
-          line-height: 30px;
-          text-align: center;
+          margin: 0 10px 10px 0;
           padding: 0 14px;
+          color: #aaa;
+          font-size: 14px;
+          text-align: center;
+          line-height: 30px;
           border-radius: 16px;
           background-color: #f4f4f4;
-          font-size: 14px;
           font-weight: 300;
-          color: #aaa;
           vertical-align: top;
           word-break: break-all;
 
@@ -147,10 +147,10 @@
 
       .copyRight p {
         padding: 5px 0;
+        color: #aeaeae;
         font-size: 12px;
         font-weight: 300;
         letter-spacing: -0.5px;
-        color: #aeaeae;
       }
     }
   }
@@ -160,8 +160,8 @@
 
     .similarTit {
       padding: 49px 0 16px;
-      font-weight: 600;
       color: #555;
+      font-weight: 600;
     }
   }
 }
