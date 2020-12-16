@@ -10,7 +10,7 @@
 
 ## 개발 인원 및 기간
 
-- 개발 기간 : 2020/11/19 ~ 2020/11/30
+- 개발 기간 : 2020/10/19 ~ 2020/10/30
 - 개발 인원 : 프론트엔드 4명, 백엔드 2명
 - [백엔드 github 링크](https://github.com/wecode-bootcamp-korea/13-grafolWEo-backend)
 
